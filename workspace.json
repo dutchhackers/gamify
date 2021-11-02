@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "codeheroes-api": "apps/codeheroes-api",
     "foosball-api": "apps/foosball-api"
   }
 }
