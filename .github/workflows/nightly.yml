@@ -1,0 +1,77 @@
+name: Nightly Build
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # run at 2 AM UTC
+  workflow_dispatch:
+
+jobs:
+  nighlty:
+    name: Nightly build job
+
+    runs-on: ${{ matrix.os }}
+
+    continue-on-error: true
+
+    strategy:
+      matrix:
+        node-version: [14, 16]
+        os: [ubuntu-latest]
+        app: ['krew-ui-angular', 'krew-ui-svelte', 'krew-ui-react', 'krew-website', 'krew-crm-api']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Check cache
+        uses: actions/cache@v2
+        id: node-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-modules-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install node modules
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Lint app ${{ matrix.app }}
+        run: npm run lint -- ${{ matrix.app }}
+
+      - name: Build app ${{ matrix.app }}
+        run: npm run build -- ${{ matrix.app }} --configuration=production
+
+  notify_on_failure:
+    needs: [nighlty]
+
+    if: failure()
+
+    name: Slack Notify
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: krew-dev
+          SLACK_USERNAME: 'M4M Bot'
+          SLACK_ICON: 'https://github.com/move4mobile.png?size=48'
+          SLACK_COLOR: 'danger'
+          SLACK_TITLE: 'Krew nightly'
+          SLACK_MESSAGE: 'The nightly build for Krew is failing :warning:'
+          SLACK_FOOTER: 'by :robot_face:'
+          MSG_MINIMAL: true
+# Docs / info
+# Used actions:
+# - https://github.com/marketplace/actions/slack-notify
