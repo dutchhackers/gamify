@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "projects": {
+    "foosball-api": {
+      "root": "apps/foosball-api",
+      "sourceRoot": "apps/foosball-api/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/foosball-api",
+            "main": "apps/foosball-api/src/main.ts",
+            "tsConfig": "apps/foosball-api/tsconfig.app.json",
+            "assets": ["apps/foosball-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/foosball-api/src/environments/environment.ts",
+                  "with": "apps/foosball-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "foosball-api:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/foosball-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/foosball-api"],
+          "options": {
+            "jestConfig": "apps/foosball-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    }
+  }
+}
