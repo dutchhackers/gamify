@@ -26,9 +26,8 @@
       }
     ]
   },
-  "projects": {
-    "foosball-api": {
-      "tags": []
-    }
-  }
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "foosball-api"
 }
