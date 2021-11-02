@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   Build:
-    name: Build job
+    name: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
