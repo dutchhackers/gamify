@@ -1,0 +1,52 @@
+{
+  "root": "apps/codeheroes-api",
+  "sourceRoot": "apps/codeheroes-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/codeheroes-api",
+        "main": "apps/codeheroes-api/src/main.ts",
+        "tsConfig": "apps/codeheroes-api/tsconfig.app.json",
+        "assets": ["apps/codeheroes-api/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/codeheroes-api/src/environments/environment.ts",
+              "with": "apps/codeheroes-api/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "codeheroes-api:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/codeheroes-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/codeheroes-api"],
+      "options": {
+        "jestConfig": "apps/codeheroes-api/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

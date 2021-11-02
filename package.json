@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test"
@@ -29,9 +30,9 @@
     "@nrwl/workspace": "13.1.2",
     "@types/jest": "27.0.2",
     "@types/node": "14.14.33",
-    "@typescript-eslint/eslint-plugin": "~4.31.1",
-    "@typescript-eslint/parser": "~4.31.1",
-    "eslint": "7.22.0",
+    "@typescript-eslint/eslint-plugin": "~4.33.0",
+    "@typescript-eslint/parser": "~4.33.0",
+    "eslint": "7.32.0",
     "eslint-config-prettier": "8.1.0",
     "jest": "27.2.3",
     "prettier": "^2.3.1",
@@ -39,4 +40,3 @@
     "typescript": "~4.3.5"
   }
 }
-

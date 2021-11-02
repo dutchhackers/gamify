@@ -1,7 +1,10 @@
 {
   "npmScope": "coders",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
   },
   "implicitDependencies": {
     "package.json": {
@@ -25,9 +28,6 @@
         "projects": "dependencies"
       }
     ]
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/nest"
   },
   "defaultProject": "foosball-api"
 }
