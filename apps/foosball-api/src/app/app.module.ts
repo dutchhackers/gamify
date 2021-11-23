@@ -3,8 +3,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { FoosballSharedDataModule } from '@foosball/data';
+
 @Module({
-  imports: [],
+  imports: [FoosballSharedDataModule],
   controllers: [AppController],
   providers: [AppService],
 })
