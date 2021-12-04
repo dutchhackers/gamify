@@ -36,14 +36,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/codeheroes-api/**/*.ts"]
+        "lintFilePatterns": ["apps/codeheroes/api/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/codeheroes-api"],
       "options": {
-        "jestConfig": "apps/codeheroes-api/jest.config.js",
+        "jestConfig": "apps/codeheroes/api/jest.config.js",
         "passWithNoTests": true
       }
     }
