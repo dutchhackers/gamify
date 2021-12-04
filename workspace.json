@@ -1,7 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "codeheroes-api": "apps/codeheroes-api",
+    "codeheroes-api": "apps/codeheroes/api",
     "foosball-api": "apps/foosball/api",
     "foosball-slackbot": "apps/foosball/slackbot",
     "foosball-shared-data": "libs/foosball-shared/data"

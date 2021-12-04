@@ -1,6 +1,6 @@
 {
   "root": "apps/codeheroes-api",
-  "sourceRoot": "apps/codeheroes-api/src",
+  "sourceRoot": "apps/codeheroes/api/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -8,9 +8,9 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/codeheroes-api",
-        "main": "apps/codeheroes-api/src/main.ts",
-        "tsConfig": "apps/codeheroes-api/tsconfig.app.json",
-        "assets": ["apps/codeheroes-api/src/assets"]
+        "main": "apps/codeheroes/api/src/main.ts",
+        "tsConfig": "apps/codeheroes/api/tsconfig.app.json",
+        "assets": ["apps/codeheroes/api/src/assets"]
       },
       "configurations": {
         "production": {
@@ -19,8 +19,8 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/codeheroes-api/src/environments/environment.ts",
-              "with": "apps/codeheroes-api/src/environments/environment.prod.ts"
+              "replace": "apps/codeheroes/api/src/environments/environment.ts",
+              "with": "apps/codeheroes/api/src/environments/environment.prod.ts"
             }
           ]
         }
