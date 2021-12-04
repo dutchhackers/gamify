@@ -1,16 +1,16 @@
 {
-  "root": "apps/foosball-slackbot",
-  "sourceRoot": "apps/foosball-slackbot/src",
+  "root": "apps/foosball/api",
+  "sourceRoot": "apps/foosball/api/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nrwl/node:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/foosball-slackbot",
-        "main": "apps/foosball-slackbot/src/main.ts",
-        "tsConfig": "apps/foosball-slackbot/tsconfig.app.json",
-        "assets": ["apps/foosball-slackbot/src/assets"]
+        "outputPath": "dist/apps/foosball-api",
+        "main": "apps/foosball/api/src/main.ts",
+        "tsConfig": "apps/foosball/api/tsconfig.app.json",
+        "assets": ["apps/foosball/api/src/assets"]
       },
       "configurations": {
         "production": {
@@ -19,8 +19,8 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/foosball-slackbot/src/environments/environment.ts",
-              "with": "apps/foosball-slackbot/src/environments/environment.prod.ts"
+              "replace": "apps/foosball/api/src/environments/environment.ts",
+              "with": "apps/foosball/api/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -29,22 +29,21 @@
     "serve": {
       "executor": "@nrwl/node:execute",
       "options": {
-        "buildTarget": "foosball-slackbot:build",
-        "port": 4002
+        "buildTarget": "foosball-api:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/foosball-slackbot/**/*.ts"]
+        "lintFilePatterns": ["apps/foosball/api/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/foosball-slackbot"],
+      "outputs": ["coverage/apps/foosball/api"],
       "options": {
-        "jestConfig": "apps/foosball-slackbot/jest.config.js",
+        "jestConfig": "apps/foosball/api/jest.config.js",
         "passWithNoTests": true
       }
     }
