@@ -1,9 +1,9 @@
-import { FoosballSharedDataService } from '@foosball/data';
+import { DataService } from '@foosball/data';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly dataService: FoosballSharedDataService) {}
+  constructor(private readonly dataService: DataService) {}
 
   getData(): { message: string } {
     return { message: 'Welcome to foosball-api!' };
@@ -11,5 +11,9 @@ export class AppService {
 
   getTestDataPing() {
     return this.dataService.ping();
+  }
+
+  getUser( email: string) {
+    return this.dataService.findUserByEmail( email );
   }
 }
