@@ -3,17 +3,14 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly dataService: DataService) {}
+  constructor(private readonly data: DataService) {}
 
   getData(): { message: string } {
     return { message: 'Welcome to foosball-api!' };
   }
 
-  getTestDataPing() {
-    return this.dataService.ping();
+  getUsers() {
+    return this.data.player.findMany();
   }
 
-  getUser( email: string) {
-    return this.dataService.findUserByEmail( email );
-  }
 }

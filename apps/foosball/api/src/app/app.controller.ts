@@ -11,14 +11,9 @@ export class AppController {
     return this.appService.getData();
   }
 
-  @Get('ping')
-  getTestDataPing() {
-    return this.appService.getTestDataPing();
-  }
-
-  @Get('user')
+  @Get('users')
   getUser() {
-    return this.appService.getUser('john@example.com');
+    return this.appService.getUsers();
   }
 
 }
