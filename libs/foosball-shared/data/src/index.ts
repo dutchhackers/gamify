@@ -1,2 +1,2 @@
-export * from './lib/foosball-shared-data.service';
-export * from './lib/foosball-shared-data.module';
+export * from './lib/data.service';
+export * from './lib/data.module';

@@ -15,4 +15,10 @@ export class AppController {
   getTestDataPing() {
     return this.appService.getTestDataPing();
   }
+
+  @Get('user')
+  getUser() {
+    return this.appService.getUser('john@example.com');
+  }
+
 }
