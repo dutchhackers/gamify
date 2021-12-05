@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@foosball/data": ["libs/foosball-shared/data/src/index.ts"],
+      "@foosball/match": ["libs/foosball/match/src/index.ts"],
       "@foosball/player": ["libs/foosball/player/src/index.ts"]
     }
   },

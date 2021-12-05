@@ -3,6 +3,7 @@
   "projects": {
     "codeheroes-api": "apps/codeheroes/api",
     "foosball-api": "apps/foosball/api",
+    "foosball-match": "libs/foosball/match",
     "foosball-player": "libs/foosball/player",
     "foosball-shared-data": "libs/foosball-shared/data",
     "foosball-slackbot": "apps/foosball/slackbot"
