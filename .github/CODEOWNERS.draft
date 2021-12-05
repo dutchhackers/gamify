@@ -13,6 +13,3 @@
 
 # Libs
 libs/ @mschilling @cassshh
-
-# Krew CRM API
-apps/krew-crm-api/ @mschilling
