@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  nickname  String?
+  avatar    String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  // one-to-one relations
+  profile Profile?
+  stats   PlayerStats[]
+
+  // one-to-many relations
+  matches PlayersInMatches[]
+}
+
+model PlayerStats {
+  playerId          Int    @id
+  player            Player @relation(fields: [playerId], references: [id])
+  totalWins         Int?
+  totalLosses       Int?
+  highestWinStreak  Int?
+  highestLoseStreak Int?
+}
+
+model Profile {
+  playerId Int     @id
+  player   Player  @relation(fields: [playerId], references: [id])
+  bio      String?
+
+  // external accounts linking
+  slackId         String? @unique
+  githubHandle    String? @unique
+  twitterHandle   String? @unique
+  instagramHandle String? @unique
+}
+
+model Match {
+  id        Int                @id @default(autoincrement())
+  date      DateTime           @default(now()) // Consider: rename into startDate or matchDate
+  status    String             @default("NEW")
+  homeScore Int                @default(0)
+  awayScore Int                @default(0)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @default(now())
+  players   PlayersInMatches[]
+}
+
+model PlayersInMatches {
+  player   Player @relation(fields: [playerId], references: [id])
+  playerId Int
+  match    Match  @relation(fields: [matchId], references: [id])
+  matchId  Int
+  side     String // Enum: Home or Away team
+
+  @@id([matchId, playerId])
+}
