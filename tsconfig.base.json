@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@foosball/core": ["libs/foosball/core/src/index.ts"],
       "@foosball/data": ["libs/foosball-shared/data/src/index.ts"],
       "@foosball/match": ["libs/foosball/match/src/index.ts"],
       "@foosball/player": ["libs/foosball/player/src/index.ts"]
