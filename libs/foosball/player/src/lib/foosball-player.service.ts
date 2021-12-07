@@ -9,7 +9,13 @@ export class FoosballPlayerService {
 
   constructor(private readonly data: DataService) {}
 
-  public players() {
+  public findMany() {
     return this.data.player.findMany({ include: this.playerIncludes })
+  }
+
+  public findOne(id: number) {
+    return this.data.player.findUnique({
+      where: { id: id },
+    });
   }
 }
