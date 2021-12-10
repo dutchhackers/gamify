@@ -19,10 +19,4 @@ export class FoosballPlayerService {
     });
   }
 
-  public findOneProfile(playerId: number) {
-    return this.data.profile.findUnique({
-      where: { playerId: playerId },
-    });
-  }
-
 }

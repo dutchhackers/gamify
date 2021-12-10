@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
-import { Profile } from './profile.model';
+import { Profile } from '@foosball/profile';
 
 @ObjectType()
 export class Player {
