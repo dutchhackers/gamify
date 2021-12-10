@@ -18,4 +18,5 @@ export class FoosballPlayerService {
       where: { id: id },
     });
   }
+
 }
