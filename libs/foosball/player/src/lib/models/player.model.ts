@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
-// import { Profile } from '.';
+import { Profile } from './profile.model';
 
 @ObjectType()
 export class Player {
@@ -21,6 +21,6 @@ export class Player {
   @Field(() => String, { nullable: true })
   avatar?: string | null;
 
-  // @Field(() => Profile, { nullable: true })
-  // profile?: Profile;
+  @Field(() => Profile, { nullable: true })
+  profile?: Profile;
 }

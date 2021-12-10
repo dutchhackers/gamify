@@ -12,19 +12,16 @@ import {
 // import { PlayerCreateInput } from 'src/@generated/prisma-nestjs-graphql/player/player-create.input';
 import { Player } from '../models/player.model';
 import { FoosballPlayerService as PlayerService } from '../foosball-player.service';
+import { Profile } from '../models/profile.model';
 
 @Resolver(() => Player)
 export class PlayerResolver {
   constructor( private readonly playerService: PlayerService  ) {}
 
-  // @ResolveField()
-  // async profile(@Root() player: Player, @Context() ctx): Promise<Profile> {
-  //   return this.prismaService.profile.findUnique({
-  //     where: {
-  //       playerId: player.id,
-  //     },
-  //   });
-  // }
+  @ResolveField()
+  async profile(@Root() player: Player, @Context() ctx): Promise<Profile> {
+    return this.playerService.findOneProfile(player.id);
+  }
 
   @Query(() => [Player], { name: 'players' })
   findMany() {

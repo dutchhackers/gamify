@@ -18,4 +18,11 @@ export class FoosballPlayerService {
       where: { id: id },
     });
   }
+
+  public findOneProfile(playerId: number) {
+    return this.data.profile.findUnique({
+      where: { playerId: playerId },
+    });
+  }
+
 }
