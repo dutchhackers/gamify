@@ -6,6 +6,7 @@
     "foosball-core": "libs/foosball/core",
     "foosball-match": "libs/foosball/match",
     "foosball-player": "libs/foosball/player",
+    "foosball-profile": "libs/foosball/profile",
     "foosball-shared-data": "libs/foosball-shared/data",
     "foosball-slackbot": "apps/foosball/slackbot"
   }
