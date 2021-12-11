@@ -4,7 +4,7 @@
     "codeheroes-api": "apps/codeheroes/api",
     "foosball-api": "apps/foosball/api",
     "foosball-core": "libs/foosball/core",
-    "foosball-shared-data": "libs/foosball/shared/data",
+    "foosball-data": "libs/foosball/data",
     "foosball-match": "libs/foosball/match",
     "foosball-player": "libs/foosball/player",
     "foosball-profile": "libs/foosball/profile",
