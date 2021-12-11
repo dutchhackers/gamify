@@ -1,6 +1,6 @@
-import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
+import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 // import { ConfigService } from '@nestjs/config'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class DataService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
@@ -9,11 +9,11 @@ export class DataService extends PrismaClient implements OnModuleInit, OnModuleD
   }
 
   public async onModuleDestroy() {
-    await this.$disconnect()
+    await this.$disconnect();
   }
 
   public async onModuleInit() {
-    await this.$connect()
+    await this.$connect();
 
     // More specific init needed?
     Logger.log('Prisma client connected'); // Example of logging
@@ -23,7 +23,6 @@ export class DataService extends PrismaClient implements OnModuleInit, OnModuleD
     return {
       email: email,
       name: 'John Doe',
-    }
+    };
   }
-
 }

@@ -1,16 +1,16 @@
 import { DataService } from '@foosball/data';
 import { Test } from '@nestjs/testing';
-import { FoosballPlayerService } from './foosball-player.service';
+import { MatchService } from './match.service';
 
-describe('FoosballPlayerService', () => {
-  let service: FoosballPlayerService;
+describe('MatchService', () => {
+  let service: MatchService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      providers: [FoosballPlayerService, DataService],
+      providers: [MatchService, DataService],
     }).compile();
 
-    service = module.get(FoosballPlayerService);
+    service = module.get(MatchService);
   });
 
   it('should be defined', () => {

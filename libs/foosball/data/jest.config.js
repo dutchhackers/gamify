@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'foosball-shared-data',
+  displayName: 'foosball-data',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/foosball-shared/data',
+  coverageDirectory: '../../../coverage/libs/foosball/data',
 };
