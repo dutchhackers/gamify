@@ -1,9 +1,7 @@
 import { TeamSide } from '@foosball/core';
-import { DataService } from '@foosball/data';
+import { DataService, MatchWhereUniqueInput, MatchCreateArgs } from '@foosball/data';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMatchInput } from './dto/create-match.input';
-
-import { Prisma } from '@prisma/client'; // Maybe we don't want Prisma dependencies here
 
 @Injectable()
 export class FoosballMatchService {
@@ -17,14 +15,14 @@ export class FoosballMatchService {
     return this.data.match.findMany({ include: this.matchIncludes });
   }
 
-  public findOne(matchWhereUniqueInput: Prisma.MatchWhereUniqueInput) {
+  public findOne(matchWhereUniqueInput: MatchWhereUniqueInput) {
     return this.data.match.findUnique({
       where: matchWhereUniqueInput,
     });
   }
 
   public async create(createMatchInput: CreateMatchInput) {
-    const payload: unknown /** Prisma.MatchCreateArgs */ = {
+    const payload: MatchCreateArgs = {
       data: {
         homeScore: createMatchInput.awayScore,
         awayScore: createMatchInput.homeScore,
