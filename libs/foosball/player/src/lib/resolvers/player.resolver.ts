@@ -22,7 +22,7 @@ export class PlayerResolver {
 
   @Query(() => Player, { name: 'player' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.playerService.findOne(id);
+    return this.playerService.findOne({ id });
   }
 
   @Mutation(() => Player)

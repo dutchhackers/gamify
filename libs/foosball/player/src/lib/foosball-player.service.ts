@@ -1,4 +1,4 @@
-import { DataService } from '@foosball/data';
+import { DataService, PlayerWhereUniqueInput } from '@foosball/data';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePlayerInput } from './dto/create-player.input';
 
@@ -14,9 +14,9 @@ export class FoosballPlayerService {
     return this.data.player.findMany({ include: this.playerIncludes });
   }
 
-  public findOne(id: number) {
+  findOne(playerWhereUniqueInput: PlayerWhereUniqueInput) {
     return this.data.player.findUnique({
-      where: { id: id },
+      where: playerWhereUniqueInput,
     });
   }
 
