@@ -3,7 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePlayerInput } from './dto/create-player.input';
 
 @Injectable()
-export class FoosballPlayerService {
+export class PlayerService {
   private readonly playerIncludes = {
     profile: true,
   };

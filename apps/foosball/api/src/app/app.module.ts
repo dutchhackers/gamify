@@ -5,12 +5,12 @@ import { AppService } from './app.service';
 
 import { DataModule } from '@foosball/data';
 import { CoreModule } from '@foosball/core';
-import { FoosballPlayerModule } from '@foosball/player';
-import { FoosballMatchModule } from '@foosball/match';
-import { FoosballProfileModule } from '@foosball/profile';
+import { PlayerModule } from '@foosball/player';
+import { MatchModule } from '@foosball/match';
+import { ProfileModule } from '@foosball/profile';
 
 @Module({
-  imports: [DataModule, CoreModule, FoosballPlayerModule, FoosballProfileModule, FoosballMatchModule],
+  imports: [DataModule, CoreModule, PlayerModule, ProfileModule, MatchModule],
   controllers: [AppController],
   providers: [AppService],
 })

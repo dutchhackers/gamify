@@ -1,11 +1,11 @@
-import { DataService } from '@foosball/data'
-import { Injectable } from '@nestjs/common'
+import { DataService } from '@foosball/data';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class FoosballProfileService {
+export class ProfileService {
   private readonly playerIncludes = {
     profile: true,
-  }
+  };
 
   constructor(private readonly data: DataService) {}
 
@@ -14,6 +14,4 @@ export class FoosballProfileService {
       where: { playerId: playerId },
     });
   }
-
 }
-

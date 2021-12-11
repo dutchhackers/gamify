@@ -1,8 +1,7 @@
 import { Args, Context, Int, Mutation, Query, ResolveField, Resolver, Root } from '@nestjs/graphql';
-// import { PlayerCreateInput } from 'src/@generated/prisma-nestjs-graphql/player/player-create.input';
 import { Player } from '../models/player.model';
-import { FoosballPlayerService as PlayerService } from '../foosball-player.service';
-import { FoosballProfileService as ProfileService } from '@foosball/profile';
+import { PlayerService } from '../player.service';
+import { ProfileService } from '@foosball/profile';
 import { Profile } from '@foosball/profile';
 import { CreatePlayerInput } from '../dto/create-player.input';
 

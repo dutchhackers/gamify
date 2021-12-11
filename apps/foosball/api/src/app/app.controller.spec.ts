@@ -1,6 +1,4 @@
 import { DataService } from '@foosball/data';
-import { FoosballMatchModule } from '@foosball/match';
-import { FoosballPlayerModule } from '@foosball/player';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AppController } from './app.controller';
@@ -11,7 +9,6 @@ describe('AppController', () => {
 
   beforeAll(async () => {
     app = await Test.createTestingModule({
-      imports: [FoosballMatchModule, FoosballPlayerModule],
       controllers: [AppController],
       providers: [AppService, DataService],
     }).compile();

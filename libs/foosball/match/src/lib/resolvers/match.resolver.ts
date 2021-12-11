@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args, Int, ResolveField, Context, Root } from '@nestjs/graphql';
-import { FoosballMatchService as MatchService } from '../foosball-match.service';
+import { MatchService as MatchService } from '../match.service';
 import { CreateMatchInput } from '../dto/create-match.input';
 import { Match } from '../models/match.model';
 

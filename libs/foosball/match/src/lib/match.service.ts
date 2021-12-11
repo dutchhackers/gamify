@@ -4,7 +4,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMatchInput } from './dto/create-match.input';
 
 @Injectable()
-export class FoosballMatchService {
+export class MatchService {
   private readonly matchIncludes = {
     players: true,
   };

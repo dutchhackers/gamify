@@ -8,9 +8,4 @@ export class AppService {
   getData(): { message: string } {
     return { message: 'Welcome to foosball-api!' };
   }
-
-  testGetData() {
-    return this.data.player.findMany();
-  }
-
 }
