@@ -7,6 +7,7 @@ import { CreateMatchInput } from './dto/create-match.input';
 export class MatchService {
   private readonly matchIncludes = {
     players: true,
+    events: true,
   };
 
   constructor(private readonly data: DataService) {}
@@ -15,10 +16,16 @@ export class MatchService {
     return this.data.match.findMany({ include: this.matchIncludes });
   }
 
-  public findOne(matchWhereUniqueInput: MatchWhereUniqueInput) {
-    return this.data.match.findUnique({
+  public async findOne(matchWhereUniqueInput: MatchWhereUniqueInput) {
+    const found = await this.data.match.findUnique({
       where: matchWhereUniqueInput,
+      include: this.matchIncludes,
     });
+
+    if (!found) {
+      throw new NotFoundException('Match not found');
+    }
+    return found;
   }
 
   public async create(createMatchInput: CreateMatchInput) {

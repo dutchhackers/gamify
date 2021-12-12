@@ -22,7 +22,8 @@ model Player {
   stats   PlayerStats[]
 
   // one-to-many relations
-  matches PlayersInMatches[]
+  matches     PlayersInMatches[]
+  matchEvents MatchEvent[]
 }
 
 model PlayerStats {
@@ -55,6 +56,19 @@ model Match {
   createdAt DateTime           @default(now())
   updatedAt DateTime           @default(now())
   players   PlayersInMatches[]
+  events    MatchEvent[]
+}
+
+model MatchEvent {
+  id            Int      @id @default(autoincrement())
+  matchId       Int
+  matchPlayerId Int
+  match         Match    @relation(fields: [matchId], references: [id])
+  matchPlayer   Player   @relation(fields: [matchPlayerId], references: [id])
+  type          String // Enum: goal, klinker.. to be defined
+  order         Int      @default(0)
+  args          String? // JSON
+  createdAt     DateTime @default(now())
 }
 
 model PlayersInMatches {
