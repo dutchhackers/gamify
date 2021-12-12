@@ -2,24 +2,28 @@ import { Resolver, Query, Mutation, Args, Int, ResolveField, Context, Root } fro
 import { MatchService as MatchService } from '../match.service';
 import { CreateMatchInput } from '../dto/create-match.input';
 import { Match } from '../models/match.model';
+import { DataService } from '@foosball/data';
+import { Player } from '@foosball/player';
 
 @Resolver(() => Match)
 export class MatchResolver {
-  constructor(private readonly matchService: MatchService) {}
+  constructor(private readonly data: DataService, private readonly matchService: MatchService) {}
 
-  // @ResolveField()
-  // async players(@Root() match: Match, @Context() ctx): Promise<Player[]> {
-  //   const playersInMatch = await this.prismaService.playersInMatches.findMany({
-  //     where: {
-  //       matchId: match.id,
-  //     },
-  //     include: {
-  //       player: true,
-  //     },
-  //   });
+  @ResolveField()
+  async players(@Root() match: Match, @Context() ctx): Promise<Player[]> {
+    // NOTE: actually we don't want to use this.data in a resolver directly
+    // In search for a better solution
+    const playersInMatch = await this.data.playersInMatches.findMany({
+      where: {
+        matchId: match.id,
+      },
+      include: {
+        player: true,
+      },
+    });
 
-  //   return playersInMatch.map((playerInMatch) => playerInMatch.player);
-  // }
+    return playersInMatch.map(playerInMatch => playerInMatch.player);
+  }
 
   @Mutation(() => Match)
   createMatch(@Args('createMatchInput') createMatchInput: CreateMatchInput) {
