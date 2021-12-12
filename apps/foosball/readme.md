@@ -39,7 +39,7 @@ NODE_ENV=development
 PORT=3000
 ```
 
-### Configure Prisma
+### Prisma setup
 
 - Generate Prisma database
 
@@ -65,8 +65,30 @@ Prisma Studio will automatically open a browser at http://localhost:5555/
 
 ### Run Foosball API locally
 
-- Run application locally on your computer
+- Run Foosball API
+
+```
+nx serve foosball-api
+```
+
+Go to http://localhost:3000/graphql to open the Apollo GraphQL sandbox
 
 ### General commands
 
 - build application
+
+```
+nx build foosball-api
+```
+
+- test application
+
+```
+nx test foosball-api
+```
+
+- lint application
+
+```
+nx lint foosball-api
+```
