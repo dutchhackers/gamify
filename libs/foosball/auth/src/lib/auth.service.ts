@@ -1,5 +1,5 @@
 import { DataService } from '@foosball/data';
-import { BadRequestException, Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthHelper } from './auth.helper';
 import { AuthLoginInput } from './dto/auth-login.input';
