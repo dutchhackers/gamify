@@ -1,4 +1,4 @@
-import { DataService } from '@beehive/data';
+import { DataService } from '@foosball/data';
 import { BadRequestException, Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthHelper } from './auth.helper';
