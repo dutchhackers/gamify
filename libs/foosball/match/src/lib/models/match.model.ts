@@ -1,5 +1,6 @@
 import { Player } from '@foosball/player';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { MatchEvent } from './match-event.model';
 
 @ObjectType()
 export class Match {
@@ -20,6 +21,9 @@ export class Match {
 
   @Field(() => [Player], { nullable: true })
   players?: Player;
+
+  @Field(() => [MatchEvent], { nullable: true })
+  events?: MatchEvent;
 
   @Field()
   createdAt: Date;

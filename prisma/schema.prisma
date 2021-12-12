@@ -67,7 +67,7 @@ model MatchEvent {
   matchPlayer   Player   @relation(fields: [matchPlayerId], references: [id])
   type          String // Enum: goal, klinker.. to be defined
   order         Int      @default(0)
-  args          String? // Enum: goal, klinker.. to be defined
+  args          String? // JSON
   createdAt     DateTime @default(now())
 }
 
