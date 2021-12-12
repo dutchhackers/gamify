@@ -1,5 +1,12 @@
 # Foosball
 
+## Applications Overview
+
+| App name | Stack setup                 | Status         | Description            |
+| -------- | --------------------------- | -------------- | ---------------------- |
+| api      | NestJS + GraphQL + Prisma 2 | In Development | Foosball API (backend) |
+| slackbot | NestJS                      | Not Started    | Foosball Slackbot      |
+
 ## Development Setup
 
 If you wish to develop or contribute to this repo, we suggest the following:
@@ -20,5 +27,9 @@ npm install
 Advised to use Node version 14 (or higher).
 
 Tip: if you have nvm installed, you can run `nvm use` to auto-detect the preferred Node version
+
+### Run Foosball API locally
+
+-
 
 - Run application locally on your computer
