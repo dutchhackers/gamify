@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "codeheroes-api": "apps/codeheroes/api",
+    "codeheroes-core": "libs/codeheroes/core",
     "foosball-api": "apps/foosball/api",
     "foosball-auth": "libs/foosball/auth",
     "foosball-core": "libs/foosball/core",

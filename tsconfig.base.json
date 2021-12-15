@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@codeheroes/core": ["libs/codeheroes/core/src/index.ts"],
       "@foosball/auth": ["libs/foosball/auth/src/index.ts"],
       "@foosball/core": ["libs/foosball/core/src/index.ts"],
       "@foosball/data": ["libs/foosball/data/src/index.ts"],
