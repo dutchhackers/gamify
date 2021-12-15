@@ -19,10 +19,27 @@ export class DataService extends PrismaClient implements OnModuleInit, OnModuleD
     Logger.log('Prisma client connected'); // Example of logging
   }
 
-  async findUserByEmail(email: string) {
-    return {
-      email: email,
-      name: 'John Doe',
-    };
+  async createUser({ email, password }: { email: string; password: string }) {
+    return this.user.create({
+      data: {
+        email,
+        password,
+      },
+    })
   }
-}
+
+  async findUserByEmail(email: string) {
+    return this.user.findUnique({
+      where: {
+        email,
+      },
+    })
+  }
+
+  async findUserById(userId: number) {
+    return this.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+  }}

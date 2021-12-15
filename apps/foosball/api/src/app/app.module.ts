@@ -8,9 +8,10 @@ import { CoreModule } from '@foosball/core';
 import { PlayerModule } from '@foosball/player';
 import { MatchModule } from '@foosball/match';
 import { ProfileModule } from '@foosball/profile';
+import { AuthModule } from '@foosball/auth';
 
 @Module({
-  imports: [DataModule, CoreModule, PlayerModule, ProfileModule, MatchModule],
+  imports: [DataModule, CoreModule, AuthModule, PlayerModule, ProfileModule, MatchModule],
   controllers: [AppController],
   providers: [AppService],
 })

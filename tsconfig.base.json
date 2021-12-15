@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@foosball/auth": ["libs/foosball/auth/src/index.ts"],
       "@foosball/core": ["libs/foosball/core/src/index.ts"],
       "@foosball/data": ["libs/foosball/data/src/index.ts"],
       "@foosball/match": ["libs/foosball/match/src/index.ts"],
