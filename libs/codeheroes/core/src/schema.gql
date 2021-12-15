@@ -2,14 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type AuthUser {
   id: Float
   email: String
   firstName: String
   lastName: String
+  picture: String
 }
 
 type Query {
   uptime: Float!
-  me: User!
+  me: AuthUser!
 }
