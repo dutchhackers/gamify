@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
+
 @Module({
   imports: [
     DataModule,
