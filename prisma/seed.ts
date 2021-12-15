@@ -20,7 +20,7 @@ async function main() {
 }
 
 main()
-  .catch((e) => {
+  .catch(e => {
     throw e;
   })
   .finally(async () => {
@@ -28,10 +28,10 @@ main()
   });
 
 async function seedPlayers() {
-  const createManyPosts = getPlayers().map((player) =>
+  const createManyPosts = getPlayers().map(player =>
     prisma.player.create({
       data: player,
-    }),
+    })
   );
 
   await prisma.playersInMatches.deleteMany();
@@ -46,12 +46,12 @@ async function seedPlayers() {
 
 async function seedMatches() {
   const players = await prisma.player.findMany();
-  const playerIds = players.map((player) => player.id);
+  const playerIds = players.map(player => player.id);
 
-  const createManyItems = getMatches(playerIds, 5).map((match) =>
+  const createManyItems = getMatches(playerIds, 5).map(match =>
     prisma.match.create({
       data: match,
-    }),
+    })
   );
 
   // Seed players
@@ -70,8 +70,7 @@ function getPlayers() {
           slackId: 'U1234',
           twitterHandle: 'mschilling',
           githubHandle: 'mschilling',
-
-        }
+        },
       },
       stats: {
         create: {
@@ -79,8 +78,7 @@ function getPlayers() {
           totalLosses: 0,
           highestWinStreak: 5,
           highestLoseStreak: 0,
-
-        }
+        },
       },
     },
     { name: 'Cas', email: 'cvandinter@move4mobile.com' },
@@ -129,6 +127,14 @@ function createRandomMatch(playerIds: number[]) {
         {
           playerId: playerId4,
           side: 'AWAY',
+        },
+      ],
+    },
+    events: {
+      create: [
+        {
+          matchPlayerId: playerId1,
+          type: 'GOAL',
         },
       ],
     },
