@@ -4,9 +4,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { CoreModule } from '@codeheroes/core';
+import { AuthModule } from '@codeheroes/auth';
 
 @Module({
-  imports: [CoreModule],
+  imports: [CoreModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

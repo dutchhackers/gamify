@@ -1,0 +1,15 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Float
+  email: String
+  firstName: String
+  lastName: String
+}
+
+type Query {
+  uptime: Float!
+  me: User!
+}
