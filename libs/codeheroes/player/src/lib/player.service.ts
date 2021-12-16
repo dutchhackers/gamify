@@ -1,9 +1,9 @@
 import { DataService } from '@codeheroes/data';
 import { Injectable } from '@nestjs/common';
+import { Player } from './models';
 
 @Injectable()
 export class PlayerService {
-
 
   constructor(private readonly data: DataService) {}
 
@@ -12,13 +12,19 @@ export class PlayerService {
     // return this.data;
   }
 
-  public findOne(key: string) {
-    return {
-      id: 1,
-      name: 'John Doe',
-      email: key,
+  public async findOne(key: string) {
+    const snapshot = await this.data.collection('users').doc(key).get();
+    if(!snapshot.exists) {
+      return;
     }
 
+    const data = snapshot.data() || {};
+    return {
+      ...data,
+      id: 1,
+      nickname: data.displayName,
+      avatar: data.photoUrl,
+    } ;
   }
 
 

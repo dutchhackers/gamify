@@ -1,9 +1,11 @@
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import * as firebase from 'firebase-admin';
 
 @Injectable()
-export class DataService /** extends Firestore */ implements OnModuleInit, OnModuleDestroy {
+export class DataService extends firebase.firestore.Firestore implements OnModuleInit, OnModuleDestroy {
+
   constructor() {
-    // super();
+    super();
   }
 
   public async onModuleDestroy() {
@@ -11,7 +13,9 @@ export class DataService /** extends Firestore */ implements OnModuleInit, OnMod
   }
 
   public async onModuleInit() {
-    // await this.$connect();
+    // const app = firebase.initializeApp({
+    //   credential: firebase.credential.applicationDefault()
+    // }, 'firestoreApp');
 
     // More specific init needed?
     Logger.log('Firestore client connected'); // Example of logging
