@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
-import { CodeheroesAuthService as AuthService } from './codeheroes-auth.service';
+import { CodeheroesAuthService as AuthService } from './auth.service';
 import { CtxUser } from './decorators/ctx-user.decorator';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
 import { AuthUser } from './models/user';

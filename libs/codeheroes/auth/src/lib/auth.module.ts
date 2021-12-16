@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthResolver } from './auth.resolver';
-import { CodeheroesAuthService as AuthService } from './codeheroes-auth.service';
+import { CodeheroesAuthService as AuthService } from './auth.service';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
 import { FirebaseAuthStrategy } from './strategies/firebase-auth.strategy';
 
