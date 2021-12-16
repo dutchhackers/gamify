@@ -10,7 +10,16 @@ type AuthUser {
   picture: String
 }
 
+type Player {
+  id: Int!
+  name: String!
+  email: String!
+  nickname: String
+  avatar: String
+}
+
 type Query {
   uptime: Float!
   me: AuthUser!
+  player(email: String!): Player!
 }
