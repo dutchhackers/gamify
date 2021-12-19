@@ -3,24 +3,39 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class GameService {
-
   constructor(private readonly data: DataService) {}
 
-  findMany() {
-    throw new Error('Method not implemented.');
+  async findMany() {
+    const snapshotItems = await this.data.collection('games').orderBy('createdAt', 'desc').limitToLast(5).get();
+    if (!snapshotItems.size) {
+      return [];
+    }
+    return snapshotItems.docs.map(snapshot => this.map(snapshot.data()));
   }
 
   async findOne(id: string) {
     const snapshot = await this.data.collection('games').doc(id).get();
-    if(!snapshot.exists) {
+    if (!snapshot.exists) {
       return;
     }
 
-    const data = snapshot.data() || {};
+    return this.map(snapshot.data());
+  }
+
+  private map(data: FirebaseFirestore.DocumentData) {
     return {
       ...data,
       id: 1,
-      createdAt: data.createdAt,
-    } ;
+      createdAt: FirestoreTimestampToDate(data.createdAt),
+      startedAt: FirestoreTimestampToDate(data.startedAt),
+      closedAt: FirestoreTimestampToDate(data.closedAt),
+    };
   }
+}
+
+function FirestoreTimestampToDate(timestamp: FirebaseFirestore.Timestamp) {
+  if (!timestamp) {
+    return;
+  }
+  return timestamp.toDate();
 }
