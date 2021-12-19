@@ -5,6 +5,7 @@
     "codeheroes-auth": "libs/codeheroes/auth",
     "codeheroes-core": "libs/codeheroes/core",
     "codeheroes-data": "libs/codeheroes/data",
+    "codeheroes-game": "libs/codeheroes/game",
     "codeheroes-player": "libs/codeheroes/player",
     "foosball-api": "apps/foosball/api",
     "foosball-auth": "libs/foosball/auth",

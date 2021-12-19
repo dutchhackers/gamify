@@ -18,8 +18,15 @@ type Player {
   avatar: String
 }
 
+type Game {
+  id: String!
+  createdAt: String!
+}
+
 type Query {
   uptime: Float!
   me: AuthUser!
   player(email: String!): Player!
+  games: [Game!]!
+  game(id: String!): Game!
 }

@@ -1,0 +1,23 @@
+{
+  "root": "libs/codeheroes/game",
+  "sourceRoot": "libs/codeheroes/game/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/codeheroes/game/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/codeheroes/game"],
+      "options": {
+        "jestConfig": "libs/codeheroes/game/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
