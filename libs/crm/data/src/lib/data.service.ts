@@ -1,11 +1,11 @@
 import { ServiceAccountConfig } from '@crm/core';
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { GoogleSpreadsheet } from 'google-spreadsheet';
+import { GoogleSpreadsheet, GoogleSpreadsheetRow } from 'google-spreadsheet';
 
 @Injectable()
 export class DataService implements OnModuleInit, OnModuleDestroy {
-  // #doc: GoogleSpreadsheet;
+  #doc: GoogleSpreadsheet;
 
   constructor(private readonly config: ConfigService) {
     // super();
@@ -30,7 +30,7 @@ export class DataService implements OnModuleInit, OnModuleDestroy {
 
       console.log('Sheet count: ', doc.sheetCount);
 
-      // this.#doc = doc;
+      this.#doc = doc;
     } catch (error) {
       console.log('Could not initialize DataService');
       throw error;
@@ -42,5 +42,21 @@ export class DataService implements OnModuleInit, OnModuleDestroy {
 
   public async onModuleDestroy() {
     // await this.$disconnect();
+  }
+
+  public async getSpreadsheetRows(sheetTitle: string): Promise<GoogleSpreadsheetRow[]> {
+    // let spreadSheetRows: GoogleSpreadsheetRow[] = await this.cacheManager.get(sheetTitle);
+    // if (spreadSheetRows) {
+    //   Logger.debug(`Loading ${sheetTitle} from cache`);
+    //   return spreadSheetRows;
+    // }
+
+    Logger.debug(`Loading ${sheetTitle} from database`);
+
+    const spreadSheetRows = await this.#doc.sheetsByTitle[sheetTitle].getRows();
+    // this.cacheManager.set(sheetTitle, spreadSheetRows, {
+    //   ttl: CACHE_WORKSHEET_DEFAULT_TTL,
+    // });
+    return spreadSheetRows;
   }
 }
