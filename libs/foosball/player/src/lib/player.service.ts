@@ -1,5 +1,5 @@
 import { DataService, PlayerWhereUniqueInput } from '@foosball/data';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreatePlayerInput } from './dto/create-player.input';
 
 @Injectable()

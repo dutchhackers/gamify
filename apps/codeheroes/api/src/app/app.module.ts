@@ -5,9 +5,12 @@ import { AppService } from './app.service';
 
 import { CoreModule } from '@codeheroes/core';
 import { AuthModule } from '@codeheroes/auth';
+import { DataModule } from '@codeheroes/data';
+import { PlayerModule } from '@codeheroes/player';
+import { GameModule } from '@codeheroes/game';
 
 @Module({
-  imports: [CoreModule, AuthModule],
+  imports: [DataModule, CoreModule, AuthModule, PlayerModule, GameModule],
   controllers: [AppController],
   providers: [AppService],
 })

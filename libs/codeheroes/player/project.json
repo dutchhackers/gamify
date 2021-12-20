@@ -1,0 +1,23 @@
+{
+  "root": "libs/codeheroes/player",
+  "sourceRoot": "libs/codeheroes/player/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/codeheroes/player/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/codeheroes/player"],
+      "options": {
+        "jestConfig": "libs/codeheroes/player/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
