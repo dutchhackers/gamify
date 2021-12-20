@@ -10,6 +10,15 @@ type AuthUser {
   picture: String
 }
 
+"""employee account """
+type EmployeeAccounts {
+  google: String
+  github: String
+  twitter: String
+  tempo: String
+  slack: String
+}
+
 """employee """
 type Employee {
   id: ID!
@@ -21,6 +30,7 @@ type Employee {
   photoUrl: String
   joined: DateTime
   birthday: String
+  accounts: EmployeeAccounts!
   active: Boolean!
   fullName: String!
 }

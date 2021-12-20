@@ -1,6 +1,7 @@
 import { parseBirthday, parseDate, splitString } from '@crm/data';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { EmployeeRole } from '../enums/employee-role.enum';
+import { EmployeeAccounts } from './employee-accounts.model';
 // import { EmployeeAccounts } from './employee-accounts.model';
 // import { EmployeeBadge } from '../../../src/employee-badges/models/employee-badge.model';
 // import { splitString, parseDate, parseBirthday } from '../../common/utils/sheets-parser.utils';
@@ -48,8 +49,8 @@ export class Employee {
   @Field({ nullable: true })
   birthday!: string; // Format: DD/MM/YYYY where YYYY is optional
 
-  // @Field(() => EmployeeAccounts)
-  // accounts: EmployeeAccounts;
+  @Field(() => EmployeeAccounts)
+  accounts: EmployeeAccounts;
 
   @Field()
   active: boolean;
@@ -80,7 +81,7 @@ export class Employee {
       active: data[FieldMapping.ACTIVE] === 'TRUE',
       joined: parseDate(data[FieldMapping.JOINED]),
       birthday: parseBirthday(data[FieldMapping.BIRTHDAY]),
-      // accounts: EmployeeAccounts.fromRow(data),
+      accounts: EmployeeAccounts.fromRow(data),
     });
 
     return obj;
