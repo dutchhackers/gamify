@@ -1,0 +1,40 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthUser {
+  id: Float
+  email: String
+  firstName: String
+  lastName: String
+  picture: String
+}
+
+type Player {
+  id: Int!
+  name: String!
+  email: String!
+  nickname: String
+  avatar: String
+}
+
+type Game {
+  id: String!
+  status: String!
+  createdAt: DateTime!
+  startedAt: DateTime!
+  closedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  uptime: Float!
+  me: AuthUser!
+  player(email: String!): Player!
+  games: [Game!]!
+  game(id: String!): Game!
+}
