@@ -17,21 +17,12 @@ type Employee {
   familyName: String!
   emailAddresses: [String!]!
   tags: [String!]!
+  role: EmployeeRole!
   photoUrl: String
   joined: DateTime
+  birthday: String
   active: Boolean!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type Query {
-  uptime: Float!
-  me: AuthUser!
-  employee(id: String!): Employee!
-  employees(active: Boolean, role: EmployeeRole, tag: String, githubAccount: String): [Employee!]!
+  fullName: String!
 }
 
 """Role of an employee"""
@@ -44,4 +35,16 @@ enum EmployeeRole {
   DESIGNER @deprecated(reason: "Who needs designers")
   HR
   TESTER
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  uptime: Float!
+  me: AuthUser!
+  employee(id: String!): Employee!
+  employees(active: Boolean, role: EmployeeRole, tag: String, githubAccount: String): [Employee!]!
 }

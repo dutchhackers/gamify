@@ -12,9 +12,8 @@ import { Employee } from '../models';
 @Resolver(() => Employee)
 export class EmployeesResolver {
   constructor(
-    private readonly employeeService: EmployeeService // private readonly employeeProjectsService: EmployeeProjectsService,
-  ) // private readonly employeeBadgesService: EmployeeBadgesService,
-  {}
+    private readonly employeeService: EmployeeService // private readonly employeeProjectsService: EmployeeProjectsService, // private readonly employeeBadgesService: EmployeeBadgesService,
+  ) {}
 
   @Query(() => Employee)
   async employee(@Args('id') id: string): Promise<Employee> {
@@ -30,10 +29,10 @@ export class EmployeesResolver {
     return this.employeeService.findAll(employeesArgs);
   }
 
-  // @ResolveField('fullName', () => String)
-  // async getFullName(@Parent() employee: Employee) {
-  //   return employee.fullName;
-  // }
+  @ResolveField('fullName', () => String)
+  async getFullName(@Parent() employee: Employee) {
+    return employee.fullName;
+  }
 
   // @ResolveField('projects', () => [EmployeeProject])
   // async getProjects(@Parent() employee: Employee) {

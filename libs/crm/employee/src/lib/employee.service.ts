@@ -17,6 +17,10 @@ export class EmployeeService {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async findAll(employeesArgs: EmployeesArgs = {}): Promise<Employee[]> {
+    // if (employeesArgs.active !== false) {
+    //   return this.data.getData(TAB_EMPLOYEES, Employee.fromRow);
+    // }
+
     // let data = await this.databaseService.getEmployees();
     const data = await this.getEmployees();
 

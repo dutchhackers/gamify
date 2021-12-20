@@ -1,5 +1,6 @@
+import { parseBirthday, parseDate, splitString } from '@crm/data';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-// import { EmployeeRole } from '../enums/employee-role.enum';
+import { EmployeeRole } from '../enums/employee-role.enum';
 // import { EmployeeAccounts } from './employee-accounts.model';
 // import { EmployeeBadge } from '../../../src/employee-badges/models/employee-badge.model';
 // import { splitString, parseDate, parseBirthday } from '../../common/utils/sheets-parser.utils';
@@ -35,8 +36,8 @@ export class Employee {
   @Field(() => [String])
   tags: string[];
 
-  // @Field(() => EmployeeRole)
-  // role: EmployeeRole;
+  @Field(() => EmployeeRole)
+  role: EmployeeRole;
 
   @Field({ nullable: true })
   photoUrl?: string;
@@ -44,8 +45,8 @@ export class Employee {
   @Field({ nullable: true })
   joined!: Date;
 
-  // @Field({ nullable: true })
-  // birthday!: string; // Format: DD/MM/YYYY where YYYY is optional
+  @Field({ nullable: true })
+  birthday!: string; // Format: DD/MM/YYYY where YYYY is optional
 
   // @Field(() => EmployeeAccounts)
   // accounts: EmployeeAccounts;
@@ -73,12 +74,12 @@ export class Employee {
       givenName: data[FieldMapping.GIVEN_NAME],
       familyName: data[FieldMapping.FAMILY_NAME],
       role: data[FieldMapping.ROLE],
-      // tags: splitString(data[FieldMapping.TAGS]),
+      tags: splitString(data[FieldMapping.TAGS]),
       photoUrl: data[FieldMapping.PHOTO_URL] || null,
-      // emailAddresses: splitString(data.Email),
+      emailAddresses: splitString(data.Email),
       active: data[FieldMapping.ACTIVE] === 'TRUE',
-      // joined: parseDate(data[FieldMapping.JOINED]),
-      // birthday: parseBirthday(data[FieldMapping.BIRTHDAY]),
+      joined: parseDate(data[FieldMapping.JOINED]),
+      birthday: parseBirthday(data[FieldMapping.BIRTHDAY]),
       // accounts: EmployeeAccounts.fromRow(data),
     });
 

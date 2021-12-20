@@ -1,13 +1,15 @@
 import { ServiceAccountConfig } from '@crm/core';
-import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, OnModuleDestroy, OnModuleInit, CACHE_MANAGER, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { GoogleSpreadsheet, GoogleSpreadsheetRow } from 'google-spreadsheet';
+
+const CACHE_WORKSHEET_DEFAULT_TTL = 60 * 5; // 5 minutes
 
 @Injectable()
 export class DataService implements OnModuleInit, OnModuleDestroy {
   #doc: GoogleSpreadsheet;
 
-  constructor(private readonly config: ConfigService) {
+  constructor(@Inject(CACHE_MANAGER) protected readonly cacheManager, private readonly config: ConfigService) {
     // super();
   }
 
@@ -44,19 +46,25 @@ export class DataService implements OnModuleInit, OnModuleDestroy {
     // await this.$disconnect();
   }
 
+  // EXPERIMENTAL!
+  async getData<T>(sheetId: string, fnTransform: any): Promise<T[]> {
+    const rows = await this.getSpreadsheetRows(sheetId);
+    return rows.map((row: any) => fnTransform(row));
+  }
+
   public async getSpreadsheetRows(sheetTitle: string): Promise<GoogleSpreadsheetRow[]> {
-    // let spreadSheetRows: GoogleSpreadsheetRow[] = await this.cacheManager.get(sheetTitle);
-    // if (spreadSheetRows) {
-    //   Logger.debug(`Loading ${sheetTitle} from cache`);
-    //   return spreadSheetRows;
-    // }
+    let spreadSheetRows: GoogleSpreadsheetRow[] = await this.cacheManager.get(sheetTitle);
+    if (spreadSheetRows) {
+      Logger.debug(`Loading ${sheetTitle} from cache`);
+      return spreadSheetRows;
+    }
 
     Logger.debug(`Loading ${sheetTitle} from database`);
 
-    const spreadSheetRows = await this.#doc.sheetsByTitle[sheetTitle].getRows();
-    // this.cacheManager.set(sheetTitle, spreadSheetRows, {
-    //   ttl: CACHE_WORKSHEET_DEFAULT_TTL,
-    // });
+    spreadSheetRows = await this.#doc.sheetsByTitle[sheetTitle].getRows();
+    this.cacheManager.set(sheetTitle, spreadSheetRows, {
+      ttl: CACHE_WORKSHEET_DEFAULT_TTL,
+    });
     return spreadSheetRows;
   }
 }
