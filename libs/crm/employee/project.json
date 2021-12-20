@@ -1,0 +1,23 @@
+{
+  "root": "libs/crm/employee",
+  "sourceRoot": "libs/crm/employee/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/crm/employee/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/crm/employee"],
+      "options": {
+        "jestConfig": "libs/crm/employee/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
