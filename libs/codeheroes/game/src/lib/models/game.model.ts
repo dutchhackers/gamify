@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
 
 @ObjectType()
 export class Game {
