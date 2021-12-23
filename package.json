@@ -16,7 +16,7 @@
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
-    "@prisma/client": "^3.6.0",
+    "@prisma/client": "^3.7.0",
     "apollo-server-express": "^3.5.0",
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.13.2",
