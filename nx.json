@@ -28,6 +28,12 @@
         "target": "build",
         "projects": "dependencies"
       }
+    ],
+    "dockerize": [
+      {
+        "target": "build",
+        "projects": "self"
+      }
     ]
   },
   "defaultProject": "foosball-api"

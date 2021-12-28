@@ -10,7 +10,8 @@
         "outputPath": "dist/apps/codeheroes-api",
         "main": "apps/codeheroes/api/src/main.ts",
         "tsConfig": "apps/codeheroes/api/tsconfig.app.json",
-        "assets": ["apps/codeheroes/api/src/assets"]
+        "assets": ["apps/codeheroes/api/src/assets"],
+        "generatePackageJson": false
       },
       "configurations": {
         "production": {
@@ -45,6 +46,30 @@
       "options": {
         "jestConfig": "apps/codeheroes/api/jest.config.js",
         "passWithNoTests": true
+      }
+    },
+    "dockerize": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker build -f ./apps/codeheroes/api/server/Dockerfile . -t codeheroes-api"
+      },
+      "parallel": false
+    },
+    "docker-push": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "if [ {args.projectId} = \"undefined\" ]; then echo \"provide project arg\"; else docker tag codeheroes-api gcr.io/{args.projectId}/codeheroes-api; fi ",
+          "if [ {args.projectId} = \"undefined\" ]; then echo \"provide project arg\"; else docker push gcr.io/{args.projectId}/codeheroes-api; fi "
+        ]
+      },
+      "parallel": false
+    },
+    "docker": {
+      "executor": "@nx-tools/nx-docker:build",
+      "options": {
+        "push": false,
+        "tags": ["your-org/api:latest", "your-org/api:v1"]
       }
     }
   },
