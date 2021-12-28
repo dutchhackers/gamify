@@ -55,10 +55,13 @@
       },
       "parallel": false
     },
-    "docker:push": {
+    "docker-push": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "docker push gcr.io/m4m-code-heroes-dev/codeheroes-api"
+        "commands": [
+          "docker tag codeheroes-api gcr.io/m4m-code-heroes-dev/codeheroes-api",
+          "docker push gcr.io/m4m-code-heroes-dev/codeheroes-api"
+        ]
       },
       "parallel": false
     },
