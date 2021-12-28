@@ -1,0 +1,7 @@
+{
+  "name": "codeheroes-api",
+  "scripts": {
+    "example": "echo 'hello world'"
+  },
+  "dependencies": {}
+}

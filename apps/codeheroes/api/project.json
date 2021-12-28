@@ -55,6 +55,13 @@
       },
       "parallel": false
     },
+    "docker:push": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker push gcr.io/m4m-code-heroes-dev/codeheroes-api"
+      },
+      "parallel": false
+    },
     "docker": {
       "executor": "@nx-tools/nx-docker:build",
       "options": {
