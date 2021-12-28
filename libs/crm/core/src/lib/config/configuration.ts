@@ -1,6 +1,6 @@
 export const configuration = () => ({
   environment: process.env.NODE_ENV,
-  port: parseInt(process.env.API_PORT || process.env.PORT || '3000', 10),
+  port: parseInt(process.env.PORT || '3000', 10),
   sheetId: process.env.SOURCE_DOC_ID,
   serviceAccount: {
     clientEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
