@@ -1,3 +1,4 @@
+import { JwtConfig } from '@foosball/core';
 import { DataModule } from '@foosball/data';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -7,15 +8,13 @@ import { AuthService } from './auth.service';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
-
 @Module({
   imports: [
     DataModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        // secretOrPrivateKey: configService.get('jvt.secret'),
-        secret: configService.get<string>('jwt.secret')
+        secret: configService.get<JwtConfig>('jwt').jwtSecret,
       }),
       inject: [ConfigService],
     }),

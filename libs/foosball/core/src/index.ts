@@ -1,4 +1,3 @@
 export * from './lib/core.module';
-
-// export enums
 export * from './lib/enums';
+export * from './lib/models';
