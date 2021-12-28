@@ -59,8 +59,8 @@
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "commands": [
-          "docker tag codeheroes-api gcr.io/m4m-code-heroes-dev/codeheroes-api",
-          "docker push gcr.io/m4m-code-heroes-dev/codeheroes-api"
+          "if [ {args.projectId} = \"undefined\" ]; then echo \"provide project arg\"; else docker tag codeheroes-api gcr.io/{args.projectId}/codeheroes-api; fi ",
+          "if [ {args.projectId} = \"undefined\" ]; then echo \"provide project arg\"; else docker push gcr.io/{args.projectId}/codeheroes-api; fi "
         ]
       },
       "parallel": false
