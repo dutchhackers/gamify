@@ -36,6 +36,7 @@
   "features": {
 	"github-cli": "latest",
 	"docker-in-docker": "latest",
-	"homebrew": "latest"
+	"homebrew": "latest",
+	"python": "latest"
   }
 }
