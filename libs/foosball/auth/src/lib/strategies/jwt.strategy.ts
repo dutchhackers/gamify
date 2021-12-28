@@ -1,3 +1,4 @@
+import { JwtConfig } from '@foosball/core';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
@@ -10,10 +11,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly configService: ConfigService, private readonly service: AuthService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: configService.get<string>('jwt.secret'),
+      secretOrKey: configService.get<JwtConfig>('jwt').jwtSecret,
     });
-
-    console.log('secret', configService.get<string>('jwt.secret'))
   }
 
   async validate(payload: JwtDto) {

@@ -30,8 +30,6 @@ export class DataService implements OnModuleInit, OnModuleDestroy {
 
       await doc.loadInfo();
 
-      console.log('Sheet count: ', doc.sheetCount);
-
       this.#doc = doc;
     } catch (error) {
       console.log('Could not initialize DataService');

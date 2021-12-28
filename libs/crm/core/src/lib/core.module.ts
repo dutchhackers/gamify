@@ -10,7 +10,7 @@ import { join } from 'path';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env.crm',
+      envFilePath: join(process.cwd(), 'libs/crm/core/.env'),
       isGlobal: true,
       load: [configuration],
       validationSchema,
