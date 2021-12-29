@@ -1,5 +1,5 @@
 {
-  "root": "apps/crm/api",
+  "root": "apps/crm-api",
   "sourceRoot": "apps/crm/api/src",
   "projectType": "application",
   "targets": {
@@ -7,7 +7,7 @@
       "executor": "@nrwl/node:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/crm/api",
+        "outputPath": "dist/apps/crm-api",
         "main": "apps/crm/api/src/main.ts",
         "tsConfig": "apps/crm/api/tsconfig.app.json",
         "assets": ["apps/crm/api/src/assets"]
@@ -46,6 +46,23 @@
         "jestConfig": "apps/crm/api/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "dockerize": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker build -f ./apps/crm/api/server/Dockerfile . -t crm-api"
+      },
+      "parallel": false
+    },
+    "docker-push": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "if [ {args.projectId} = \"undefined\" ]; then echo \"provide project arg\"; else docker tag crm-api gcr.io/{args.projectId}/crm-api; fi ",
+          "if [ {args.projectId} = \"undefined\" ]; then echo \"provide project arg\"; else docker push gcr.io/{args.projectId}/crm-api; fi "
+        ]
+      },
+      "parallel": false
     }
   },
   "tags": []
