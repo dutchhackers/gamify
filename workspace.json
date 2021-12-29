@@ -12,6 +12,7 @@
     "crm-core": "libs/crm/core",
     "crm-data": "libs/crm/data",
     "crm-employee": "libs/crm/employee",
+    "crm-project": "libs/crm/project",
     "foosball-api": "apps/foosball/api",
     "foosball-auth": "libs/foosball/auth",
     "foosball-core": "libs/foosball/core",

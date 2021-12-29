@@ -24,6 +24,7 @@
       "@crm/core": ["libs/crm/core/src/index.ts"],
       "@crm/data": ["libs/crm/data/src/index.ts"],
       "@crm/employee": ["libs/crm/employee/src/index.ts"],
+      "@crm/project": ["libs/crm/project/src/index.ts"],
       "@foosball/auth": ["libs/foosball/auth/src/index.ts"],
       "@foosball/core": ["libs/foosball/core/src/index.ts"],
       "@foosball/data": ["libs/foosball/data/src/index.ts"],
