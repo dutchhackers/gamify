@@ -1,9 +1,11 @@
-import { NotFoundException } from '@nestjs/common';
+import { GqlAuthGuard } from '@crm/auth';
+import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { EmployeesArgs } from '../dto/employees.args';
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../models';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => Employee)
 export class EmployeesResolver {
   constructor(
