@@ -65,5 +65,5 @@
       "parallel": false
     }
   },
-  "tags": []
+  "tags": ["type:app"]
 }

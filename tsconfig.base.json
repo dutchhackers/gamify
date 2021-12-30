@@ -21,6 +21,7 @@
       "@codeheroes/game": ["libs/codeheroes/game/src/index.ts"],
       "@codeheroes/player": ["libs/codeheroes/player/src/index.ts"],
       "@crm/auth": ["libs/crm/auth/src/index.ts"],
+      "@crm/badge": ["libs/crm/badge/src/index.ts"],
       "@crm/core": ["libs/crm/core/src/index.ts"],
       "@crm/data": ["libs/crm/data/src/index.ts"],
       "@crm/employee": ["libs/crm/employee/src/index.ts"],

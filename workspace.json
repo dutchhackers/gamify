@@ -9,6 +9,7 @@
     "codeheroes-player": "libs/codeheroes/player",
     "crm-api": "apps/crm/api",
     "crm-auth": "libs/crm/auth",
+    "crm-badge": "libs/crm/badge",
     "crm-core": "libs/crm/core",
     "crm-data": "libs/crm/data",
     "crm-employee": "libs/crm/employee",
