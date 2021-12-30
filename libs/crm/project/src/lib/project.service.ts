@@ -1,8 +1,8 @@
+import { JiraProjectStatus } from '@crm/core';
 import { DataService } from '@crm/data';
 import { Injectable, Logger } from '@nestjs/common';
 import { ProjectsArgs } from './dto/projects.args';
 import { Project } from './models/project.model';
-import { JiraProjectStatus } from './enums/jira-project-status.enum';
 
 const TAB_PROJECTS = 'Projects';
 
@@ -17,6 +17,7 @@ export class ProjectService {
   }
 
   async findAll(projectsArgs: ProjectsArgs = {}): Promise<Project[]> {
+    Logger.log(`Find projects ${JSON.stringify(projectsArgs)}...`);
     let data = await this.getProjects();
 
     // Filter by JIRA Key

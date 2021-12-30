@@ -1,6 +1,6 @@
+import { JiraProjectStatus } from '@crm/core';
 import { parseNumber } from '@crm/data';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { JiraProjectStatus } from '../enums/jira-project-status.enum';
 
 enum FieldMapping {
   ID = 'ID',

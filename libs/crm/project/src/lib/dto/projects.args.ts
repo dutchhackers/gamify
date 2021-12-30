@@ -1,9 +1,9 @@
+import { JiraProjectStatus } from '@crm/core';
 import { ArgsType, Field } from '@nestjs/graphql';
-import { JiraProjectStatus } from '../enums/jira-project-status.enum';
 
 @ArgsType()
 export class ProjectsArgs {
-  @Field(() => JiraProjectStatus, { nullable: true, name: 'status' })
+  @Field(() => JiraProjectStatus, { nullable: true, name: 'jiraProjectStatus' })
   jiraProjectStatus?: JiraProjectStatus;
 
   @Field(() => String, { nullable: true })
