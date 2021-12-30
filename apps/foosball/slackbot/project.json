@@ -49,5 +49,5 @@
       }
     }
   },
-  "tags": ["type:app"]
+  "tags": ["type:app", "scope:foosball"]
 }

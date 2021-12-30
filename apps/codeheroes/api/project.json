@@ -73,5 +73,5 @@
       }
     }
   },
-  "tags": ["type:app"]
+  "tags": ["type:app", "scope:codeheroes"]
 }
