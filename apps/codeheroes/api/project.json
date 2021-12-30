@@ -1,5 +1,5 @@
 {
-  "root": "apps/codeheroes-api",
+  "root": "apps/codeheroes/api",
   "sourceRoot": "apps/codeheroes/api/src",
   "projectType": "application",
   "targets": {
@@ -73,5 +73,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["type:app"]
 }

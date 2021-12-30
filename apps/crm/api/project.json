@@ -1,5 +1,5 @@
 {
-  "root": "apps/crm-api",
+  "root": "apps/crm/api",
   "sourceRoot": "apps/crm/api/src",
   "projectType": "application",
   "targets": {
