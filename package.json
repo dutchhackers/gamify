@@ -47,7 +47,7 @@
     "@nrwl/workspace": "13.4.0",
     "@types/cache-manager": "^3.4.2",
     "@types/google-spreadsheet": "^3.1.5",
-    "@types/jest": "27.0.3",
+    "@types/jest": "27.4.0",
     "@types/node": "17.0.5",
     "@types/luxon": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "5.8.1",
