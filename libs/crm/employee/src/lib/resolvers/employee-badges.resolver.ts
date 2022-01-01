@@ -1,14 +1,14 @@
-// import { Badge, BadgeService } from '@crm/badge';
+import { Badge, BadgeService } from '@crm/badge';
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { EmployeeBadgeService } from '../employee-badge.service';
-import { EmployeeService } from '../employee.service';
 import { Employee, EmployeeBadge } from '../models';
+import { EmployeeBadgeService, EmployeeService } from '../services';
 
 @Resolver(() => EmployeeBadge)
 export class EmployeeBadgeResolver {
   constructor(
     private readonly employeeBadgeService: EmployeeBadgeService,
-    private readonly employeeService: EmployeeService // private readonly badgeService: BadgeService
+    private readonly employeeService: EmployeeService,
+    private readonly badgeService: BadgeService
   ) {}
 
   @Query(() => [EmployeeBadge])
@@ -22,9 +22,9 @@ export class EmployeeBadgeResolver {
     return this.employeeService.findOneById(employeeId + '');
   }
 
-  // @ResolveField('badge', () => Badge)
-  // getBadge(@Parent() employeeBadge: EmployeeBadge) {
-  //   const { badgeId } = employeeBadge;
-  //   return this.badgeService.findOneById(badgeId);
-  // }
+  @ResolveField('badge', () => Badge)
+  getBadge(@Parent() employeeBadge: EmployeeBadge) {
+    const { badgeId } = employeeBadge;
+    return this.badgeService.findOneById(badgeId);
+  }
 }

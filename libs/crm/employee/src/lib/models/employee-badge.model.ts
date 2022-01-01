@@ -1,7 +1,7 @@
-import { Field, ObjectType } from '@nestjs/graphql';
-// import { Badge } from '@crm/badge';
-import { Employee } from '@crm/employee';
+import { Badge } from '@crm/badge';
 import { parseDate, parseNumber, parseString } from '@crm/data';
+import { Employee } from '@crm/employee';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 enum FieldMapping {
   EMPLOYEE = 'Employee',
@@ -23,8 +23,8 @@ export class EmployeeBadge {
   @Field(() => Number)
   badgeId: number;
 
-  // @Field(() => Badge)
-  // badge: Badge;
+  @Field(() => Badge)
+  badge: Badge;
 
   @Field()
   awarded: number;

@@ -1,4 +1,3 @@
-export * from './lib/employee-badge.service';
 export * from './lib/employee.module';
-export * from './lib/employee.service';
 export * from './lib/models';
+export * from './lib/services';

@@ -1,12 +1,12 @@
+import { BadgeModule } from '@crm/badge';
 import { DataModule } from '@crm/data';
 import { Module } from '@nestjs/common';
-import { EmployeeBadgeService } from './employee-badge.service';
-import { EmployeeService } from './employee.service';
 import { EmployeeBadgeResolver } from './resolvers/employee-badges.resolver';
 import { EmployeesResolver } from './resolvers/employee.resolver';
+import { EmployeeBadgeService, EmployeeService } from './services';
 
 @Module({
-  imports: [DataModule],
+  imports: [DataModule, BadgeModule],
   controllers: [],
   providers: [EmployeeService, EmployeesResolver, EmployeeBadgeService, EmployeeBadgeResolver],
   exports: [EmployeeService, EmployeeBadgeService],
