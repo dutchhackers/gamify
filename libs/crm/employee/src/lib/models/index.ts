@@ -1,2 +1,3 @@
-export * from './employee.model';
 export * from './employee-accounts.model';
+export * from './employee-badge.model';
+export * from './employee.model';
