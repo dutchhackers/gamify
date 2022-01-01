@@ -1,4 +1,3 @@
-// import { Badge, BadgeService } from '@crm/badge';
 import { Badge, BadgeService } from '@crm/badge';
 import { DataService } from '@crm/data';
 import { Injectable } from '@nestjs/common';
