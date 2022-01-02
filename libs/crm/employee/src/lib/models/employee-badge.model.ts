@@ -1,6 +1,7 @@
 import { Badge } from '@crm/badge';
 import { GoogleSpreadsheetRow, parseDate, parseNumber, parseString } from '@crm/data';
 import { Field, ObjectType } from '@nestjs/graphql';
+import { Employee } from '../models';
 
 enum FieldMapping {
   EMPLOYEE = 'Employee',
