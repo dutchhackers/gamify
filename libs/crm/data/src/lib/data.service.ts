@@ -7,7 +7,7 @@ const CACHE_WORKSHEET_DEFAULT_TTL = 60 * 5; // 5 minutes
 
 @Injectable()
 export class DataService implements OnModuleInit, OnModuleDestroy {
-  #doc: GoogleSpreadsheet;
+  #doc!: GoogleSpreadsheet;
 
   constructor(@Inject(CACHE_MANAGER) protected readonly cacheManager, private readonly config: ConfigService) {
     // super();
