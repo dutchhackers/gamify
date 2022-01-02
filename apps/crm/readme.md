@@ -45,7 +45,6 @@ GOOGLE_PRIVATE_KEY="<private_key>"
 
 ```
 
-
 ### Run CRM API locally
 
 - Run CRM API
