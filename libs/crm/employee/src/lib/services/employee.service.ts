@@ -1,8 +1,8 @@
 import { DataService } from '@crm/data';
 import { Injectable } from '@nestjs/common';
-import { EmployeesArgs } from './dto/employees.args';
-import { EmployeeRole } from './enums/employee-role.enum';
-import { Employee } from './models';
+import { EmployeesArgs } from '../dto/employees.args';
+import { EmployeeRole } from '../enums/employee-role.enum';
+import { Employee } from '../models';
 
 const TAB_EMPLOYEES = 'Employees';
 
@@ -72,6 +72,6 @@ export class EmployeeService {
 
   private async getEmployees() {
     const rows = await this.data.getSpreadsheetRows(TAB_EMPLOYEES);
-    return rows.map((row: any) => Employee.fromRow(row)).filter(e => e.id);
+    return rows.map(row => Employee.fromRow(row)).filter(e => e.id);
   }
 }

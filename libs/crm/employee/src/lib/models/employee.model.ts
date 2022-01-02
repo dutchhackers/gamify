@@ -1,7 +1,9 @@
-import { parseBirthday, parseDate, splitString } from '@crm/data';
+import { GoogleSpreadsheetRow, parseBirthday, parseDate, splitString } from '@crm/data';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { EmployeeRole } from '../enums/employee-role.enum';
 import { EmployeeAccounts } from './employee-accounts.model';
+import { EmployeeBadge } from './employee-badge.model';
+import { EmployeeProject } from './employee-project.model';
 // import { EmployeeAccounts } from './employee-accounts.model';
 // import { EmployeeBadge } from '../../../src/employee-badges/models/employee-badge.model';
 // import { splitString, parseDate, parseBirthday } from '../../common/utils/sheets-parser.utils';
@@ -59,17 +61,17 @@ export class Employee {
    ** Via Resolvers
    */
 
-  // @Field(() => [EmployeeProject])
-  // projects: EmployeeProject[];
+  @Field(() => [EmployeeProject])
+  projects: EmployeeProject[];
 
-  // @Field(() => [EmployeeBadge])
-  // badges: EmployeeBadge[];
+  @Field(() => [EmployeeBadge])
+  badges: EmployeeBadge[];
 
   get fullName() {
     return `${this.givenName} ${this.familyName}`;
   }
 
-  static fromRow(data: any) {
+  static fromRow(data: GoogleSpreadsheetRow) {
     const obj = Object.assign(new Employee(), <Partial<Employee>>{
       id: data[FieldMapping.ID],
       givenName: data[FieldMapping.GIVEN_NAME],

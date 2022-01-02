@@ -1,13 +1,17 @@
-import { NotFoundException } from '@nestjs/common';
+import { GqlAuthGuard } from '@crm/auth';
+import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { EmployeesArgs } from '../dto/employees.args';
-import { EmployeeService } from '../employee.service';
-import { Employee } from '../models';
+import { Employee, EmployeeBadge, EmployeeProject } from '../models';
+import { EmployeeService, EmployeeBadgeService, EmployeeProjectService } from '../services';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => Employee)
 export class EmployeesResolver {
   constructor(
-    private readonly employeeService: EmployeeService // private readonly employeeProjectsService: EmployeeProjectsService, // private readonly employeeBadgesService: EmployeeBadgesService,
+    private readonly employeeService: EmployeeService,
+    private readonly employeeBadgeService: EmployeeBadgeService,
+    private readonly employeeProjectService: EmployeeProjectService
   ) {}
 
   @Query(() => Employee)
@@ -29,19 +33,19 @@ export class EmployeesResolver {
     return employee.fullName;
   }
 
-  // @ResolveField('projects', () => [EmployeeProject])
-  // async getProjects(@Parent() employee: Employee) {
-  //   const { id } = employee;
+  @ResolveField('projects', () => [EmployeeProject])
+  async getProjects(@Parent() employee: Employee) {
+    const { id } = employee;
 
-  //   const allEmployeeProjects = await this.employeeProjectsService.findAll();
-  //   return allEmployeeProjects.filter((project) => project.employeeId === id);
-  // }
+    const allEmployeeProjects = await this.employeeProjectService.findAll();
+    return allEmployeeProjects.filter(project => project.employeeId === id);
+  }
 
-  // @ResolveField('badges', () => [EmployeeBadge])
-  // async getEmployeeBadges(@Parent() employee: Employee) {
-  //   const { id } = employee;
+  @ResolveField('badges', () => [EmployeeBadge])
+  async getEmployeeBadges(@Parent() employee: Employee) {
+    const { id } = employee;
 
-  //   const allEmployeeBadges = await this.employeeBadgesService.findAll();
-  //   return allEmployeeBadges.filter((badge) => badge.employeeId === id);
-  // }
+    const allEmployeeBadges = await this.employeeBadgeService.findAll();
+    return allEmployeeBadges.filter(badge => badge.employeeId === id);
+  }
 }

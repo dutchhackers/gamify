@@ -17,6 +17,7 @@ import { join } from 'path';
     }),
     GraphQLModule.forRoot({
       playground: false,
+      introspection: true,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       autoSchemaFile: join(process.cwd(), 'libs/crm/core/src/schema.gql'),
     }),

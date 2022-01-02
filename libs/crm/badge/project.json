@@ -1,0 +1,23 @@
+{
+  "root": "libs/crm/badge",
+  "sourceRoot": "libs/crm/badge/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/crm/badge/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/crm/badge"],
+      "options": {
+        "jestConfig": "libs/crm/badge/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:feature", "scope:crm"]
+}

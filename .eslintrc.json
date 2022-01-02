@@ -13,9 +13,33 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": ["type:util"]
+              },
+              {
+                "sourceTag": "scope:crm",
+                "onlyDependOnLibsWithTags": ["scope:crm", "scope:crm-shared", "scope:crm-core"]
+              },
+              {
+                "sourceTag": "scope:foosball",
+                "onlyDependOnLibsWithTags": ["scope:foosball", "scope:foosball-shared", "scope:foosball-core"]
+              },
+              {
+                "sourceTag": "scope:crm-core",
+                "onlyDependOnLibsWithTags": ["scope:crm-shared"]
+              },
+              {
+                "sourceTag": "scope:crm-shared",
+                "onlyDependOnLibsWithTags": ["scope:crm-shared"]
+              }              
             ]
           }
         ]
