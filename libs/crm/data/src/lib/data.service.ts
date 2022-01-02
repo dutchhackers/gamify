@@ -2,8 +2,7 @@ import { ServiceAccountConfig } from '@crm/core';
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit, CACHE_MANAGER, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { GoogleSpreadsheet, GoogleSpreadsheetRow } from 'google-spreadsheet';
-
-const CACHE_WORKSHEET_DEFAULT_TTL = 60 * 5; // 5 minutes
+import { CACHE_WORKSHEET_DEFAULT_TTL } from './utils';
 
 @Injectable()
 export class DataService implements OnModuleInit, OnModuleDestroy {
