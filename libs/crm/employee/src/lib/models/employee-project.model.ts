@@ -1,4 +1,4 @@
-import { parseDate, parseNumber, parseString } from '@crm/data';
+import { GoogleSpreadsheetRow, parseDate, parseNumber, parseString } from '@crm/data';
 import { Project } from '@crm/project';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { EmployeeRole } from '../enums/employee-role.enum';
@@ -43,7 +43,7 @@ export class EmployeeProject {
     return true;
   }
 
-  static fromRow(data: any) {
+  static fromRow(data: GoogleSpreadsheetRow) {
     const obj = Object.assign(new EmployeeProject(), <Partial<EmployeeProject>>{
       employeeId: parseString(data[FieldMapping.EMPLOYEE_ID]),
       projectId: parseNumber(data[FieldMapping.PROJECT_ID]),

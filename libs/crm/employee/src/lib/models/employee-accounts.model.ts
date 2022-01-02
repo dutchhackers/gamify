@@ -1,3 +1,4 @@
+import { GoogleSpreadsheetRow } from '@crm/data';
 import { Field, ObjectType } from '@nestjs/graphql';
 
 enum FieldMapping {
@@ -25,10 +26,8 @@ export class EmployeeAccounts {
   @Field({ nullable: true })
   slack!: string;
 
-  static fromRow(data: any) {
-    const obj = Object.assign(new EmployeeAccounts(), <
-      Partial<EmployeeAccounts>
-    >{
+  static fromRow(data: GoogleSpreadsheetRow) {
+    const obj = Object.assign(new EmployeeAccounts(), <Partial<EmployeeAccounts>>{
       google: data[FieldMapping.GOOGLE],
       github: data[FieldMapping.GITHUB],
       twitter: data[FieldMapping.TWITTER],

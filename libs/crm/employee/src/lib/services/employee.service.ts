@@ -72,6 +72,6 @@ export class EmployeeService {
 
   private async getEmployees() {
     const rows = await this.data.getSpreadsheetRows(TAB_EMPLOYEES);
-    return rows.map((row: any) => Employee.fromRow(row)).filter(e => e.id);
+    return rows.map(row => Employee.fromRow(row)).filter(e => e.id);
   }
 }

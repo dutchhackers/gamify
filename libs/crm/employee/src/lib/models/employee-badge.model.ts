@@ -1,6 +1,5 @@
 import { Badge } from '@crm/badge';
-import { parseDate, parseNumber, parseString } from '@crm/data';
-import { Employee } from '@crm/employee';
+import { GoogleSpreadsheetRow, parseDate, parseNumber, parseString } from '@crm/data';
 import { Field, ObjectType } from '@nestjs/graphql';
 
 enum FieldMapping {
@@ -32,7 +31,7 @@ export class EmployeeBadge {
   @Field({ nullable: true })
   awardedDate?: Date;
 
-  static fromRow(data: any) {
+  static fromRow(data: GoogleSpreadsheetRow) {
     const obj = Object.assign(new EmployeeBadge(), <Partial<EmployeeBadge>>{
       employeeId: parseString(data[FieldMapping.EMPLOYEE_ID]),
       badgeId: parseNumber(data[FieldMapping.BADGE_ID]),

@@ -1,4 +1,4 @@
-import { parseBirthday, parseDate, splitString } from '@crm/data';
+import { GoogleSpreadsheetRow, parseBirthday, parseDate, splitString } from '@crm/data';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { EmployeeRole } from '../enums/employee-role.enum';
 import { EmployeeAccounts } from './employee-accounts.model';
@@ -71,7 +71,7 @@ export class Employee {
     return `${this.givenName} ${this.familyName}`;
   }
 
-  static fromRow(data: any) {
+  static fromRow(data: GoogleSpreadsheetRow) {
     const obj = Object.assign(new Employee(), <Partial<Employee>>{
       id: data[FieldMapping.ID],
       givenName: data[FieldMapping.GIVEN_NAME],

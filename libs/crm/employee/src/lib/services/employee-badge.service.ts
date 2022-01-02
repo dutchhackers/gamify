@@ -22,6 +22,6 @@ export class EmployeeBadgeService {
 
   private async getEmployeeBadges() {
     const rows = await this.data.getSpreadsheetRows(TAB_EMPLOYEE_BADGES);
-    return rows.map((row: any) => EmployeeBadge.fromRow(row)).filter(e => e.employeeId);
+    return rows.map(row => EmployeeBadge.fromRow(row)).filter(e => e.employeeId);
   }
 }

@@ -22,6 +22,6 @@ export class EmployeeProjectService {
 
   private async getEmployeeProjects() {
     const rows = await this.data.getSpreadsheetRows(TAB_EMPLOYEE_PROJECTS);
-    return rows.map((row: any) => EmployeeProject.fromRow(row)).filter(e => e.employeeId);
+    return rows.map(row => EmployeeProject.fromRow(row)).filter(e => e.employeeId);
   }
 }
