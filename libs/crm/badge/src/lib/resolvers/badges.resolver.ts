@@ -1,11 +1,12 @@
 import { NotFoundException } from '@nestjs/common';
-import { Args, Query, Resolver } from '@nestjs/graphql';
-import { BadgeService } from '../badge.service';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { BadgeService, BadgeAwardedService } from '../services';
 import { Badge } from '../models';
+import { BadgeAwarded } from '../models/badge-award.model';
 
 @Resolver(() => Badge)
 export class BadgesResolver {
-  constructor(private readonly badgeService: BadgeService) {}
+  constructor(private readonly badgeService: BadgeService, private readonly badgeAwardedService: BadgeAwardedService) {}
 
   @Query(() => Badge)
   async badge(@Args('id') id: number): Promise<Badge> {
@@ -19,5 +20,14 @@ export class BadgesResolver {
   @Query(() => [Badge])
   badges(): Promise<Badge[]> {
     return this.badgeService.findAll();
+  }
+
+  @ResolveField('awarded', () => [BadgeAwarded])
+  async getBadgeAwarded(@Parent() badge: Badge) {
+    const { id } = badge;
+
+    const allAwardedBadges = await this.badgeAwardedService.findAll();
+    return allAwardedBadges.filter(badge => badge.badgeId === id);
+    // return [];
   }
 }
