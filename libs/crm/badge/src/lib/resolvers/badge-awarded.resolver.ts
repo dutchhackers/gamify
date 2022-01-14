@@ -6,7 +6,7 @@ import { BadgeService } from '../services';
 @Resolver(() => BadgeAwarded)
 export class BadgeAwardedResolver {
   constructor(
-    private readonly badgeService: BadgeService // , private readonly employeeService: EmployeeService
+    private readonly badgeService: BadgeService //, private readonly employeeService: EmployeeService
   ) {}
 
   @ResolveField('badge', () => Badge)
