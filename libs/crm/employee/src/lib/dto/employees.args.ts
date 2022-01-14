@@ -1,5 +1,5 @@
+import { EmployeeRole } from '@crm/core';
 import { ArgsType, Field } from '@nestjs/graphql';
-import { EmployeeRole } from '../enums/employee-role.enum';
 
 @ArgsType()
 export class EmployeesArgs {

@@ -13,19 +13,19 @@ enum FieldMapping {
 @ObjectType({ description: 'employee badge ' })
 export class BadgeAwarded {
   @Field()
-  employeeId: string;
+  employeeId!: string;
 
   // @Field(() => Employee)
   // employee: Employee;
 
   @Field(() => Number)
-  badgeId: number;
+  badgeId!: number;
 
   // @Field(() => Badge)
   // badge: Badge;
 
   @Field()
-  awarded: number;
+  awarded!: number;
 
   @Field({ nullable: true })
   awardedDate?: Date;

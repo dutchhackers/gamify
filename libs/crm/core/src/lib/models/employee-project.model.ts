@@ -1,8 +1,8 @@
 import { GoogleSpreadsheetRow, parseDate, parseNumber, parseString } from '@crm/data';
 import { Project } from '@crm/project';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { EmployeeRole } from '../enums/employee-role.enum';
-import { Employee } from './employee.model';
+import { EmployeeRole } from '@crm/core';
+import { Employee } from '../../../../core/src/lib/models/employee.model';
 
 enum FieldMapping {
   EMPLOYEE_ID = 'EmployeeId',

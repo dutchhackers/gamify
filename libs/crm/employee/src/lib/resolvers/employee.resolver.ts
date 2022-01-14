@@ -2,7 +2,7 @@ import { GqlAuthGuard } from '@crm/auth';
 import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { EmployeesArgs } from '../dto/employees.args';
-import { Employee, EmployeeBadge, EmployeeProject } from '../models';
+import { Employee, EmployeeBadge, EmployeeProject } from '@crm/core';
 import { EmployeeService, EmployeeBadgeService, EmployeeProjectService } from '../services';
 
 @UseGuards(GqlAuthGuard)

@@ -1,7 +1,7 @@
+import { BadgeAwarded } from '@crm/core';
 import { DataService } from '@crm/data';
 import { Injectable } from '@nestjs/common';
 // import { Badge } from '../models';
-import { BadgeAwarded } from '../models/badge-award.model';
 // import { BadgeService } from '../services';
 
 const TAB_EMPLOYEE_BADGES = 'EmployeeBadges';

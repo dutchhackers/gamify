@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataService } from '@crm/data';
-import { EmployeeProject } from '../models';
 import { Project, ProjectService } from '@crm/project';
+import { EmployeeProject } from '@crm/core';
 
 const TAB_EMPLOYEE_PROJECTS = 'EmployeeProjects';
 

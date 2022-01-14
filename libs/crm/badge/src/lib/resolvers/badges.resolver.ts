@@ -1,8 +1,7 @@
+import { Badge, BadgeAwarded } from '@crm/core';
 import { NotFoundException } from '@nestjs/common';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { BadgeService, BadgeAwardedService } from '../services';
-import { Badge } from '../models';
-import { BadgeAwarded } from '../models/badge-award.model';
 
 @Resolver(() => Badge)
 export class BadgesResolver {
