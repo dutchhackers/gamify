@@ -1,6 +1,6 @@
 import { DataModule } from '@crm/data';
 import { Module } from '@nestjs/common';
-import { ProjectService } from './project.service';
+import { ProjectService } from './services/project.service';
 import { ProjectResolver } from './resolvers/project.resolver';
 
 @Module({

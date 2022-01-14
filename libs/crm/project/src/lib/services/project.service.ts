@@ -1,8 +1,7 @@
-import { JiraProjectStatus } from '@crm/core';
+import { JiraProjectStatus, Project } from '@crm/core';
 import { DataService } from '@crm/data';
 import { Injectable, Logger } from '@nestjs/common';
-import { ProjectsArgs } from './dto/projects.args';
-import { Project } from './models/project.model';
+import { ProjectsArgs } from '../dto/projects.args';
 
 const TAB_PROJECTS = 'Projects';
 
@@ -45,6 +44,6 @@ export class ProjectService {
 
   private async getProjects() {
     const rows = await this.data.getSpreadsheetRows(TAB_PROJECTS);
-    return rows.map((row: any) => Project.fromRow(row)).filter(e => e.id);
+    return rows.map(row => Project.fromRow(row)).filter(e => e.id);
   }
 }

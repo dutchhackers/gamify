@@ -1,6 +1,5 @@
 import { lowerCase, parseBoolean, parseNumber } from '@crm/data';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { BadgeAwarded } from './badge-award.model';
 
 enum FieldMapping {
   ID = 'ID',
@@ -44,13 +43,6 @@ export class Badge {
   multipleAllowed: boolean;
 
   active: boolean;
-
-  /*
-   ** Via Resolvers
-   */
-
-  @Field(() => [BadgeAwarded])
-  awarded: BadgeAwarded[];
 
   static fromRow(data: any) {
     const obj = Object.assign(new Badge(), <Partial<Badge>>{
