@@ -1,13 +1,14 @@
 import { GqlAuthGuard } from '@crm/auth';
 import { BadgeService } from '@crm/badge';
+import { Badge, Employee, EmployeeBadge } from '@crm/core';
+import { EmployeeService } from '@crm/employee';
 import { UseGuards } from '@nestjs/common';
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { Badge, Employee, EmployeeBadge } from '@crm/core';
-import { EmployeeBadgeService, EmployeeService } from '../services';
+import { EmployeeBadgeService } from '../services';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => EmployeeBadge)
-export class EmployeeBadgeResolver {
+export class EmployeeBadgesResolver {
   constructor(
     private readonly employeeBadgeService: EmployeeBadgeService,
     private readonly employeeService: EmployeeService,

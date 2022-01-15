@@ -13,6 +13,8 @@
     "crm-core": "libs/crm/core",
     "crm-data": "libs/crm/data",
     "crm-employee": "libs/crm/employee",
+    "crm-employees-badges": "libs/crm/employees-badges",
+    "crm-employees-projects": "libs/crm/employees-projects",
     "crm-project": "libs/crm/project",
     "foosball-api": "apps/foosball/api",
     "foosball-auth": "libs/foosball/auth",

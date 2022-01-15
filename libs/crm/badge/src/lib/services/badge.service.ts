@@ -20,6 +20,6 @@ export class BadgeService {
 
   private async getBadges() {
     const rows = await this.data.getSpreadsheetRows(TAB_BADGES);
-    return rows.map((row: any) => Badge.fromRow(row)).filter(e => e.id);
+    return rows.map(row => Badge.fromRow(row)).filter(e => e.id);
   }
 }

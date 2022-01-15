@@ -1,9 +1,10 @@
 import { GqlAuthGuard } from '@crm/auth';
+import { Employee, EmployeeProject, Project } from '@crm/core';
+import { EmployeeService } from '@crm/employee';
 import { ProjectService } from '@crm/project';
 import { UseGuards } from '@nestjs/common';
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { Employee, EmployeeProject, Project } from '@crm/core';
-import { EmployeeProjectService, EmployeeService } from '../services';
+import { EmployeeProjectService } from '../services';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => EmployeeProject)
