@@ -8,10 +8,5 @@
     "target": "es6"
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts"],
-  "include": [
-    "**/*.ts",
-    "../employees-badges/src/lib/services/employee-project.service.ts",
-    "../employees-badges/src/lib/services/employee-badge.service.ts",
-    "../employees-badges/src/lib/resolvers/employee-projects.resolver.ts"
-  ]
+  "include": ["**/*.ts"]
 }

@@ -6,18 +6,11 @@ import { BadgeAwardedResolver } from './resolvers/badge-awarded.resolver';
 import { BadgeAwardedsResolver } from './resolvers/badge-awardeds.resolver';
 import { EmployeeBadgeResolver } from './resolvers/employee-badge.resolver';
 import { EmployeeBadgesResolver } from './resolvers/employee-badges.resolver';
-import { BadgeAwardedService, EmployeeBadgeService } from './services';
+import { EmployeesBadgesService } from './services';
 
 @Module({
   imports: [DataModule, BadgeModule, EmployeeModule],
-  providers: [
-    BadgeAwardedService,
-    EmployeeBadgeService,
-    EmployeeBadgeResolver,
-    EmployeeBadgesResolver,
-    BadgeAwardedResolver,
-    BadgeAwardedsResolver,
-  ],
+  providers: [EmployeesBadgesService, EmployeeBadgeResolver, EmployeeBadgesResolver, BadgeAwardedResolver, BadgeAwardedsResolver],
   exports: [],
 })
 export class EmployeesBadgesModule {}

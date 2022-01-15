@@ -1,12 +1,12 @@
 import { BadgeService } from '@crm/badge';
-import { Badge, EmployeeBadge } from '@crm/core';
+import { Badge, BadgeAwarded, EmployeeBadge } from '@crm/core';
 import { DataService } from '@crm/data';
 import { Injectable } from '@nestjs/common';
 
 const TAB_EMPLOYEE_BADGES = 'EmployeeBadges';
 
 @Injectable()
-export class EmployeeBadgeService {
+export class EmployeesBadgesService {
   constructor(private data: DataService, private badgeService: BadgeService) {}
 
   async findAll(): Promise<EmployeeBadge[]> {
@@ -18,6 +18,11 @@ export class EmployeeBadgeService {
     const badges = await this.badgeService.findAll();
 
     return data.filter(e => e.employeeId === employeeId).map(e => badges.find(p => p.id === e.badgeId));
+  }
+
+  async getAwardedBadges() {
+    const rows = await this.data.getSpreadsheetRows(TAB_EMPLOYEE_BADGES);
+    return rows.map(row => BadgeAwarded.fromRow(row)).filter(e => e.employeeId);
   }
 
   private async getEmployeeBadges() {

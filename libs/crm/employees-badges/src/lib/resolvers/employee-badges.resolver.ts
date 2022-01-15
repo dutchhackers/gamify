@@ -4,20 +4,20 @@ import { Badge, Employee, EmployeeBadge } from '@crm/core';
 import { EmployeeService } from '@crm/employee';
 import { UseGuards } from '@nestjs/common';
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { EmployeeBadgeService } from '../services';
+import { EmployeesBadgesService } from '../services';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => EmployeeBadge)
 export class EmployeeBadgesResolver {
   constructor(
-    private readonly employeeBadgeService: EmployeeBadgeService,
+    private readonly employeesBadgeService: EmployeesBadgesService,
     private readonly employeeService: EmployeeService,
     private readonly badgeService: BadgeService
   ) {}
 
   @Query(() => [EmployeeBadge])
   employeeBadges(): Promise<EmployeeBadge[]> {
-    return this.employeeBadgeService.findAll();
+    return this.employeesBadgeService.findAll();
   }
 
   @ResolveField('employee', () => Employee)
