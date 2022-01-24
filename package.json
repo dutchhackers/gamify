@@ -23,7 +23,7 @@
     "bcryptjs": "^2.4.3",
     "cache-manager": "^3.6.0",
     "class-validator": "^0.13.2",
-    "firebase-admin": "^10.0.1",
+    "firebase-admin": "^10.0.2",
     "google-spreadsheet": "^3.2.0",
     "graphql": "^15.8.0",
     "graphql-tools": "^8.2.0",
