@@ -1,5 +1,5 @@
 import { GqlAuthGuard } from '@crm/auth';
-import { Project } from '@crm/core';
+import { Project } from '@crm/dto';
 import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { ProjectsArgs } from '../dto/projects.args';

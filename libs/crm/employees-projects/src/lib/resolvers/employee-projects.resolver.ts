@@ -1,5 +1,5 @@
 import { GqlAuthGuard } from '@crm/auth';
-import { Employee, EmployeeProject, Project } from '@crm/core';
+import { Employee, EmployeeProject, Project } from '@crm/dto';
 import { EmployeeService } from '@crm/employee';
 import { ProjectService } from '@crm/project';
 import { UseGuards } from '@nestjs/common';

@@ -1,12 +1,13 @@
-import { Badge, BadgeAwarded } from '@crm/core';
+import { Badge, BadgeAwarded } from '@crm/dto';
 import { NotFoundException } from '@nestjs/common';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { BadgeService } from '../services';
 
 @Resolver(() => Badge)
 export class BadgesResolver {
-  constructor(private readonly badgeService: BadgeService) // , private readonly badgeAwardedService: BadgeAwardedService
-  {}
+  constructor(
+    private readonly badgeService: BadgeService // , private readonly badgeAwardedService: BadgeAwardedService
+  ) {}
 
   @Query(() => Badge)
   async badge(@Args('id') id: number): Promise<Badge> {

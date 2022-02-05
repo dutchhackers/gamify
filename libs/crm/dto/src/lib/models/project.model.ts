@@ -1,4 +1,4 @@
-import { JiraProjectStatus } from '@crm/core';
+import { JiraProjectStatus } from '@crm/dto';
 import { parseNumber } from '@crm/data';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 

@@ -24,6 +24,7 @@
       "@crm/badge": ["libs/crm/badge/src/index.ts"],
       "@crm/core": ["libs/crm/core/src/index.ts"],
       "@crm/data": ["libs/crm/data/src/index.ts"],
+      "@crm/dto": ["libs/crm/dto/src/index.ts"],
       "@crm/employee": ["libs/crm/employee/src/index.ts"],
       "@crm/employee-badge": ["libs/crm/employee-badge/src/index.ts"],
       "@crm/employees-badges": ["libs/crm/employees-badges/src/index.ts"],

@@ -1,6 +1,6 @@
 import { DataService } from '@crm/data';
 import { Injectable, Logger } from '@nestjs/common';
-import { Badge } from '@crm/core';
+import { Badge } from '@crm/dto';
 
 const TAB_BADGES = 'Badges';
 

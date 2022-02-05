@@ -1,4 +1,4 @@
-import { JiraProjectStatus, Project } from '@crm/core';
+import { JiraProjectStatus, Project } from '@crm/dto';
 import { DataService } from '@crm/data';
 import { Injectable, Logger } from '@nestjs/common';
 import { ProjectsArgs } from '../dto/projects.args';

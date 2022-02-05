@@ -1,5 +1,5 @@
 import { BadgeService } from '@crm/badge';
-import { Badge, BadgeAwarded, EmployeeBadge } from '@crm/core';
+import { Badge, BadgeAwarded, EmployeeBadge } from '@crm/dto';
 import { DataService } from '@crm/data';
 import { Injectable } from '@nestjs/common';
 

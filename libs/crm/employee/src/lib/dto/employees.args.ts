@@ -1,4 +1,4 @@
-import { EmployeeRole } from '@crm/core';
+import { EmployeeRole } from '@crm/dto';
 import { ArgsType, Field } from '@nestjs/graphql';
 
 @ArgsType()

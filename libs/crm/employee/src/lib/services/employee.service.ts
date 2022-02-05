@@ -1,4 +1,4 @@
-import { Employee, EmployeeRole } from '@crm/core';
+import { Employee, EmployeeRole } from '@crm/dto';
 import { DataService } from '@crm/data';
 import { Injectable } from '@nestjs/common';
 import { EmployeesArgs } from '../dto/employees.args';

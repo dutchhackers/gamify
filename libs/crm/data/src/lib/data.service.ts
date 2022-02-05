@@ -1,4 +1,4 @@
-import { ServiceAccountConfig } from '@crm/core';
+import { ServiceAccountConfig } from '@crm/dto';
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit, CACHE_MANAGER, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { GoogleSpreadsheet, GoogleSpreadsheetRow } from 'google-spreadsheet';

@@ -1,4 +1,4 @@
-import { Badge, BadgeAwarded } from '@crm/core';
+import { Badge, BadgeAwarded } from '@crm/dto';
 import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
 import { EmployeesBadgesService } from '../services';
 

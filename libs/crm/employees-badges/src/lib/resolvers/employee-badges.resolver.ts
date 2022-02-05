@@ -1,6 +1,6 @@
 import { GqlAuthGuard } from '@crm/auth';
 import { BadgeService } from '@crm/badge';
-import { Badge, Employee, EmployeeBadge } from '@crm/core';
+import { Badge, Employee, EmployeeBadge } from '@crm/dto';
 import { EmployeeService } from '@crm/employee';
 import { UseGuards } from '@nestjs/common';
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
