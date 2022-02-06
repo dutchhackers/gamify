@@ -29,12 +29,14 @@ Tip: if you have nvm installed, you can run `nvm use` to auto-detect the preferr
 
 - Create .env file
 
-Copy `sample.env` (in the API app root) to `.env` and fill in the environment variables
+Create a `.env` file in folder `libs/crm/core`
+
+Tip: copy `sample.env` (from core lib: libs/crm/core) to `.env` and fill in the environment variables
 
 ```
 
 NODE_ENV=development
-PORT=3000
+PORT=5001
 
 # Used by firebase admin
 GOOGLE_APPLICATION_CREDENTIALS=./path/to/service-account.json
@@ -53,7 +55,7 @@ GOOGLE_PRIVATE_KEY="<private_key>"
 nx serve crm-api
 ```
 
-Go to http://localhost:3000/graphql to open the Apollo GraphQL sandbox
+Go to http://localhost:5001/graphql to open the Apollo GraphQL sandbox
 
 ### General commands
 
