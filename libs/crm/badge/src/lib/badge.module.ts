@@ -1,6 +1,6 @@
 import { DataModule } from '@crm/data';
 import { Module } from '@nestjs/common';
-import { BadgeService } from './badge.service';
+import { BadgeService } from './services';
 import { BadgesResolver } from './resolvers/badges.resolver';
 
 @Module({

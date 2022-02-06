@@ -1,8 +1,7 @@
+import { Employee, EmployeeRole } from '@crm/dto';
 import { DataService } from '@crm/data';
 import { Injectable } from '@nestjs/common';
 import { EmployeesArgs } from '../dto/employees.args';
-import { EmployeeRole } from '../enums/employee-role.enum';
-import { Employee } from '../models';
 
 const TAB_EMPLOYEES = 'Employees';
 
