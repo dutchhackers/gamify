@@ -1,5 +1,5 @@
-import { lowerCase, parseBoolean, parseNumber } from '@crm/data';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { lowerCase, parseBoolean, parseNumber } from '../utils';
 
 enum FieldMapping {
   ID = 'ID',
@@ -44,7 +44,7 @@ export class Badge {
 
   active: boolean;
 
-  static fromRow(data: any) {
+  static fromRow(data) {
     const obj = Object.assign(new Badge(), <Partial<Badge>>{
       id: parseNumber(data[FieldMapping.ID] + ''),
       name: data[FieldMapping.NAME],
@@ -64,7 +64,7 @@ export class Badge {
 
 // docummentation for badge image url
 // https://shields.io/
-function getBadgeImageUrl(row: any) {
+function getBadgeImageUrl(row) {
   let color = 'success';
   switch (row[FieldMapping.DEGREE]) {
     case 'bronze':

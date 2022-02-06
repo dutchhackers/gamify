@@ -1,4 +1,4 @@
-import { GoogleSpreadsheetRow } from '@crm/data';
+import { GoogleSpreadsheetRow } from './google-spreadsheet-row';
 import { Field, ObjectType } from '@nestjs/graphql';
 
 enum FieldMapping {

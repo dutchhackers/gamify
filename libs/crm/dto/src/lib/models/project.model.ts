@@ -1,6 +1,6 @@
-import { JiraProjectStatus } from '@crm/dto';
-import { parseNumber } from '@crm/data';
+import { parseNumber } from '../utils';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { JiraProjectStatus } from '../enums';
 
 enum FieldMapping {
   ID = 'ID',
@@ -27,7 +27,7 @@ export class Project {
   @Field(() => JiraProjectStatus, { nullable: true })
   status: JiraProjectStatus;
 
-  static fromRow(data: any) {
+  static fromRow(data) {
     const obj = Object.assign(new Project(), <Partial<Project>>{
       id: parseNumber(data[FieldMapping.ID]),
       name: data[FieldMapping.NAME],
