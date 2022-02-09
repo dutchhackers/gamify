@@ -33,7 +33,7 @@
     "passport-firebase-jwt": "^1.2.1",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.5.2",
+    "rxjs": "^7.5.3",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
