@@ -19,7 +19,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@prisma/client": "^3.11.0",
     "apollo-server-core": "^3.6.3",
-    "apollo-server-express": "^3.6.5",
+    "apollo-server-express": "^3.6.6",
     "bcryptjs": "^2.4.3",
     "cache-manager": "^3.6.0",
     "class-validator": "^0.13.2",
