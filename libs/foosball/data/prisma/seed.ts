@@ -1,4 +1,4 @@
-import { PrismaClient } from '.prisma/client';
+import { PrismaClient } from '../generated';
 
 const prisma = new PrismaClient();
 
@@ -93,7 +93,7 @@ function getPlayers() {
   ];
 }
 
-function getMatches(playerIds: number[] = [], numberOfMatches: number = 10) {
+function getMatches(playerIds: number[] = [], numberOfMatches = 10) {
   const matches: any[] = [];
   for (let i = 0; i < numberOfMatches; i++) {
     matches.push(createRandomMatch(playerIds));

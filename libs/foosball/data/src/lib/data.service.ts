@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 // import { ConfigService } from '@nestjs/config'
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../../generated';
 
 @Injectable()
 export class DataService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
@@ -25,7 +25,7 @@ export class DataService extends PrismaClient implements OnModuleInit, OnModuleD
         email,
         password,
       },
-    })
+    });
   }
 
   async findUserByEmail(email: string) {
@@ -33,7 +33,7 @@ export class DataService extends PrismaClient implements OnModuleInit, OnModuleD
       where: {
         email,
       },
-    })
+    });
   }
 
   async findUserById(userId: number) {
@@ -41,5 +41,6 @@ export class DataService extends PrismaClient implements OnModuleInit, OnModuleD
       where: {
         id: userId,
       },
-    })
-  }}
+    });
+  }
+}
