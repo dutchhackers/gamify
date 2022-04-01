@@ -7,6 +7,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "postinstall": "npm run generate-prisma-clients",
+    "generate-prisma-clients": "nx run foosball-data:generate",
     "foosball-db:studio": "prisma studio --schema libs/foosball/data/prisma/schema.prisma"
   },
   "private": true,
