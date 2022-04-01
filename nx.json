@@ -38,6 +38,12 @@
         "projects": "dependencies"
       }
     ],
+    "test": [
+      {
+        "target": "generate",
+        "projects": "dependencies"
+      }
+    ],
     "dockerize": [
       {
         "target": "build",
