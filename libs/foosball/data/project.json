@@ -18,53 +18,24 @@
         "passWithNoTests": true
       }
     },
-    "deploy": {
-      "builder": "@nx-tools/nx-prisma:generate",
-      "options": {
-        "schema": "libs/foosball/data/prisma/schema.prisma"
-      }
-    },
     "generate": {
       "builder": "@nx-tools/nx-prisma:generate",
       "options": {
         "schema": "libs/foosball/data/prisma/schema.prisma"
       }
     },
-    "migrate": {
-      "builder": "@nx-tools/nx-prisma:migrate",
-      "options": {
-        "schema": "libs/foosball/data/prisma/schema.prisma"
-      }
-    },
-    "pull": {
-      "builder": "@nx-tools/nx-prisma:rollback",
-      "options": {
-        "schema": "libs/foosball/data/prisma/schema.prisma"
-      }
-    },
     "push": {
-      "builder": "@nx-tools/nx-prisma:seed",
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "schema": "libs/foosball/data/prisma/schema.prisma"
-      }
-    },
-    "reset": {
-      "builder": "@nx-tools/nx-prisma:seed",
-      "options": {
-        "schema": "libs/foosball/data/prisma/schema.prisma"
-      }
+        "command": "prisma db push --schema libs/foosball/data/prisma/schema.prisma"
+      },
+      "parallel": false
     },
     "seed": {
       "builder": "@nx-tools/nx-prisma:seed",
       "options": {
         "script": "libs/foosball/data/prisma/seed.ts",
         "tsConfig": "libs/foosball/data/prisma/tsconfig.tools.json"
-      }
-    },
-    "status": {
-      "builder": "@nx-tools/nx-prisma:seed",
-      "options": {
-        "schema": "libs/foosball/data/prisma/schema.prisma"
       }
     }
   },

@@ -7,10 +7,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "foosball:prisma-generate": "prisma generate --schema libs/foosball/data/prisma/schema.prisma",
-    "foosball:prisma-db-push": "prisma db push --schema libs/foosball/data/prisma/schema.prisma",
-    "foosball:prisma-studio": "prisma studio --schema libs/foosball/data/prisma/schema.prisma",
-    "foosball:prisma-db-seed": "prisma db seed --schema libs/foosball/data/prisma/schema.prisma"
+    "foosball-db:studio": "prisma studio --schema libs/foosball/data/prisma/schema.prisma"
   },
   "private": true,
   "dependencies": {
