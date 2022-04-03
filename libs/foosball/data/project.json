@@ -25,11 +25,10 @@
       }
     },
     "push": {
-      "executor": "@nrwl/workspace:run-commands",
+      "builder": "@nx-tools/nx-prisma:push",
       "options": {
-        "command": "prisma db push --schema libs/foosball/data/prisma/schema.prisma"
-      },
-      "parallel": false
+        "schema": "libs/foosball/data/prisma/schema.prisma"
+      }
     },
     "seed": {
       "builder": "@nx-tools/nx-prisma:seed",
