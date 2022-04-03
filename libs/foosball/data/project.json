@@ -23,19 +23,6 @@
           "projects": "self"
         }
       ]
-    },
-    "push": {
-      "builder": "@nx-tools/nx-prisma:push",
-      "options": {
-        "schema": "libs/foosball/data/prisma/schema.prisma"
-      }
-    },
-    "seed": {
-      "builder": "@nx-tools/nx-prisma:seed",
-      "options": {
-        "script": "libs/foosball/data/prisma/seed.ts",
-        "tsConfig": "libs/foosball/data/prisma/tsconfig.tools.json"
-      }
     }
   },
   "tags": ["type:util", "scope:foosball"]
