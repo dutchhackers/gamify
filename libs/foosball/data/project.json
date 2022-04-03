@@ -16,13 +16,13 @@
       "options": {
         "jestConfig": "libs/foosball/data/jest.config.js",
         "passWithNoTests": true
-      }
-    },
-    "generate": {
-      "builder": "@nx-tools/nx-prisma:generate",
-      "options": {
-        "schema": "libs/foosball/data/prisma/schema.prisma"
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "generate",
+          "projects": "self"
+        }
+      ]
     },
     "push": {
       "builder": "@nx-tools/nx-prisma:push",

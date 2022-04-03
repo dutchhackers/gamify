@@ -19,7 +19,6 @@
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
-    "@nx-tools/nx-prisma": "^2.0.0-alpha.4",
     "@prisma/client": "^3.12.0-dev.42",
     "apollo-server-core": "^3.6.3",
     "apollo-server-express": "^3.6.7",
