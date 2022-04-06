@@ -1,0 +1,22 @@
+{
+  "root": "libs/gamify-api/apps",
+  "sourceRoot": "libs/gamify-api/apps/src",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/gamify-api/apps/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/gamify-api/apps"],
+      "options": {
+        "jestConfig": "libs/gamify-api/apps/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
