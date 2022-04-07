@@ -3,6 +3,16 @@
   "sourceRoot": "libs/foosball/data/src",
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/foosball-data",
+        "main": "libs/foosball/data/src/index.ts",
+        "tsConfig": "libs/foosball/data/tsconfig.lib.json",
+        "assets": ["libs/foosball/data/*.md"]
+      }
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
