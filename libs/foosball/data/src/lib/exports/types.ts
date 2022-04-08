@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma } from '../../../generated';
 
 /** PLAYER  */
 export type PlayerWhereUniqueInput = Prisma.PlayerWhereUniqueInput;
