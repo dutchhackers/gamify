@@ -6,6 +6,10 @@ export class AppsService {
 
     private apps: App[] = [];
 
+    constructor() {
+        this.mockApps();
+    }
+
     getApps(): App[] {
         return this.apps;
     }

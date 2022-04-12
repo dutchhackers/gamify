@@ -8,8 +8,6 @@ export class AppsController {
 
     @Get()
     index() {
-        this.appsService.mockApps(); // TODO Should be removed in the future
-        const apps = this.appsService.getApps();
-        return apps;
+        return this.appsService.getApps();
     }
 }
