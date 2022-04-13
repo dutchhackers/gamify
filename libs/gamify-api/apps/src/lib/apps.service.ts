@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { App, ApplicationType } from '@coders/gamify-api/core';
+import { App, ApplicationType } from '@gamify-api/core';
 
 @Injectable()
 export class AppsService {
@@ -10,7 +10,7 @@ export class AppsService {
         this.mockApps();
     }
 
-    getApps(): App[] {
+    getAll(): App[] {
         return this.apps;
     }
 
@@ -18,7 +18,7 @@ export class AppsService {
         this.apps = [
             {
                 id: 1,
-                application_type: ApplicationType.Game,
+                application_type: ApplicationType.GAME,
                 name: "Code Heroes",
                 description: "Go commit something or make a pull-request",
                 admin_user_id: 1,
@@ -29,7 +29,7 @@ export class AppsService {
             },
             {
                 id: 2,
-                application_type: ApplicationType.Challange,
+                application_type: ApplicationType.CHALLENGE,
                 name: "Walking Challenge 2022",
                 description: "Walk or run to score points",
                 admin_user_id: 1,
@@ -42,7 +42,7 @@ export class AppsService {
             },
             {
                 id: 3,
-                application_type: ApplicationType.ExternalApp,
+                application_type: ApplicationType.EXTERNAL_APP,
                 name: "Krew",
                 description: "Krew integration",
                 admin_user_id: 2,

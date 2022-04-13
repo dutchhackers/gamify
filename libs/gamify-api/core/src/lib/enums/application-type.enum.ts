@@ -1,5 +1,5 @@
 export enum ApplicationType {
-    Game = "GAME",
-    ExternalApp = "EXTERNAL_APP",
-    Challange = "CHALLENGE",
+    GAME = "GAME",
+    EXTERNAL_APP = "EXTERNAL_APP",
+    CHALLENGE = "CHALLENGE",
 }

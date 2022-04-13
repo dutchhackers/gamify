@@ -5,7 +5,7 @@ export interface App {
     application_type: ApplicationType;
     name: string;
     description: string;
-    api_key?: string;
+    apiKey?: string;
     admin_user_id: number;
     external_application_url: string;
     overview_priority: number;

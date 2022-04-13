@@ -8,6 +8,6 @@ export class AppsController {
 
     @Get()
     index() {
-        return this.appsService.getApps();
+        return this.appsService.getAll();
     }
 }
