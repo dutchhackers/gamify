@@ -13,3 +13,7 @@
 
 # Libs
 libs/ @mschilling @cassshh
+
+# Scope: gamify
+apps/gamify @mschilling @sanderelderman
+libs/gamify @mschilling @sanderelderman
