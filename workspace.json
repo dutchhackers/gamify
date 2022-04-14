@@ -26,8 +26,8 @@
     "foosball-profile": "libs/foosball/profile",
     "foosball-slackbot": "apps/foosball/slackbot",
     "gamify-api": "apps/gamify/api",
-    "gamify-api-apps": "libs/gamify-api/apps",
-    "gamify-api-core": "libs/gamify-api/core",
+    "gamify-apps": "libs/gamify/apps",
+    "gamify-core": "libs/gamify/core",
     "gamify-web-app": "apps/gamify/web-app"
   }
 }

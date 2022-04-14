@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppsModule } from '@gamify-api/apps';
+import { AppsModule } from '@gamify/apps';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
