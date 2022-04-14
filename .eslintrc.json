@@ -33,13 +33,17 @@
                 "onlyDependOnLibsWithTags": ["scope:foosball", "scope:foosball-shared", "scope:foosball-core"]
               },
               {
+                "sourceTag": "scope:gamify",
+                "onlyDependOnLibsWithTags": ["scope:gamify", "scope:gamify-shared", "scope:gamify-core"]
+              },
+              {
                 "sourceTag": "scope:crm-core",
                 "onlyDependOnLibsWithTags": ["scope:crm-shared"]
               },
               {
                 "sourceTag": "scope:crm-shared",
                 "onlyDependOnLibsWithTags": ["scope:crm-shared"]
-              }              
+              }
             ]
           }
         ]
