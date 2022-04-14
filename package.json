@@ -42,9 +42,9 @@
     "passport-firebase-jwt": "^1.2.1",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
-    "zone.js": "~0.11.4",
     "rxjs": "^7.5.5",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.2.0",
@@ -57,8 +57,8 @@
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
     "@nrwl/angular": "13.9.5",
-    "@nrwl/cypress": "13.9.5",
     "@nrwl/cli": "^13.9.5",
+    "@nrwl/cypress": "13.9.5",
     "@nrwl/eslint-plugin-nx": "13.9.5",
     "@nrwl/jest": "13.9.5",
     "@nrwl/linter": "13.9.5",
@@ -83,6 +83,6 @@
     "prettier": "2.6.2",
     "prisma": "^3.12.0",
     "ts-jest": "27.1.4",
-    "typescript": "4.6.3"
+    "typescript": "^4.5.5"
   }
 }
