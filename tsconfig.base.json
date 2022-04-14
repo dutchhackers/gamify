@@ -20,7 +20,6 @@
       "@codeheroes/data": ["libs/codeheroes/data/src/index.ts"],
       "@codeheroes/game": ["libs/codeheroes/game/src/index.ts"],
       "@codeheroes/player": ["libs/codeheroes/player/src/index.ts"],
-      "@gamify-api/app": ["libs/gamify-api/app/src/index.ts"],
       "@gamify-api/apps": ["libs/gamify-api/apps/src/index.ts"],
       "@gamify-api/core": ["libs/gamify-api/core/src/index.ts"],
       "@crm/auth": ["libs/crm/auth/src/index.ts"],
