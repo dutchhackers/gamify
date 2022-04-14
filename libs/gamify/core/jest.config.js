@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'gamify-api-apps',
+  displayName: 'gamify-core',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/libs/gamify-api/apps',
+  coverageDirectory: '../../../coverage/libs/gamify/core',
 };
