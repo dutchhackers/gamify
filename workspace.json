@@ -28,6 +28,7 @@
     "gamify-api": "apps/gamify/api",
     "gamify-apps": "libs/gamify/apps",
     "gamify-core": "libs/gamify/core",
+    "gamify-data": "libs/gamify/data",
     "gamify-web-app": "apps/gamify/web-app"
   }
 }
