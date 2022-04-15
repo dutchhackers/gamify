@@ -2,8 +2,8 @@
   "scripts": {
     "studio": "prisma studio --schema prisma/schema.prisma",
     "generate": "prisma generate --schema prisma/schema.prisma",
-    "prisma-migrate": "prisma migrate dev --name init",
-    "push-db": "prisma db push",
+    "migrate": "prisma migrate dev --name init",
+    "push": "prisma db push",
     "seed": "prisma db seed"
   },
   "prisma": {

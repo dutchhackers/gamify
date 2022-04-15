@@ -1,15 +1,24 @@
 import { DataService } from '@gamify/data';
 import { Injectable } from '@nestjs/common';
+import { CreateApplicationInput } from './dto/create-application.input';
 
 @Injectable()
 export class ApplicationsService {
 
-    constructor(private readonly dataService: DataService) {}
+    constructor(private readonly data: DataService) {}
 
-    getAll() {
-        return this.dataService.application.findMany();
+    findMany() {
+        return this.data.application.findMany();
+    }
 
-        // return [];
+    findOne(id: number) {
+        return this.data.application.findUnique({ where: { id }});
+    }
+
+    create(createApplicationInput: CreateApplicationInput) {
+        return this.data.application.create({
+            data: createApplicationInput
+        })
     }
 
 }

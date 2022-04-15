@@ -5,6 +5,7 @@ console.log('running seeder');
 
 async function main() {
 
+  await seedUsers();
   await seedApplications();
 
 }
@@ -17,6 +18,16 @@ main()
     await prisma.$disconnect();
   });
 
+async function seedUsers() {
+  const createManyItems = getUsers().map(item =>
+    prisma.user.create({
+      data: item,
+    })
+  );
+
+  await Promise.all(createManyItems);
+}
+
 async function seedApplications() {
 
   const createManyItems = getApplications().map(item =>
@@ -28,10 +39,15 @@ async function seedApplications() {
   await Promise.all(createManyItems);
 }
 
-function getApplications() {
+function getUsers() {
   return [
-    { name: 'Walking Challenge' },
-  ];
+    { email: 'test@test.com' },
+  ]
 }
 
+function getApplications() {
+  return [
+    { name: 'Walking Challenge', applicationType: "CHALLANGE", adminUserId: 1 },
+  ];
+}
 
