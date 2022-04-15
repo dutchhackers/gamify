@@ -1,3 +1,4 @@
+import { DataService } from '@gamify/data';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AppController } from './app.controller';
@@ -9,7 +10,7 @@ describe('AppController', () => {
   beforeAll(async () => {
     app = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService],
+      providers: [AppService, DataService],
     }).compile();
   });
 
