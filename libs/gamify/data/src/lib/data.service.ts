@@ -18,15 +18,11 @@ export class DataService extends PrismaClient implements OnModuleInit, OnModuleD
         Logger.log('Gamify prisma client connected!');
     }
 
-    async createUser({ email, }: { email: string; }) {
-        return this.user.create({
-          data: {
-            email,
-          },
-        });
-    }
-
-    async allApplications() {
-        return this.application.findMany();
-    }
+    // async createUser({ email, }: { email: string; }) {
+    //     return this.user.create({
+    //       data: {
+    //         email,
+    //       },
+    //     });
+    // }
 }

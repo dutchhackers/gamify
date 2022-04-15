@@ -20,9 +20,9 @@ export class AppController {
 
     // this.dataService.createUser({ email: "selderman@move4mobile.com" });
 
-    const users = await this.dataService.allApplications();
+    // const users = await this.dataService.allApplications();
 
-    return users;
+    // return users;
 
     return { 'blah': 'blah2' };
   }
