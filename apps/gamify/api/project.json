@@ -45,7 +45,13 @@
       "options": {
         "jestConfig": "apps/gamify/api/jest.config.js",
         "passWithNoTests": true
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "generate",
+          "projects": "dependencies"
+        }
+      ]
     }
   },
   "tags": ["type:app", "scope:gamify"]
