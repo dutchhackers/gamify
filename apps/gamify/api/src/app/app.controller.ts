@@ -18,8 +18,6 @@ export class AppController {
   @Get('test')
   async testAction() {
 
-    // this.dataService.createUser({ email: "selderman@move4mobile.com" });
-
     // const users = await this.dataService.allApplications();
 
     // return users;

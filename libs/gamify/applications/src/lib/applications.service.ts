@@ -8,8 +8,6 @@ export class ApplicationsService {
 
     getAll() {
         return this.dataService.application.findMany();
-
-        // return [];
     }
 
 }
