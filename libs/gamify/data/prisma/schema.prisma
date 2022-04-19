@@ -15,6 +15,7 @@ model User {
     firstName    String?
     lastName     String?
     applications Application[]
+    uuid         String?       @unique
 }
 
 model Application {
@@ -26,4 +27,17 @@ model Application {
     externalApplicationUrl String?
     adminUser              User     @relation(fields: [adminUserId], references: [id])
     adminUserId            Int
+    Badge                  Badge[]
+}
+
+model Badge {
+    id                   Int         @id @default(autoincrement())
+    createdAt            DateTime    @default(now())
+    name                 String
+    application          Application @relation(fields: [applicationId], references: [id])
+    applicationId        Int
+    iconPath             String?
+    tier                 String
+    repeatedlyObtainable Boolean
+    totalScore           Int?
 }

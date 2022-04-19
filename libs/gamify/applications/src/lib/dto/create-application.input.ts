@@ -1,5 +1,6 @@
 import { ApplicationType } from '@gamify/core';
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsUrl } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsEnum, IsNumber, IsNotEmpty, IsOptional, IsUrl, IsInt } from 'class-validator';
 
 export class CreateApplicationInput {
 
@@ -19,6 +20,7 @@ export class CreateApplicationInput {
     // Admin user id should not be provided by the client as input value but 
     // should be obtained from current authenticated user.
     @IsOptional()
-    @IsNumber()
+    @IsInt()
+    @Type(() => Number)
     adminUserId: number;
 }
