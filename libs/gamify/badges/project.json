@@ -1,0 +1,22 @@
+{
+  "root": "libs/gamify/badges",
+  "sourceRoot": "libs/gamify/badges/src",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/gamify/badges/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/gamify/badges"],
+      "options": {
+        "jestConfig": "libs/gamify/badges/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:gamify", "feature:gamify"]
+}
