@@ -9,12 +9,20 @@ export class ApplicationsController {
   constructor(private applicationsService: ApplicationsService) {}
 
   @Post()
-  create(@Body() createApplicationInput: CreateApplicationInput) {
+  async create(@Body() createApplicationInput: CreateApplicationInput, @Res() response: Response) {
+    if (! await this.applicationsService.isNameUnique(createApplicationInput.name)) {
+      response.status(HttpStatus.BAD_REQUEST).send({ 
+        'error': 'Bad Request',
+        'statusCode': 400,
+        'message': ["Name must be unique"]
+      });
+      return;
+    }
+
     // TODO Validate current user id, should be obtained from current authenticated user.
     createApplicationInput.adminUserId = 1;
-    const result = this.applicationsService.create(createApplicationInput);
 
-    return result;
+    response.send(await this.applicationsService.create(createApplicationInput));
   }
 
   @Get()
@@ -26,7 +34,7 @@ export class ApplicationsController {
   async findOne(@Param('id', ParseIntPipe) id: number, @Res() response: Response) {
     const app = await this.applicationsService.findOne(id);
 
-    if (app == null) {
+    if (app === null) {
       response.status(HttpStatus.NOT_FOUND).send({ 
         'error': 'Application not found',
         'statusCode': 404
@@ -38,13 +46,31 @@ export class ApplicationsController {
   }
 
   @Put(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput) {
-    console.log(updateApplicationInput);
-    return `Id: ${id}`;
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @Res() response: Response) {
+    if (! await this.applicationsService.isNameUnique(updateApplicationInput.name)) {
+      response.status(HttpStatus.BAD_REQUEST).send({ 
+        'error': 'Bad Request',
+        'statusCode': 400,
+        'message': ["Name must be unique"]
+      });
+      return;
+    }
+
+    response.send(await this.applicationsService.update(id, updateApplicationInput));
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return `Id: ${id}`;
+  async remove(@Param('id', ParseIntPipe) id: number, @Res() response: Response) {
+    const app = await this.applicationsService.findOne(id);
+
+    if (app === null) {
+      response.status(HttpStatus.NOT_FOUND).send({ 
+        'error': 'Application to delete not found',
+        'statusCode': 404
+      });
+      return;
+    }
+
+    return response.send(await this.applicationsService.remove(id));
   }
 }
