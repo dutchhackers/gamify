@@ -47,7 +47,7 @@ function getUsers() {
 
 function getApplications() {
   return [
-    { name: 'Walking Challenge', applicationType: "CHALLANGE", adminUserId: 1 },
+    { name: 'Walking Challenge', applicationType: "CHALLENGE", ownerUserId: 1 },
   ];
 }
 

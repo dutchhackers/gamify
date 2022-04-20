@@ -1,28 +1,24 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, ParseIntPipe, Post, Put, Res } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
-import { Response } from 'express';
 
 @Controller('applications')
 export class ApplicationsController {
   constructor(private applicationsService: ApplicationsService) {}
 
   @Post()
-  async create(@Body() createApplicationInput: CreateApplicationInput, @Res() response: Response) {
+  async create(@Body() createApplicationInput: CreateApplicationInput) {
+    console.log(JSON.stringify(createApplicationInput));
+
     if (! await this.applicationsService.isNameUnique(createApplicationInput.name)) {
-      response.status(HttpStatus.BAD_REQUEST).send({ 
-        'error': 'Bad Request',
-        'statusCode': 400,
-        'message': ["Name must be unique"]
-      });
-      return;
+      throw new BadRequestException("Name must be unique");
     }
 
     // TODO Validate current user id, should be obtained from current authenticated user.
-    createApplicationInput.adminUserId = 1;
+    createApplicationInput.ownerUserId = 1;
 
-    response.send(await this.applicationsService.create(createApplicationInput));
+    return await this.applicationsService.create(createApplicationInput);
   }
 
   @Get()
@@ -31,46 +27,41 @@ export class ApplicationsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number, @Res() response: Response) {
-    const app = await this.applicationsService.findOne(id);
-
-    if (app === null) {
-      response.status(HttpStatus.NOT_FOUND).send({ 
-        'error': 'Application not found',
-        'statusCode': 404
-      });
-      return;
-    }
-
-    response.send(app);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.findApplicationOrFail(id);
   }
 
   @Put(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @Res() response: Response) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, ) {
+    await this.findApplicationOrFail(id);
+
     if (! await this.applicationsService.isNameUnique(updateApplicationInput.name)) {
-      response.status(HttpStatus.BAD_REQUEST).send({ 
-        'error': 'Bad Request',
-        'statusCode': 400,
-        'message': ["Name must be unique"]
-      });
-      return;
+      throw new BadRequestException("Name must be unique");
     }
 
-    response.send(await this.applicationsService.update(id, updateApplicationInput));
+    return await this.applicationsService.update(id, updateApplicationInput);
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number, @Res() response: Response) {
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    await this.findApplicationOrFail(id);
+
+    return await this.applicationsService.remove(id);
+  }
+
+  /**
+   * Tries to find a application in the database by id. When the applications doesn't exist it throws a NotFoundException
+   * 
+   * @param id The id of the applications.
+   * @returns A application when found in the database.
+   */
+  private async findApplicationOrFail(id: number) {
     const app = await this.applicationsService.findOne(id);
 
     if (app === null) {
-      response.status(HttpStatus.NOT_FOUND).send({ 
-        'error': 'Application to delete not found',
-        'statusCode': 404
-      });
-      return;
+      throw new NotFoundException();
     }
 
-    return response.send(await this.applicationsService.remove(id));
+    return app;
   }
 }
