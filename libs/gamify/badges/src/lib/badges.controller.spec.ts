@@ -1,3 +1,5 @@
+import { ApplicationsService } from '@gamify/application';
+import { DataService } from '@gamify/data';
 import { Test } from '@nestjs/testing';
 import { BadgesController } from './badges.controller';
 import { BadgesService } from './badges.service';
@@ -7,7 +9,7 @@ describe('BadgesController', () => {
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      providers: [BadgesService],
+      providers: [BadgesService, ApplicationsService, DataService],
       controllers: [BadgesController],
     }).compile();
 
