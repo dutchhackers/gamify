@@ -1,6 +1,6 @@
 import { ApplicationType } from '@gamify/core';
 import { Type } from 'class-transformer';
-import { IsEnum, IsNumber, IsNotEmpty, IsOptional, IsUrl, IsInt } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsUrl, IsInt } from 'class-validator';
 
 export class CreateApplicationInput {
 

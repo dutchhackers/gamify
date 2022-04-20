@@ -1,18 +1,16 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { BadgesService } from './badges.service';
 import { CreateBadgeInput } from './dto/create-badge.input';
-import { Response } from 'express';
+import { UpdateBadgeInput } from './dto/update-badge.input';
 
 @Controller('badges')
 export class BadgesController {
   constructor(private badgesService: BadgesService) {}
 
   @Post()
-  async create(@Body() createBadgeInput: CreateBadgeInput, @Res() response: Response) {
-    
-
-    // TODO validate if authenticated user has access to the given application id
-    response.send(await this.badgesService.create(createBadgeInput))
+  async create(@Body() createBadgeInput: CreateBadgeInput) {
+    // TODO check authorization of user.
+    return this.badgesService.create(createBadgeInput);
   }
 
   @Get()
@@ -20,4 +18,42 @@ export class BadgesController {
     return this.badgesService.findMany();
   }
 
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.findBadgeOrFail(id);
+  }
+
+  @Put(':id')
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput) {
+    // TODO check authorization of user.
+
+    await this.findBadgeOrFail(id);
+
+    return await this.badgesService.update(id, updateBadgeInput);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    // TODO check authorization of user.
+
+    await this.findBadgeOrFail(id);
+
+    return await this.badgesService.remove(id);
+  }
+
+  /**
+   * Tries to find a badge in the database by id. When the badge doesn't exist it throws a NotFoundException
+   * 
+   * @param id The id of the badge.
+   * @returns A badge when found in the database.
+   */
+  private async findBadgeOrFail(id: number) {
+    const badge = await this.badgesService.findOne(id);
+
+    if (badge === null) {
+      throw new NotFoundException();
+    }
+
+    return badge;
+  }
 }
