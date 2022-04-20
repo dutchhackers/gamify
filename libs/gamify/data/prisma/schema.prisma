@@ -24,6 +24,6 @@ model Application {
     description            String?
     applicationType        String
     externalApplicationUrl String?
-    adminUser              User     @relation(fields: [adminUserId], references: [id])
-    adminUserId            Int
+    ownerUser              User     @relation(fields: [ownerUserId], references: [id])
+    ownerUserId            Int
 }
