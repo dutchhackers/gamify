@@ -9,15 +9,21 @@ datasource db {
 }
 
 model User {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    email     String   @unique
-    firstName String?
-    lastName  String?
+    id           Int           @id @default(autoincrement())
+    createdAt    DateTime      @default(now())
+    email        String        @unique
+    firstName    String?
+    lastName     String?
+    applications Application[]
 }
 
 model Application {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    name      String   @unique
+    id                     Int      @id @default(autoincrement())
+    createdAt              DateTime @default(now())
+    name                   String   @unique
+    description            String?
+    applicationType        String
+    externalApplicationUrl String?
+    ownerUser              User     @relation(fields: [ownerUserId], references: [id])
+    ownerUserId            Int
 }
