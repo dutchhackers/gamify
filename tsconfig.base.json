@@ -20,6 +20,7 @@
       "@codeheroes/data": ["libs/codeheroes/data/src/index.ts"],
       "@codeheroes/game": ["libs/codeheroes/game/src/index.ts"],
       "@codeheroes/player": ["libs/codeheroes/player/src/index.ts"],
+      
       "@crm/auth": ["libs/crm/auth/src/index.ts"],
       "@crm/badge": ["libs/crm/badge/src/index.ts"],
       "@crm/core": ["libs/crm/core/src/index.ts"],
@@ -36,9 +37,10 @@
       "@foosball/match": ["libs/foosball/match/src/index.ts"],
       "@foosball/player": ["libs/foosball/player/src/index.ts"],
       "@foosball/profile": ["libs/foosball/profile/src/index.ts"],
+      "@gamify/application": ["libs/gamify/applications/src/index.ts"],
+      "@gamify/auth": ["libs/gamify/auth/src/index.ts"],
       "@gamify/core": ["libs/gamify/core/src/index.ts"],
-      "@gamify/data": ["libs/gamify/data/src/index.ts"],
-      "@gamify/application": ["libs/gamify/applications/src/index.ts"]
+      "@gamify/data": ["libs/gamify/data/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
