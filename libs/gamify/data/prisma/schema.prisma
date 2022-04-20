@@ -15,7 +15,6 @@ model User {
     firstName    String?
     lastName     String?
     applications Application[]
-    uuid         String?       @unique
 }
 
 model Application {
