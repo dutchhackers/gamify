@@ -1,7 +1,8 @@
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
+import { FirebaseAuthGuard } from '@gamify/auth';
 
 @Controller('applications')
 export class ApplicationsController {
@@ -22,6 +23,7 @@ export class ApplicationsController {
   }
 
   @Get()
+  @UseGuards(FirebaseAuthGuard)
   findAll() {
     return this.applicationsService.findMany();
   }
