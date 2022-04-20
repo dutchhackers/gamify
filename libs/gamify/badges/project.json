@@ -18,5 +18,5 @@
       }
     }
   },
-  "tags": ["scope:gamify", "feature:gamify"]
+  "tags": ["scope:gamify", "type:feature"]
 }

@@ -1,14 +1,19 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { ApplicationsService } from '@gamify/application';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { BadgesService } from './badges.service';
 import { CreateBadgeInput } from './dto/create-badge.input';
 import { UpdateBadgeInput } from './dto/update-badge.input';
 
 @Controller('badges')
 export class BadgesController {
-  constructor(private badgesService: BadgesService) {}
+  constructor(private badgesService: BadgesService, private applicationsService: ApplicationsService) {}
 
   @Post()
   async create(@Body() createBadgeInput: CreateBadgeInput) {
+    if (await this.applicationsService.findOne(createBadgeInput.applicationId) === null) {
+      throw new BadRequestException('Application not found');
+    }
+
     // TODO check authorization of user.
     return this.badgesService.create(createBadgeInput);
   }
