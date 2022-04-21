@@ -12,6 +12,12 @@ export class UsersService {
         })
     }
 
+    findByEmail(email: string) {
+        return this.data.user.findUnique({
+            where: { email }
+        })
+    }
+
     create(email: string, firebaseUid: string) {
         return this.data.user.create({
             data: {
@@ -21,4 +27,12 @@ export class UsersService {
         })
     }
 
+    updateFirebaseUid(id: number, firebaseUid: string) {
+        return this.data.user.update({
+            where: { id },
+            data: {
+                firebaseUid
+            }
+        })
+    }
 }
