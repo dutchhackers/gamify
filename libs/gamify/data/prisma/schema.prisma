@@ -15,6 +15,7 @@ model User {
     firstName    String?
     lastName     String?
     applications Application[]
+    firebaseUid  String?       @unique
 }
 
 model Application {

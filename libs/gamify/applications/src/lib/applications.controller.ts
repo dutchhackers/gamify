@@ -2,7 +2,7 @@ import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, 
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
-import { FirebaseAuthGuard } from '@gamify/auth';
+import { FirebaseAuthGuard, User, UserModel } from '@gamify/auth';
 
 @Controller('applications')
 export class ApplicationsController {
@@ -24,7 +24,9 @@ export class ApplicationsController {
 
   @Get()
   @UseGuards(FirebaseAuthGuard)
-  findAll() {
+  findAll(@User() user: UserModel) {
+    console.log('request user:');
+    console.log(user);
     return this.applicationsService.findMany();
   }
 
