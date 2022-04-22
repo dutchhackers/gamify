@@ -24,7 +24,7 @@ export class BadgesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.findBadgeOrFail(id);
   }
 
