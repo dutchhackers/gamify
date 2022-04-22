@@ -26,7 +26,7 @@ model Application {
     externalApplicationUrl String?
     ownerUser              User     @relation(fields: [ownerUserId], references: [id])
     ownerUserId            Int
-    Badge                  Badge[]
+    badges                 Badge[]
 }
 
 model Badge {

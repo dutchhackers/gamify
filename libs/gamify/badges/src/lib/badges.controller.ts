@@ -3,13 +3,14 @@ import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, 
 import { BadgesService } from './badges.service';
 import { CreateBadgeInput } from './dto/create-badge.input';
 import { UpdateBadgeInput } from './dto/update-badge.input';
+import { BadgeModel } from './models';
 
 @Controller('badges')
 export class BadgesController {
   constructor(private badgesService: BadgesService, private applicationsService: ApplicationsService) {}
 
   @Post()
-  async create(@Body() createBadgeInput: CreateBadgeInput) {
+  async create(@Body() createBadgeInput: CreateBadgeInput): Promise<BadgeModel> {
     if (await this.applicationsService.findOne(createBadgeInput.applicationId) === null) {
       throw new BadRequestException('Application not found');
     }
@@ -19,31 +20,31 @@ export class BadgesController {
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<BadgeModel[]> {
     return this.badgesService.findMany();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<BadgeModel> {
     return this.findBadgeOrFail(id);
   }
 
   @Put(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput): Promise<BadgeModel> {
     // TODO check authorization of user.
 
     await this.findBadgeOrFail(id);
 
-    return await this.badgesService.update(id, updateBadgeInput);
+    return this.badgesService.update(id, updateBadgeInput);
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id', ParseIntPipe) id: number): Promise<BadgeModel> {
     // TODO check authorization of user.
-
+  
     await this.findBadgeOrFail(id);
 
-    return await this.badgesService.remove(id);
+    return this.badgesService.remove(id);
   }
 
   /**
