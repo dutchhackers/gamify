@@ -9,13 +9,14 @@ datasource db {
 }
 
 model User {
-    id           Int           @id @default(autoincrement())
-    createdAt    DateTime      @default(now())
-    email        String        @unique
-    firstName    String?
-    lastName     String?
-    applications Application[]
-    firebaseUid  String?       @unique
+    id             Int           @id @default(autoincrement())
+    createdAt      DateTime      @default(now())
+    email          String        @unique
+    firstName      String?
+    lastName       String?
+    applications   Application[]
+    firebaseUid    String?       @unique
+    moderationRole String        @default("user")
 }
 
 model Application {

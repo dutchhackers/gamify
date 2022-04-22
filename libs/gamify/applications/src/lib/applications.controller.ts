@@ -1,8 +1,9 @@
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, SetMetadata, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
-import { FirebaseAuthGuard, User, UserModel } from '@gamify/auth';
+import { Roles, User, UserModel } from '@gamify/auth';
+import { Role } from '@gamify/core';
 
 @Controller('applications')
 export class ApplicationsController {
@@ -23,7 +24,6 @@ export class ApplicationsController {
   }
 
   @Get()
-  @UseGuards(FirebaseAuthGuard)
   findAll(@User() user: UserModel) {
     console.log('request user:');
     console.log(user);
@@ -31,12 +31,24 @@ export class ApplicationsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
+  @Roles(Role.ADMIN, Role.MODERATOR)
+  async findOne(@Param('id', ParseIntPipe) id: number, @User() user: UserModel) {
+    if (! await this.applicationsService.canModerateApplication(id, user.id)) {
+      throw new UnauthorizedException('Can not moderate app');
+    }
+
     return this.findApplicationOrFail(id);
   }
 
   @Put(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, ) {
+  // Admin      - always
+  // Moderator  - if you own the application, or are added as moderator (future feature)
+  @Roles(Role.ADMIN, Role.MODERATOR)
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @User() user: UserModel) {
+    if (! await this.applicationsService.canModerateApplication(id, user.id)) {
+      throw new UnauthorizedException();
+    }
+
     await this.findApplicationOrFail(id);
 
     if (! await this.applicationsService.isNameUnique(updateApplicationInput.name)) {

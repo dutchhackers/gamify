@@ -1,4 +1,6 @@
+import { Role } from '@gamify/core';
 import { DataService } from '@gamify/data';
+import { UsersService } from '@gamify/users';
 import { Injectable } from '@nestjs/common';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
@@ -6,7 +8,7 @@ import { UpdateApplicationInput } from './dto/update-application.input';
 @Injectable()
 export class ApplicationsService {
 
-    constructor(private readonly data: DataService) {}
+    constructor(private readonly data: DataService, private readonly usersService: UsersService) {}
 
     findMany() {
         return this.data.application.findMany();
@@ -43,5 +45,21 @@ export class ApplicationsService {
         }
 
         return true;
+    }
+
+    async canModerateApplication(applicationId: number, userId: number): Promise<boolean> {
+        const user = await this.usersService.find(userId);
+        if (user.moderationRole === Role.ADMIN) {
+            return true;
+        }
+
+        const application = await this.findOne(applicationId);
+        if (application.ownerUserId == user.id) {
+            return true;
+        }
+
+        // TODO check if user is added as moderator to the application
+
+        return false;
     }
 }

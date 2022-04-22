@@ -8,4 +8,5 @@ export class UserModel {
     lastname?: string;
     firebaseUid: string;
     firebaseData: object;
+    moderationRole: string;
 }

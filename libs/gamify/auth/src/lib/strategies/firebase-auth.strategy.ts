@@ -3,7 +3,6 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Strategy, ExtractJwt } from 'passport-firebase-jwt';
 import * as firebase from 'firebase-admin';
 import { UsersService } from '@gamify/users';
-import { UserModel } from '../models/user.model';
 
 @Injectable()
 export class FirebaseAuthStrategy extends PassportStrategy(
@@ -19,7 +18,6 @@ export class FirebaseAuthStrategy extends PassportStrategy(
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
-    console.log('strategy constructor');
     this.defaultApp = firebase.initializeApp({
       credential: firebase.credential.applicationDefault()
     });

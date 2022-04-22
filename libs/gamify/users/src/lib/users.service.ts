@@ -18,6 +18,12 @@ export class UsersService {
         })
     }
 
+    find(id: number) {
+        return this.data.user.findUnique({
+            where: { id }
+        })
+    }
+
     create(email: string, firebaseUid: string) {
         return this.data.user.create({
             data: {
