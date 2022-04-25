@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/crm/employees-badges"],
       "options": {
-        "jestConfig": "libs/crm/employees-badges/jest.config.js",
+        "jestConfig": "libs/crm/employees-badges/jest.config.ts",
         "passWithNoTests": true
       }
     }

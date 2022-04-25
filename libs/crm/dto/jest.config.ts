@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'foosball-player',
-  preset: '../../../jest.preset.js',
+  displayName: 'crm-dto',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/foosball/player',
+  coverageDirectory: '../../../coverage/libs/crm/dto',
+  preset: '../../../jest.preset.ts',
 };

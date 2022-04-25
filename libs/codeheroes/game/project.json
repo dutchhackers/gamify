@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/codeheroes/game"],
       "options": {
-        "jestConfig": "libs/codeheroes/game/jest.config.js",
+        "jestConfig": "libs/codeheroes/game/jest.config.ts",
         "passWithNoTests": true
       }
     }
