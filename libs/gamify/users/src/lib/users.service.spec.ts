@@ -1,3 +1,4 @@
+import { DataService } from '@gamify/data';
 import { Test } from '@nestjs/testing';
 import { UsersService } from './users.service';
 
@@ -6,7 +7,7 @@ describe('UsersService', () => {
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      providers: [UsersService],
+      providers: [UsersService, DataService],
     }).compile();
 
     service = module.get(UsersService);
