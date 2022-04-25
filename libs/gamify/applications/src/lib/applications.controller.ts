@@ -4,6 +4,7 @@ import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
 import { Roles, User, UserModel } from '@gamify/auth';
 import { Role } from '@gamify/core';
+import { ApplicationModel, ApplicationUserModel } from './models';
 
 @Controller('applications')
 export class ApplicationsController {
@@ -11,7 +12,7 @@ export class ApplicationsController {
 
   @Post()
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async create(@Body() createApplicationInput: CreateApplicationInput, @User() user: UserModel) {
+  async create(@Body() createApplicationInput: CreateApplicationInput, @User() user: UserModel): Promise<ApplicationModel> {
     if (! await this.applicationsService.isNameUnique(createApplicationInput.name)) {
       throw new BadRequestException("Name must be unique");
     }
@@ -27,13 +28,13 @@ export class ApplicationsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<ApplicationModel> {
     return this.findApplicationOrFail(id);
   }
 
   @Put(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @User() user: UserModel) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @User() user: UserModel): Promise<ApplicationModel> {
     if (! await this.applicationsService.canModerateApplication(id, user.id)) {
       throw new UnauthorizedException();
     }
@@ -49,7 +50,7 @@ export class ApplicationsController {
 
   @Delete(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async remove(@Param('id', ParseIntPipe) id: number, @User() user: UserModel) {
+  async remove(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<ApplicationModel> {
     if (! await this.applicationsService.canModerateApplication(id, user.id)) {
       throw new UnauthorizedException();
     }
@@ -59,13 +60,36 @@ export class ApplicationsController {
     return await this.applicationsService.remove(id);
   }
 
+  @Post('/:id/join')
+  async join(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<ApplicationUserModel> {
+    await this.findApplicationOrFail(id);
+
+    if (await this.applicationsService.findApplicationUser(id, user.id)) {
+      throw new BadRequestException("User is already a member of this application");
+    }
+    
+    return this.applicationsService.addUserToApplication(id, user.id);
+  }
+
+  @Delete('/:id/leave')
+  async leave(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<ApplicationUserModel> {
+    await this.findApplicationOrFail(id);
+
+    const applicationUser = await this.applicationsService.findApplicationUser(id, user.id);
+    if (applicationUser === null) {
+      throw new BadRequestException("User is not a member of this application");
+    }
+
+    return this.applicationsService.removeUserFromApplication(id, user.id);
+  }
+
   /**
    * Tries to find a application in the database by id. When the applications doesn't exist it throws a NotFoundException
    * 
    * @param id The id of the applications.
    * @returns A application when found in the database.
    */
-  private async findApplicationOrFail(id: number) {
+  private async findApplicationOrFail(id: number): Promise<ApplicationModel> {
     const app = await this.applicationsService.findOne(id);
 
     if (app === null) {
