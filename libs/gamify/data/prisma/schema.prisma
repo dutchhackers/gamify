@@ -28,4 +28,17 @@ model Application {
     externalApplicationUrl String?
     ownerUser              User     @relation(fields: [ownerUserId], references: [id])
     ownerUserId            Int
+    badges                 Badge[]
+}
+
+model Badge {
+    id                   Int         @id @default(autoincrement())
+    createdAt            DateTime    @default(now())
+    name                 String
+    application          Application @relation(fields: [applicationId], references: [id])
+    applicationId        Int
+    iconPath             String?
+    tier                 String
+    repeatedlyObtainable Boolean
+    totalScore           Int?
 }

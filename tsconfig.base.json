@@ -38,6 +38,7 @@
       "@foosball/profile": ["libs/foosball/profile/src/index.ts"],
       "@gamify/application": ["libs/gamify/applications/src/index.ts"],
       "@gamify/auth": ["libs/gamify/auth/src/index.ts"],
+      "@gamify/badge": ["libs/gamify/badges/src/index.ts"],
       "@gamify/core": ["libs/gamify/core/src/index.ts"],
       "@gamify/data": ["libs/gamify/data/src/index.ts"],
       "@gamify/users": ["libs/gamify/users/src/index.ts"]
