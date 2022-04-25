@@ -1,7 +1,7 @@
 import { ApplicationsService } from '@gamify/application';
 import { Roles, User, UserModel } from '@gamify/auth';
 import { Role } from '@gamify/core';
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, forwardRef, Get, Inject, NotFoundException, Param, ParseIntPipe, Post, Put, UnauthorizedException } from '@nestjs/common';
 import { BadgesService } from './badges.service';
 import { CreateBadgeInput } from './dto/create-badge.input';
 import { UpdateBadgeInput } from './dto/update-badge.input';
@@ -9,7 +9,10 @@ import { BadgeModel } from './models';
 
 @Controller('badges')
 export class BadgesController {
-  constructor(private badgesService: BadgesService, private applicationsService: ApplicationsService) {}
+  constructor(
+    private badgesService: BadgesService, 
+    private applicationsService: ApplicationsService
+  ) {}
 
   @Post()
   @Roles(Role.ADMIN, Role.MODERATOR)

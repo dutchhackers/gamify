@@ -1,7 +1,7 @@
 import { Role } from '@gamify/core';
 import { DataService } from '@gamify/data';
 import { UsersService } from '@gamify/users';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
 import { ApplicationModel, ApplicationUserModel } from './models';
@@ -9,7 +9,7 @@ import { ApplicationModel, ApplicationUserModel } from './models';
 @Injectable()
 export class ApplicationsService {
 
-    constructor(private readonly data: DataService, private readonly usersService: UsersService) {}
+    constructor(private readonly data: DataService, @Inject(forwardRef(() => UsersService)) private readonly usersService: UsersService) {}
 
     findMany(): Promise<ApplicationModel[]> {
         return this.data.application.findMany();

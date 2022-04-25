@@ -6,39 +6,18 @@ export class UsersService {
 
     constructor(private readonly data: DataService) {}
 
-    findByFirebaseId(firebaseUid: string) {
-        return this.data.user.findUnique({
-            where: { firebaseUid }
-        })
-    }
-
-    findByEmail(email: string) {
-        return this.data.user.findUnique({
-            where: { email }
-        })
-    }
-
     find(id: number) {
         return this.data.user.findUnique({
             where: { id }
-        })
+        });
     }
 
-    create(email: string, firebaseUid: string) {
-        return this.data.user.create({
+    giveBadgeToUser(userId: number, badgeId: number) {
+        return this.data.userBadge.create({
             data: {
-                email,
-                firebaseUid
+                userId,
+                badgeId
             }
-        })
-    }
-
-    updateFirebaseUid(id: number, firebaseUid: string) {
-        return this.data.user.update({
-            where: { id },
-            data: {
-                firebaseUid
-            }
-        })
+        });
     }
 }
