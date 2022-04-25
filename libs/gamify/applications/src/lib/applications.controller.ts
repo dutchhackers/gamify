@@ -10,7 +10,7 @@ export class ApplicationsController {
   constructor(private applicationsService: ApplicationsService) {}
 
   @Post()
-  @Roles(Role.MODERATOR)
+  @Roles(Role.ADMIN, Role.MODERATOR)
   async create(@Body() createApplicationInput: CreateApplicationInput, @User() user: UserModel) {
     if (! await this.applicationsService.isNameUnique(createApplicationInput.name)) {
       throw new BadRequestException("Name must be unique");
