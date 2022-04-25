@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'gamify-core',
-  preset: '../../../jest.preset.js',
+  displayName: 'foosball-api',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/libs/gamify/core',
+  coverageDirectory: '../../../coverage/apps/foosball/api',
+  preset: '../../../jest.preset.ts',
 };

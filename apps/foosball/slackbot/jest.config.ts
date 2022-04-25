@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'crm-api',
-  preset: '../../../jest.preset.js',
+  displayName: 'foosball-slackbot',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/apps/crm/api',
+  coverageDirectory: '../../../coverage/apps/foosball/slackbot',
+  preset: '../../../jest.preset.ts',
 };

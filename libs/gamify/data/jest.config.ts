@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'codeheroes-api',
-  preset: '../../../jest.preset.js',
+  displayName: 'gamify-data',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/apps/codeheroes-api',
+  coverageDirectory: '../../../coverage/libs/gamify/data',
+  preset: '../../../jest.preset.ts',
 };

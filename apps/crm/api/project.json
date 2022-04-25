@@ -43,7 +43,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/crm/api"],
       "options": {
-        "jestConfig": "apps/crm/api/jest.config.js",
+        "jestConfig": "apps/crm/api/jest.config.ts",
         "passWithNoTests": true
       }
     },

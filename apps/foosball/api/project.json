@@ -43,7 +43,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/foosball/api"],
       "options": {
-        "jestConfig": "apps/foosball/api/jest.config.js",
+        "jestConfig": "apps/foosball/api/jest.config.ts",
         "passWithNoTests": true
       },
       "dependsOn": [

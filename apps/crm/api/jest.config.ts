@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'gamify-applications',
-  preset: '../../../jest.preset.js',
+  displayName: 'crm-api',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/libs/gamify/applications',
+  coverageDirectory: '../../../coverage/apps/crm/api',
+  preset: '../../../jest.preset.ts',
 };

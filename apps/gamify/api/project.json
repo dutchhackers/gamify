@@ -43,7 +43,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/gamify/api"],
       "options": {
-        "jestConfig": "apps/gamify/api/jest.config.js",
+        "jestConfig": "apps/gamify/api/jest.config.ts",
         "passWithNoTests": true
       },
       "dependsOn": [
