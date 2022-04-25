@@ -7,7 +7,7 @@ async function main() {
 
   await seedUsers();
   await seedApplications();
-
+  await seedBadges();
 }
 
 main()
@@ -19,7 +19,7 @@ main()
   });
 
 async function seedUsers() {
-  const createManyItems = getUsers().map(item =>
+  const createManyItems = getUsers().map(item => 
     prisma.user.create({
       data: item,
     })
@@ -29,13 +29,21 @@ async function seedUsers() {
 }
 
 async function seedApplications() {
-
   const createManyItems = getApplications().map(item =>
     prisma.application.create({
       data: item,
     })
   );
 
+  await Promise.all(createManyItems);
+}
+
+async function seedBadges() {
+  const createManyItems = getBadges().map(item =>
+    prisma.badge.create({
+      data: item
+    })
+  );
   await Promise.all(createManyItems);
 }
 
@@ -47,7 +55,14 @@ function getUsers() {
 
 function getApplications() {
   return [
-    { name: 'Walking Challenge', applicationType: "CHALLENGE", ownerUserId: 1 },
+    { name: 'Walking Challenge 2022', applicationType: "CHALLENGE", ownerUserId: 1 },
   ];
 }
 
+function getBadges() {
+  return [
+    { name: 'Participant', applicationId: 1, tier: 'BRONZE', repeatedlyObtainable: false },
+    { name: 'Week Winner', applicationId: 1, tier: 'SILVER', repeatedlyObtainable: true },
+    { name: 'Challenge Winner 2022 Edition', applicationId: 1, tier: 'GOLD', repeatedlyObtainable: false }
+  ]
+}

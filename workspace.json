@@ -27,6 +27,7 @@
     "foosball-slackbot": "apps/foosball/slackbot",
     "gamify-api": "apps/gamify/api",
     "gamify-applications": "libs/gamify/applications",
+    "gamify-badges": "libs/gamify/badges",
     "gamify-core": "libs/gamify/core",
     "gamify-data": "libs/gamify/data",
     "gamify-web-app": "apps/gamify/web-app"
