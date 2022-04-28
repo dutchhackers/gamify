@@ -6,7 +6,7 @@ export class UsersService {
 
     constructor(private readonly data: DataService) {}
 
-    find(id: number) {
+    findOne(id: number) {
         return this.data.user.findUnique({
             where: { id }
         });
@@ -17,6 +17,14 @@ export class UsersService {
             data: {
                 userId,
                 badgeId
+            }
+        });
+    }
+
+    getUserBadges(userId: number) {
+        return this.data.userBadge.findMany({
+            where: {
+                userId
             }
         });
     }

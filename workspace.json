@@ -31,6 +31,7 @@
     "gamify-badges": "libs/gamify/badges",
     "gamify-core": "libs/gamify/core",
     "gamify-data": "libs/gamify/data",
+    "gamify-shared": "libs/gamify/shared",
     "gamify-users": "libs/gamify/users",
     "gamify-web-app": "apps/gamify/web-app"
   }

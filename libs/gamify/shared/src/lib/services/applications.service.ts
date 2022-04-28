@@ -1,15 +1,16 @@
+import { ApplicationModel, ApplicationUserModel, CreateApplicationInput, UpdateApplicationInput } from '@gamify/application';
 import { Role } from '@gamify/core';
 import { DataService } from '@gamify/data';
-import { UsersService } from '@gamify/users';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { CreateApplicationInput } from './dto/create-application.input';
-import { UpdateApplicationInput } from './dto/update-application.input';
-import { ApplicationModel, ApplicationUserModel } from './models';
+import { UsersService } from './users.service';
 
 @Injectable()
 export class ApplicationsService {
 
-    constructor(private readonly data: DataService, @Inject(forwardRef(() => UsersService)) private readonly usersService: UsersService) {}
+    constructor(
+        private readonly data: DataService, 
+        @Inject(forwardRef(() => UsersService)) private readonly usersService: UsersService
+    ) {}
 
     findMany(): Promise<ApplicationModel[]> {
         return this.data.application.findMany();
@@ -74,7 +75,7 @@ export class ApplicationsService {
     }
 
     async canModerateApplication(applicationId: number, userId: number): Promise<boolean> {
-        const user = await this.usersService.find(userId);
+        const user = await this.usersService.findOne(userId);
         if (user.moderationRole === Role.ADMIN) {
             return true;
         }
