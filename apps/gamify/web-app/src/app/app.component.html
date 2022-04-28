@@ -1,1 +1,19 @@
-<coders-nx-welcome></coders-nx-welcome> <router-outlet></router-outlet>
+<div style="display: flex; flex-direction: column; min-height: 100vh;">
+    <mat-toolbar color="primary">
+        <span>Gamify</span>
+    </mat-toolbar>
+    
+    <!-- Creates a layout with a left-positioned sidenav and explicit content. -->
+    <mat-sidenav-container style="flex: 1 1 auto">
+        <mat-sidenav #drawer [opened]="isOnAdminPage" mode="side">
+            <mat-list role="list">
+                <mat-list-item role="listitem">Dashboard</mat-list-item>
+                <mat-list-item role="listitem">Applications</mat-list-item>
+                <mat-list-item role="listitem">Users</mat-list-item>
+              </mat-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
