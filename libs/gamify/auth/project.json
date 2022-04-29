@@ -1,0 +1,22 @@
+{
+  "root": "libs/gamify/auth",
+  "sourceRoot": "libs/gamify/auth/src",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/gamify/auth/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/gamify/auth"],
+      "options": {
+        "jestConfig": "libs/gamify/auth/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:feature", "scope:gamify"]
+}
