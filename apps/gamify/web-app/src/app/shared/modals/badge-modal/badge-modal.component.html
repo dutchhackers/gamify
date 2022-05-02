@@ -1,4 +1,8 @@
-<h1>Create Badge</h1>
+<h1>
+    <span *ngIf="data.action === 'create'">Create</span> 
+    <span *ngIf="data.action === 'edit'">Edit</span>
+    Badge
+</h1>
 
 <mat-form-field appearance="fill" style="width: 100%;">
     <mat-label>Name</mat-label>
