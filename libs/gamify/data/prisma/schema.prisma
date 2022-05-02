@@ -9,7 +9,6 @@ datasource db {
 }
 
 model User {
-    <<<<<<< HEAD
     id                 Int               @id @default(autoincrement())
     createdAt          DateTime          @default(now())
     email              String            @unique
@@ -19,16 +18,6 @@ model User {
     firebaseUid        String?           @unique
     moderationRole     String            @default("user")
     joinedApplications ApplicationUser[]
-    =======
-    id                 Int               @id @default(autoincrement())
-    createdAt          DateTime          @default(now())
-    email              String            @unique
-    firstName          String?
-    lastName           String?
-    applications       Application[]
-    firebaseUid        String?           @unique
-    moderationRole     String            @default("user")
-    >>>>>>> origin/main
 }
 
 model Application {
