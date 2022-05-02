@@ -1,1 +1,28 @@
-<p>application-details-general works!</p>
+<div style="display: flex; flex-direction: column;">
+    <h2 style="margin-top: 10px;">General Application Details</h2>
+
+    <mat-form-field class="input-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Very Cool Game" value="M4M Walking Challenge">
+    </mat-form-field>
+    
+    <mat-form-field class="input-width" appearance="fill">
+        <mat-label>Type</mat-label>
+        <input matInput placeholder="Very Cool Game" value="CHALLENGE" disabled>
+    </mat-form-field>
+
+    <mat-form-field class="input-width" appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="How to play the game?"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="input-width" appearance="fill">
+        <mat-label>External application url</mat-label>
+        <input matInput placeholder="https://mycoolgame.io" value="">
+    </mat-form-field>
+
+    <div style="margin-bottom: 10px;">
+        <button mat-raised-button color="primary">Save</button>
+        <button mat-raised-button style="margin-left: 10px;" routerLink="/admin/applications">Cancel</button>
+    </div>
+</div>
