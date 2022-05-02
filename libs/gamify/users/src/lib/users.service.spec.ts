@@ -1,17 +1,16 @@
 import { DataService } from '@gamify/data';
-import { UsersService } from '@gamify/users';
 import { Test } from '@nestjs/testing';
-import { BadgesService } from './badges.service';
+import { UsersService } from './users.service';
 
-describe('BadgesService', () => {
-  let service: BadgesService;
+describe('UsersService', () => {
+  let service: UsersService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      providers: [BadgesService, DataService, UsersService],
+      providers: [UsersService, DataService],
     }).compile();
 
-    service = module.get(BadgesService);
+    service = module.get(UsersService);
   });
 
   it('should be defined', () => {
