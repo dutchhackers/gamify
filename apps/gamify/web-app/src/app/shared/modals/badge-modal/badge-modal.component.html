@@ -1,0 +1,22 @@
+<h1>Create Badge</h1>
+
+<mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+</mat-form-field>
+
+<mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Tier</mat-label>
+    <mat-select [(ngModel)]="data.tier">
+        <mat-option *ngFor="let tier of tiers" [value]="tier.value">
+            {{tier.viewValue}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-checkbox [(ngModel)]="data.repeatedlyObtainable">Repeatedly Obtainable</mat-checkbox>
+
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="data" color="primary">Save</button>
+    <button mat-raised-button (click)="onNoClick()">Cancel</button>
+</div>

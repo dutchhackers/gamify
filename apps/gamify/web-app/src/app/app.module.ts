@@ -6,10 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './pages/admin/admin.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
+import { UiModule } from './ui.module';
 
 @NgModule({
   declarations: [AppComponent, DashboardComponent],
@@ -17,11 +14,8 @@ import { MatListModule } from '@angular/material/list';
     BrowserModule, 
     AppRoutingModule,
     AdminModule, 
-    BrowserAnimationsModule, 
-    MatSliderModule, 
-    MatToolbarModule, 
-    MatSidenavModule, 
-    MatListModule
+    BrowserAnimationsModule,
+    UiModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

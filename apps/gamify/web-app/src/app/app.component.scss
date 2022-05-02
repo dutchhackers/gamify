@@ -1,3 +1,29 @@
 mat-sidenav {
     width: 200px;
 }
+
+.app-wrapper {
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh;
+}
+
+mat-sidenav-container {
+    flex: 1 1 auto;
+
+    display: flex; 
+    flex-direction: column;
+}
+
+.toolbar-button { 
+    margin-left: 10px;
+}
+
+.spacer { 
+    flex: 1 1 auto;
+}
+
+mat-sidenav-content {
+    padding: 10px;
+    flex: 1 1 auto;
+}
