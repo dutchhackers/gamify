@@ -1,25 +1,31 @@
-import { Component } from '@angular/core';
-
-export interface Application {
-  id: number;
-  name: string;
-  type: string;
-  players: number;
-  badges: number;
-}
-
-const ELEMENT_DATA: Application[] = [
-  {id: 1, name: 'Walking Challenge', type: "GAME", players: 5, badges: 10},
-];
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Application } from '@gamify/shared';
+import { Subscription } from 'rxjs';
+import { ApplicationService } from '../../../services/application.service';
 
 @Component({
   selector: 'coders-applications',
   templateUrl: './applications.component.html',
   styleUrls: ['./applications.component.css']
 })
-export class ApplicationsComponent {
+export class ApplicationsComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['id', 'name', 'type', 'players', 'badges', 'actions'];
 
-  dataSource = ELEMENT_DATA;
+  dataSource: Application[] = [];
+
+  private subscriptions: Subscription = new Subscription();
+
+  constructor(private applicationService: ApplicationService) { }
+
+  ngOnInit() {
+    this.subscriptions = this.applicationService.list$().subscribe(res => {
+      this.dataSource = res;
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
 }

@@ -1,4 +1,4 @@
-import { ApplicationType } from '@gamify/core';
+import { ApplicationType } from '@gamify/shared';
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsUrl } from 'class-validator';
 import { Type } from "class-transformer";
 

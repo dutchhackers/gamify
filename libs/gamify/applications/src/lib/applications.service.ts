@@ -1,4 +1,5 @@
 import { DataService } from '@gamify/data';
+import { IApplication, ApplicationConverter } from '@gamify/shared';
 import { Injectable } from '@nestjs/common';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
@@ -8,8 +9,8 @@ export class ApplicationsService {
 
     constructor(private readonly data: DataService) {}
 
-    findMany() {
-        return this.data.application.findMany();
+    async findMany(): Promise<IApplication[]> {
+        return (await this.data.application.findMany()).map(app => ApplicationConverter.fromPrismaApplication(app));
     }
 
     findOne(id: number) {

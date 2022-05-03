@@ -1,5 +1,5 @@
 <div style="display: flex; justify-content: space-between;">
-    <h1>Application: M4M Walking Challenge</h1>
+    <h1>Application: {{application?.name}}</h1>
     <div>
         <a mat-raised-button color="primary" routerLink="/admin/applications">
             <mat-icon>arrow_back</mat-icon>
@@ -7,10 +7,9 @@
         </a>
     </div>
 </div>
-<!-- Name, Type (disabled) Description,  -->
 <mat-tab-group>
     <mat-tab label="General"> 
-        <coders-application-details-general></coders-application-details-general>
+        <coders-application-details-general [application]="application"></coders-application-details-general>
     </mat-tab>
     <mat-tab label="Badges">
         <coders-application-details-badges></coders-application-details-badges>

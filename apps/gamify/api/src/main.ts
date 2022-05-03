@@ -16,7 +16,8 @@ async function bootstrap() {
     transform: true,
     whitelist: true,
   }));
-  const port = process.env.PORT || 3333;
+  app.enableCors();
+  const port = process.env.PORT || 3000;
   await app.listen(port);
   Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }

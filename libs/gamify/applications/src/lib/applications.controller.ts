@@ -2,6 +2,7 @@ import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, 
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
+import { IApplication } from '@gamify/shared';
 
 @Controller('applications')
 export class ApplicationsController {
@@ -22,7 +23,7 @@ export class ApplicationsController {
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<IApplication[]> {
     return this.applicationsService.findMany();
   }
 
