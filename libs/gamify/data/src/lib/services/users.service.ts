@@ -1,5 +1,5 @@
-import { DataService } from '@gamify/data';
 import { Injectable } from '@nestjs/common';
+import { DataService } from '../data.service';
 
 @Injectable()
 export class UsersService {

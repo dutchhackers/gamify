@@ -1,5 +1,5 @@
 import { BadgeModel, CreateBadgeInput, UpdateBadgeInput } from '@gamify/badge';
-import { DataService } from '@gamify/data';
+import { DataService } from '../data.service';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

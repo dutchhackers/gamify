@@ -1,10 +1,9 @@
-import { DataModule } from '@gamify/data';
-import { ApplicationsService, GamifySharedModule, UsersService } from '@gamify/shared';
+import { DataModule, ApplicationsService, UsersService } from '@gamify/data';
 import { Module } from '@nestjs/common';
 import { ApplicationsController } from './applications.controller';
 
 @Module({
-  imports: [DataModule, GamifySharedModule],
+  imports: [DataModule],
   controllers: [ApplicationsController],
   providers: [ApplicationsService, UsersService],
   exports: [],

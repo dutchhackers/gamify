@@ -1,10 +1,9 @@
-import { DataModule } from '@gamify/data';
-import { ApplicationsService, BadgesService, GamifySharedModule, UsersService } from '@gamify/shared';
+import { DataModule, ApplicationsService, BadgesService, UsersService } from '@gamify/data';
 import { Module } from '@nestjs/common';
 import { BadgesController } from './badges.controller';
 
 @Module({
-  imports: [DataModule, GamifySharedModule],
+  imports: [DataModule],
   controllers: [BadgesController],
   providers: [BadgesService, ApplicationsService, UsersService],
   exports: [],
