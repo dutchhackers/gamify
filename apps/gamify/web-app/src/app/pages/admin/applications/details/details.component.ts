@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Application } from '@gamify/shared';
+import { Observable } from 'rxjs';
 import { ApplicationService } from '../../../../services/application.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { ApplicationService } from '../../../../services/application.service';
 export class DetailsComponent implements OnInit {
 
   application: Application | undefined;
+  application$: Observable<Application> = new Observable<Application>();
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService) {}
 
@@ -21,6 +23,8 @@ export class DetailsComponent implements OnInit {
         console.log(res);
         this.application = res;
       });
+
+      this.application$ = this.applicationService.get$(params['id']);
     });
   }
 }

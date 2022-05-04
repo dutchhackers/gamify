@@ -26,4 +26,10 @@ export class ApplicationService {
       map(res => res as Application)
     )
   }
+
+  update$(id: number, payload: { name: string, description: string, externalApplicationUrl: string }): Observable<Application> {
+    return this.http.put<IApplication>(`${environment.apiUrl}${APPLICATIONS_API_PATH}/${id}`, payload).pipe(
+      map(res => res as Application)
+    )
+  }
 }
