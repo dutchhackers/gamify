@@ -1,5 +1,7 @@
 import { ApplicationsService } from '@gamify/application';
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Roles, User, UserModel } from '@gamify/auth';
+import { Role } from '@gamify/core';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UnauthorizedException } from '@nestjs/common';
 import { BadgesService } from './badges.service';
 import { CreateBadgeInput } from './dto/create-badge.input';
 import { UpdateBadgeInput } from './dto/update-badge.input';
@@ -10,12 +12,17 @@ export class BadgesController {
   constructor(private badgesService: BadgesService, private applicationsService: ApplicationsService) {}
 
   @Post()
-  async create(@Body() createBadgeInput: CreateBadgeInput): Promise<BadgeModel> {
-    if (await this.applicationsService.findOne(createBadgeInput.applicationId) === null) {
+  @Roles(Role.ADMIN, Role.MODERATOR)
+  async create(@Body() createBadgeInput: CreateBadgeInput, @User() user: UserModel): Promise<BadgeModel> {
+    const application = await this.applicationsService.findOne(createBadgeInput.applicationId);
+    if (application === null) {
       throw new BadRequestException('Application not found');
     }
 
-    // TODO check authorization of user.
+    if (! await this.applicationsService.canModerateApplication(application.id, user.id)) {
+      throw new UnauthorizedException();
+    }
+
     return this.badgesService.create(createBadgeInput);
   }
 
@@ -30,19 +37,25 @@ export class BadgesController {
   }
 
   @Put(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput): Promise<BadgeModel> {
-    // TODO check authorization of user.
+  @Roles(Role.ADMIN, Role.MODERATOR)
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput, @User() user: UserModel): Promise<BadgeModel> {
+    const badge = await this.findBadgeOrFail(id);
 
-    await this.findBadgeOrFail(id);
+    if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
+      throw new UnauthorizedException();
+    }
 
     return this.badgesService.update(id, updateBadgeInput);
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number): Promise<BadgeModel> {
-    // TODO check authorization of user.
-  
-    await this.findBadgeOrFail(id);
+  @Roles(Role.ADMIN, Role.MODERATOR)
+  async remove(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<BadgeModel> {
+    const badge = await this.findBadgeOrFail(id);
+
+    if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
+      throw new UnauthorizedException();
+    }
 
     return this.badgesService.remove(id);
   }
