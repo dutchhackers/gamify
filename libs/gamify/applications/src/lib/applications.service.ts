@@ -36,18 +36,6 @@ export class ApplicationsService {
         return this.data.application.delete({ where: { id }});
     }
 
-    async isNameUnique(name: string): Promise<boolean> {
-        const app = await this.data.application.findFirst({
-            where: { name }
-        });
-
-        if (app !== null) {
-            return false;
-        }
-
-        return true;
-    }
-
     async canModerateApplication(applicationId: number, userId: number): Promise<boolean> {
         const user = await this.usersService.find(userId);
         if (user.moderationRole === Role.ADMIN) {

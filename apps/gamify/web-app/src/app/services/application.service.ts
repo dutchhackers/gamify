@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Application, IApplication } from '@gamify/shared';
-import { map, Observable } from 'rxjs';
+import { Application, ApplicationType, IApplication } from '@gamify/shared';
+import { catchError, map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 const APPLICATIONS_API_PATH = '/applications';
@@ -11,9 +11,7 @@ const APPLICATIONS_API_PATH = '/applications';
 })
 export class ApplicationService {
 
-  constructor(private http: HttpClient) {
-    console.log('application service constructor');
-   }
+  constructor(private http: HttpClient) { }
 
   list$(): Observable<Application[]> {
     return this.http.get<IApplication[]>(`${environment.apiUrl}${APPLICATIONS_API_PATH}`).pipe(
@@ -27,9 +25,19 @@ export class ApplicationService {
     )
   }
 
+  create$(payload: { name: string, applicationType: ApplicationType, description: string, externalApplicationUrl?: string }): Observable<Application> {
+    return this.http.post<IApplication>(`${environment.apiUrl}${APPLICATIONS_API_PATH}`, payload).pipe(
+      map(res => res as Application)
+    )
+  }
+
   update$(id: number, payload: { name: string, description: string, externalApplicationUrl: string }): Observable<Application> {
     return this.http.put<IApplication>(`${environment.apiUrl}${APPLICATIONS_API_PATH}/${id}`, payload).pipe(
       map(res => res as Application)
     )
+  }
+
+  delete$(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}${APPLICATIONS_API_PATH}/${id}`)
   }
 }

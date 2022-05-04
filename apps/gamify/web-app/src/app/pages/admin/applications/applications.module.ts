@@ -10,11 +10,15 @@ import { ApplicationDetailsBadgesComponent } from '../../../shared/components/ap
 import { ApplicationDetailsGeneralComponent } from '../../../shared/components/application-details-general/application-details-general.component';
 import { ApplicationDetailsPlayersComponent } from '../../../shared/components/application-details-players/application-details-players.component';
 import { ApplicationDetailsModeratorsComponent } from '../../../shared/components/application-details-moderators/application-details-moderators.component';
+import { CreateApplicationComponent } from './create-application/create-application.component';
+import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
     DetailsComponent,
+    CreateApplicationComponent,
     BadgeModalComponent,
+    ConfirmModalComponent,
     ApplicationDetailsGeneralComponent,
     ApplicationDetailsBadgesComponent,
     ApplicationDetailsPlayersComponent,

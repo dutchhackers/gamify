@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UnauthorizedException } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
@@ -13,10 +13,6 @@ export class ApplicationsController {
   @Post()
   @Roles(Role.ADMIN, Role.MODERATOR)
   async create(@Body() createApplicationInput: CreateApplicationInput, @User() user: UserModel) {
-    if (! await this.applicationsService.isNameUnique(createApplicationInput.name)) {
-      throw new BadRequestException("Name must be unique");
-    }
-
     createApplicationInput.ownerUserId = user.id;
 
     return await this.applicationsService.create(createApplicationInput);
@@ -40,10 +36,6 @@ export class ApplicationsController {
     }
 
     await this.findApplicationOrFail(id);
-
-    if (! await this.applicationsService.isNameUnique(updateApplicationInput.name)) {
-      throw new BadRequestException("Name must be unique");
-    }
 
     return await this.applicationsService.update(id, updateApplicationInput);
   }

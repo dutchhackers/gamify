@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Application } from '@gamify/shared';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
+import { ApplicationService } from '../../../services/application.service';
 
 @Component({
   selector: 'coders-application-details-general',
@@ -11,21 +13,21 @@ import { Observable } from 'rxjs';
 export class ApplicationDetailsGeneralComponent implements OnInit {
 
   @Input() application$: Observable<Application> | undefined;
+  application: Application | undefined;
 
-  // this
+  @Output() applicationUpdated: EventEmitter<Application> = new EventEmitter<Application>(); 
 
   form = new FormGroup({
     "name": new FormControl("", Validators.required),
-    "description": new FormControl("", Validators.required),
-    "externalApplicationUrl": new FormControl("", Validators.required),
+    "description": new FormControl(""),
+    "externalApplicationUrl": new FormControl(""),
   })
 
-  // constructor() { }
+  constructor(private applicationsService: ApplicationService) { }
 
   ngOnInit(): void {
     this.application$?.subscribe(application => {
-      console.log('application changed:');
-      console.log(application);
+      this.application = application;
 
       this.form.patchValue({
         "name": application.name,
@@ -35,10 +37,29 @@ export class ApplicationDetailsGeneralComponent implements OnInit {
     });
   }
 
-  save(): void {
-    // this.form.value
+  onSubmit(): void {
+    const id = this.application?.id;
+    if (!id) return;
 
-    console.log(this.form.value);
+    const data = this.form.value;
+    if (data.description === "") {
+      delete data.description;
+    }
+    if (data.externalApplicationUrl === "") {
+      delete data.externalApplicationUrl;
+    }
+
+    const request = this.applicationsService.update$(id, data).pipe(
+      catchError((err: any, caught: Observable<Application>) => {
+        console.log('caught an error!!');
+        console.log(err);
+        return throwError(() => new Error('Something bad happened; please try again later.'));
+      })
+    );
+    request.subscribe(res => {
+      console.log('Updated application:', res);
+      this.applicationUpdated.emit(res);
+    });
   }
 
 }

@@ -1,6 +1,8 @@
 <h1>Applications</h1>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z2" style="width: 100%;">
+<a mat-raised-button color="primary" routerLink="create">Create new application</a>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z2" style="width: 100%; margin-top: 10px">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -31,7 +33,7 @@
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element"> 
         <a mat-raised-button [routerLink]="['/admin/applications/', element.id]" color="primary">Edit</a>
-        <button mat-raised-button color="warn" style="margin-left: 6px">Delete</button>
+        <button mat-raised-button color="warn" style="margin-left: 6px" (click)="openDeleteDialog(element)">Delete</button>
       </td>
     </ng-container>
   

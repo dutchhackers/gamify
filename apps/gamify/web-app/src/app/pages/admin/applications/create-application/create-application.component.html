@@ -1,14 +1,19 @@
+<h1>Create Application</h1>
+
 <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="onSubmit()">
-    <h2 style="margin-top: 10px;">General Application Details</h2>
 
     <mat-form-field class="input-width" appearance="fill">
         <mat-label>Name</mat-label>
         <input matInput placeholder="Very Cool Game" formControlName="name">
     </mat-form-field>
-    
+
     <mat-form-field class="input-width" appearance="fill">
-        <mat-label>Type</mat-label>
-        <input matInput placeholder="Very Cool Game" [value]="(application$ | async)?.applicationType" disabled>
+        <mat-label>Tier</mat-label>
+        <mat-select formControlName="applicationType">
+            <mat-option *ngFor="let type of applicationTypes" [value]="type.value">
+                {{type.viewValue}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 
     <mat-form-field class="input-width" appearance="fill">
@@ -21,8 +26,8 @@
         <input matInput placeholder="https://mycoolgame.io" formControlName="externalApplicationUrl">
     </mat-form-field>
 
-    <div style="margin-bottom: 10px;">
-        <button mat-raised-button color="primary">Save</button>
+    <div>
+        <button mat-raised-button color="primary" type="submit">Create</button>
         <button mat-raised-button style="margin-left: 10px;" routerLink="/admin/applications">Cancel</button>
     </div>
 </form>

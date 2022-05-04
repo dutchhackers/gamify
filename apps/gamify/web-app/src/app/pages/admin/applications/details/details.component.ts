@@ -18,13 +18,14 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log(params);
-      this.applicationService.get$(params['id']).subscribe(res => {
-        console.log(res);
+      this.application$ = this.applicationService.get$(params['id']);
+      this.application$.subscribe(res => {
         this.application = res;
       });
-
-      this.application$ = this.applicationService.get$(params['id']);
     });
+  }
+
+  updateApplication($event: Application) {
+    this.application = $event;
   }
 }
