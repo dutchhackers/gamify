@@ -1,6 +1,8 @@
 <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="onSubmit()">
     <h2 style="margin-top: 10px;">General Application Details</h2>
 
+    <coders-message-box [message$]="errorMessage$" style="margin-bottom: 10px; display: block;"></coders-message-box>
+
     <mat-form-field class="input-width" appearance="fill">
         <mat-label>Name</mat-label>
         <input matInput placeholder="Very Cool Game" formControlName="name">

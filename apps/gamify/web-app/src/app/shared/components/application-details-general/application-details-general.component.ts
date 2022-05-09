@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Application } from '@gamify/shared';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, Subject, throwError } from 'rxjs';
 import { ApplicationService } from '../../../services/application.service';
 
 @Component({
@@ -23,6 +23,8 @@ export class ApplicationDetailsGeneralComponent implements OnInit {
     "description": new FormControl(""),
     "externalApplicationUrl": new FormControl(""),
   })
+  
+  errorMessage$: Subject<string|string[]> = new Subject<string|string[]>();
 
   constructor(private applicationsService: ApplicationService, private _snackBar: MatSnackBar) { }
 
@@ -51,13 +53,14 @@ export class ApplicationDetailsGeneralComponent implements OnInit {
     }
 
     const request = this.applicationsService.update$(id, data).pipe(
-      catchError((err: any, caught: Observable<Application>) => {
+      catchError((err: HttpErrorResponse, caught: Observable<Application>) => {
         this._snackBar.open('Error while saving application, please try again', 'Close', {
           horizontalPosition: 'center',	
           verticalPosition: 'top',
           duration: 3000
         });
-        return throwError(() => new Error('Something bad happened; please try again later.'));
+        this.errorMessage$.next(err.error.message);
+        return throwError(() => new Error('Error while saving application, please try again'));
       })
     );
     request.subscribe(res => {
