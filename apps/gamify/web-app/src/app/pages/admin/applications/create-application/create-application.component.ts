@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApplicationType } from '@gamify/shared';
+import { catchError, Subject, tap, throwError } from 'rxjs';
 import { ApplicationService } from '../../../../services/application.service';
 
 interface ApplicationTypeSelect {
@@ -29,6 +31,8 @@ export class CreateApplicationComponent {
     "externalApplicationUrl": new FormControl(""),
   })
 
+  errorMessage$: Subject<string|string[]> = new Subject<string|string[]>();
+
   constructor(private applicationsService: ApplicationService, private router: Router) { }
 
   onSubmit() {
@@ -39,10 +43,16 @@ export class CreateApplicationComponent {
     if (data.externalApplicationUrl === "") {
       delete data.externalApplicationUrl;
     }
-    this.applicationsService.create$(data).subscribe(res => {
-      console.log(res);
-      this.router.navigate(['/admin/applications/' + res.id]);
-    });
-
+    this.applicationsService.create$(data).pipe(
+      catchError((err: HttpErrorResponse) => {
+        console.log(err);
+        this.errorMessage$.next(err.error.message);
+        return throwError(() => new Error(err.error.message));
+      }),
+      tap(res => {
+        console.log('successfull created application:', res);
+        this.router.navigate(['/admin/applications/' + res.id]);
+      })
+    ).subscribe();
   }
 }

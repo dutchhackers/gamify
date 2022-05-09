@@ -1,5 +1,7 @@
 <h1>Create Application</h1>
 
+<coders-message-box [message$]="errorMessage$" style="margin-bottom: 10px; display: block;"></coders-message-box>
+
 <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="onSubmit()">
 
     <mat-form-field class="input-width" appearance="fill">

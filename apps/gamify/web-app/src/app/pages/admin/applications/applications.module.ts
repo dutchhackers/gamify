@@ -12,6 +12,8 @@ import { ApplicationDetailsPlayersComponent } from '../../../shared/components/a
 import { ApplicationDetailsModeratorsComponent } from '../../../shared/components/application-details-moderators/application-details-moderators.component';
 import { CreateApplicationComponent } from './create-application/create-application.component';
 import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
+import { MessageBoxComponent } from '../../../shared/components/message-box/message-box.component';
+import { UcfirstPipe } from '../../../core/pipes/ucfirst.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/conf
     ApplicationDetailsBadgesComponent,
     ApplicationDetailsPlayersComponent,
     ApplicationDetailsModeratorsComponent,
+    MessageBoxComponent,
+    UcfirstPipe,
   ],
   imports: [
     CommonModule,

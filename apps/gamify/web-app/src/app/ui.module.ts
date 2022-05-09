@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
     declarations: [],
@@ -33,6 +35,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatDialogModule,
         MatSelectModule,
         MatCheckboxModule,
+        MatSnackBarModule,
+        MatCardModule,
     ]
   })
   export class UiModule {}

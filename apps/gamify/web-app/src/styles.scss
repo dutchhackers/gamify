@@ -39,3 +39,9 @@ $gamify-web-app-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.error-card {
+  // background: mat.get-color-from-palette($gamify-web-app-warn, '500');
+  background: #D32F2F;
+  color: #fff;
+}
