@@ -64,7 +64,6 @@ export class ApplicationDetailsGeneralComponent implements OnInit {
       })
     );
     request.subscribe(res => {
-      console.log('Updated application:', res);
       this.applicationUpdated.emit(res);
       this._snackBar.open('Application saved!', 'Close', {
         horizontalPosition: 'center',	

@@ -1,6 +1,6 @@
 import { Role } from '@gamify/core';
 import { DataService } from '@gamify/data';
-import { IApplication, ApplicationConverter } from '@gamify/shared';
+import { ApplicationConverter, Application } from '@gamify/shared';
 import { UsersService } from '@gamify/users';
 import { Injectable } from '@nestjs/common';
 import { CreateApplicationInput } from './dto/create-application.input';
@@ -11,7 +11,7 @@ export class ApplicationsService {
 
     constructor(private readonly data: DataService, private readonly usersService: UsersService) {}
 
-    async findMany(): Promise<IApplication[]> {
+    async findMany(): Promise<Application[]> {
         return (await this.data.application.findMany()).map(app => ApplicationConverter.fromPrismaApplication(app));
     }
 

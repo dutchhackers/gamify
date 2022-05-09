@@ -10,7 +10,7 @@
     </mat-form-field>
 
     <mat-form-field class="input-width" appearance="fill">
-        <mat-label>Tier</mat-label>
+        <mat-label>Application Type (unchangeable after creation)</mat-label>
         <mat-select formControlName="applicationType">
             <mat-option *ngFor="let type of applicationTypes" [value]="type.value">
                 {{type.viewValue}}

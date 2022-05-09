@@ -5,7 +5,7 @@ import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, 
 import { BadgesService } from './badges.service';
 import { CreateBadgeInput } from './dto/create-badge.input';
 import { UpdateBadgeInput } from './dto/update-badge.input';
-import { BadgeModel } from './models';
+import { Badge } from '@gamify/shared';
 
 @Controller('badges')
 export class BadgesController {
@@ -13,7 +13,7 @@ export class BadgesController {
 
   @Post()
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async create(@Body() createBadgeInput: CreateBadgeInput, @User() user: UserModel): Promise<BadgeModel> {
+  async create(@Body() createBadgeInput: CreateBadgeInput, @User() user: UserModel): Promise<Badge> {
     const application = await this.applicationsService.findOne(createBadgeInput.applicationId);
     if (application === null) {
       throw new BadRequestException('Application not found');
@@ -27,18 +27,18 @@ export class BadgesController {
   }
 
   @Get()
-  findAll(): Promise<BadgeModel[]> {
+  findAll(): Promise<Badge[]> {
     return this.badgesService.findMany();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<BadgeModel> {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Badge> {
     return this.findBadgeOrFail(id);
   }
 
   @Put(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput, @User() user: UserModel): Promise<BadgeModel> {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput, @User() user: UserModel): Promise<Badge> {
     const badge = await this.findBadgeOrFail(id);
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
@@ -50,7 +50,7 @@ export class BadgesController {
 
   @Delete(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async remove(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<BadgeModel> {
+  async remove(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<Badge> {
     const badge = await this.findBadgeOrFail(id);
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
