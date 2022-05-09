@@ -1,5 +1,4 @@
-import { DataService } from '@gamify/data';
-import { UsersService } from '@gamify/users';
+import { DataService } from './../data.service';
 import { Test } from '@nestjs/testing';
 import { ApplicationsService } from './applications.service';
 import { UsersService } from './users.service';
