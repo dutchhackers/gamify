@@ -9,26 +9,28 @@ datasource db {
 }
 
 model User {
-    id             Int           @id @default(autoincrement())
-    createdAt      DateTime      @default(now())
-    email          String        @unique
-    firstName      String?
-    lastName       String?
-    applications   Application[]
-    firebaseUid    String?       @unique
-    moderationRole String        @default("user")
+    id                 Int               @id @default(autoincrement())
+    createdAt          DateTime          @default(now())
+    email              String            @unique
+    firstName          String?
+    lastName           String?
+    ownedApplications  Application[]
+    firebaseUid        String?           @unique
+    moderationRole     String            @default("user")
+    joinedApplications ApplicationUser[]
 }
 
 model Application {
-    id                     Int      @id @default(autoincrement())
-    createdAt              DateTime @default(now())
-    name                   String   @unique
+    id                     Int               @id @default(autoincrement())
+    createdAt              DateTime          @default(now())
+    name                   String            @unique
     description            String?
     applicationType        String
     externalApplicationUrl String?
-    ownerUser              User     @relation(fields: [ownerUserId], references: [id])
+    ownerUser              User              @relation(fields: [ownerUserId], references: [id])
     ownerUserId            Int
     badges                 Badge[]
+    users                  ApplicationUser[]
 }
 
 model Badge {
@@ -41,4 +43,14 @@ model Badge {
     tier                 String
     repeatedlyObtainable Boolean
     totalScore           Int?
+}
+
+model ApplicationUser {
+    application   Application @relation(fields: [applicationId], references: [id])
+    applicationId Int
+    user          User        @relation(fields: [userId], references: [id])
+    userId        Int
+    joinedAt      DateTime    @default(now())
+
+    @@id([applicationId, userId])
 }
