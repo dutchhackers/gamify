@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/foosball/auth"],
       "options": {
-        "jestConfig": "libs/foosball/auth/jest.config.js",
+        "jestConfig": "libs/foosball/auth/jest.config.ts",
         "passWithNoTests": true
       }
     }

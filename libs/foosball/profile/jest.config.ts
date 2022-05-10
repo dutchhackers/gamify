@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'codeheroes-data',
-  preset: '../../../jest.preset.js',
+  displayName: 'foosball-profile',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/codeheroes/data',
+  coverageDirectory: '../../../coverage/libs/foosball/profile',
+  preset: '../../../jest.preset.ts',
 };

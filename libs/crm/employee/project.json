@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/crm/employee"],
       "options": {
-        "jestConfig": "libs/crm/employee/jest.config.js",
+        "jestConfig": "libs/crm/employee/jest.config.ts",
         "passWithNoTests": true
       }
     }

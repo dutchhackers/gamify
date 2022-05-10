@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'crm-dto',
-  preset: '../../../jest.preset.js',
+  displayName: 'codeheroes-game',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/crm/dto',
+  coverageDirectory: '../../../coverage/libs/codeheroes/game',
+  preset: '../../../jest.preset.ts',
 };

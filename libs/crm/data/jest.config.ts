@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'crm-auth',
-  preset: '../../../jest.preset.js',
+  displayName: 'crm-data',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/crm/auth',
+  coverageDirectory: '../../../coverage/libs/crm/data',
+  preset: '../../../jest.preset.ts',
 };

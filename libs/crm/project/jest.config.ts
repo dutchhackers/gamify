@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'crm-employees-badges',
-  preset: '../../../jest.preset.js',
+  displayName: 'crm-project',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/crm/employees-badges',
+  coverageDirectory: '../../../coverage/libs/crm/project',
+  preset: '../../../jest.preset.ts',
 };

@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'foosball-slackbot',
-  preset: '../../../jest.preset.js',
+  displayName: 'codeheroes-api',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,6 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/apps/foosball/slackbot',
+  coverageDirectory: '../../../coverage/apps/codeheroes-api',
+  preset: '../../../jest.preset.ts',
 };
