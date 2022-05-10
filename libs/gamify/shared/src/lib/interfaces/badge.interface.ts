@@ -7,6 +7,6 @@ export interface IBadge {
     applicationId: number;
     iconPath?: string;
     tier: BadgeTier;
-    repeatableObtainable: boolean;
+    repeatedlyObtainable: boolean;
     totalScore?: number;
 }

@@ -1,45 +1,64 @@
-import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Badge, BadgeTier } from '@gamify/shared';
+import { catchError, throwError } from 'rxjs';
+import { BadgeDialogData } from '../../../core/interfaces/badge-dialog-data.interface';
+import { BadgesService } from '../../../services/badges.service';
 import { BadgeModalComponent } from '../../modals/badge-modal/badge-modal.component';
-
-interface Badge {
-  id: number;
-  name: string;
-  tier: string;
-  repeatedlyObtainable: boolean;
-}
-
-const BADGES: Badge[] = [
-  { id: 1, name: 'Badge 1', tier: 'BRONZE', repeatedlyObtainable: true },
-  { id: 2, name: 'Badge 2', tier: 'SILVER', repeatedlyObtainable: false },
-  { id: 3, name: 'Badge 3', tier: 'GOLD', repeatedlyObtainable: false },
-];
 
 @Component({
   selector: 'coders-application-details-badges',
   templateUrl: './application-details-badges.component.html',
   styleUrls: ['./application-details-badges.component.scss']
 })
-export class ApplicationDetailsBadgesComponent {
+export class ApplicationDetailsBadgesComponent implements OnInit {
+
+  @Input() applicationId = 0;
 
   badgesDisplayedColumns: string[] = ['id', 'name', 'tier', 'repeatedlyObtainable', 'actions'];
-  badgesDataSource = BADGES;
+  badgesDataSource: Badge[] = [];
+  @ViewChild('badgesTable') badgesTable: any;
 
   badgeName = "";
-  badgeTier = "";
+  badgeTier = BadgeTier.BRONZE;
   repeatedlyObtainable = false;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog, 
+    private badgesService: BadgesService,
+    private snackBar: MatSnackBar
+  ) { }
 
-  openCreateBadgeModal() {
+  ngOnInit(): void {
+    this.badgesService.list$().subscribe(res => {
+      this.badgesDataSource = res;
+    });
+  }
+
+  openCreateBadgeModal(payload?: { name: string, tier: BadgeTier, repeatedlyObtainable: boolean, error?: string|string[] }) {
+    const data: BadgeDialogData = {
+      action: 'create',
+      name: '',
+      tier: '',
+      repeatedlyObtainable: false,
+      error: undefined
+
+    }
+    if (payload) {
+      data.name = payload.name;
+      data.tier = payload.tier;
+      data.repeatedlyObtainable = payload.repeatedlyObtainable;
+
+      if (payload.error) {
+        data.error = payload.error;
+      }
+    }
+
     const dialogRef = this.dialog.open(BadgeModalComponent, {
       width: '400px',
-      data: {
-        action: 'create',
-        name: '',
-        tier: '',
-        repeatedlyObtainable: false
-      }
+      data
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -51,12 +70,40 @@ export class ApplicationDetailsBadgesComponent {
       this.badgeName = result.name;
       this.badgeTier = result.tier;
       this.repeatedlyObtainable = result.repeatedlyObtainable;
+
+      this.badgesService.create$({
+        name: this.badgeName,
+        tier: this.badgeTier, 
+        applicationId: this.applicationId, 
+        repeatedlyObtainable: this.repeatedlyObtainable
+      }).pipe(
+        catchError((err: HttpErrorResponse) => {
+          console.log('Error creating badge');
+
+          this.openCreateBadgeModal({
+            name: this.badgeName,
+            tier: this.badgeTier,
+            repeatedlyObtainable: this.repeatedlyObtainable,
+            error: err.error.message
+          });
+
+          return throwError(() => new Error(err.error.message));
+        })
+      ).subscribe(res => {
+        this.badgesDataSource.push(res);
+        this.badgesTable.renderRows();
+        this.snackBar.open('Badge succesfully created!', 'Close', {
+          horizontalPosition: 'center',	
+          verticalPosition: 'top',
+          duration: 3000
+        });
+      });
     });
   }
 
   openEditBadgeModal(badgeId: number) {
     console.log('Edit badge: ' + badgeId);
-    const badge = BADGES[badgeId - 1];
+    const badge = this.badgesDataSource[badgeId - 1];
     const dialogRef = this.dialog.open(BadgeModalComponent, {
       width: '400px',
       data: {

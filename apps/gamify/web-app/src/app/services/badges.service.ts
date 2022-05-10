@@ -4,7 +4,7 @@ import { Badge, IBadge, BadgeTier } from '@gamify/shared';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-const BadgeS_API_PATH = '/badges';
+const BADGES_API_PATH = '/badges';
 
 @Injectable({
   providedIn: 'root'
@@ -14,30 +14,30 @@ export class BadgesService {
   constructor(private http: HttpClient) { }
 
   list$(): Observable<Badge[]> {
-    return this.http.get<IBadge[]>(`${environment.apiUrl}${BadgeS_API_PATH}`).pipe(
+    return this.http.get<IBadge[]>(`${environment.apiUrl}${BADGES_API_PATH}`).pipe(
       map(res => res as Badge[])
     )
   }
 
   get$(id: number): Observable<Badge> {
-    return this.http.get<IBadge>(`${environment.apiUrl}${BadgeS_API_PATH}/${id}`).pipe(
+    return this.http.get<IBadge>(`${environment.apiUrl}${BADGES_API_PATH}/${id}`).pipe(
       map(res => res as Badge)
     )
   }
 
-  create$(payload: { name: string, badgeTier: BadgeTier, applicationId: number, repeatedlyObtainable: boolean }): Observable<Badge> {
-    return this.http.post<IBadge>(`${environment.apiUrl}${BadgeS_API_PATH}`, payload).pipe(
+  create$(payload: { name: string, tier: BadgeTier, applicationId: number, repeatedlyObtainable: boolean }): Observable<Badge> {
+    return this.http.post<IBadge>(`${environment.apiUrl}${BADGES_API_PATH}`, payload).pipe(
       map(res => res as Badge)
     )
   }
 
-  update$(id: number, payload: { name: string, badgeTier: BadgeTier, repeatedlyObtainable: boolean }): Observable<Badge> {
-    return this.http.put<IBadge>(`${environment.apiUrl}${BadgeS_API_PATH}/${id}`, payload).pipe(
+  update$(id: number, payload: { name: string, tier: BadgeTier, repeatedlyObtainable: boolean }): Observable<Badge> {
+    return this.http.put<IBadge>(`${environment.apiUrl}${BADGES_API_PATH}/${id}`, payload).pipe(
       map(res => res as Badge)
     )
   }
 
   delete$(id: number): Observable<void> {
-    return this.http.delete<void>(`${environment.apiUrl}${BadgeS_API_PATH}/${id}`)
+    return this.http.delete<void>(`${environment.apiUrl}${BADGES_API_PATH}/${id}`)
   }
 }

@@ -4,7 +4,9 @@
     Badge
 </h1>
 
-<mat-form-field appearance="fill" style="width: 100%;">
+<coders-message-box [message]="errorMessage"></coders-message-box>
+
+<mat-form-field appearance="fill" style="width: 100%; margin-top: 10px;">
     <mat-label>Name</mat-label>
     <input matInput [(ngModel)]="data.name">
 </mat-form-field>
@@ -12,8 +14,8 @@
 <mat-form-field appearance="fill" style="width: 100%">
     <mat-label>Tier</mat-label>
     <mat-select [(ngModel)]="data.tier">
-        <mat-option *ngFor="let tier of tiers" [value]="tier.value">
-            {{tier.viewValue}}
+        <mat-option *ngFor="let tier of tiers | keyvalue" [value]="tier.key">
+            {{tier.value}}
         </mat-option>
     </mat-select>
 </mat-form-field>

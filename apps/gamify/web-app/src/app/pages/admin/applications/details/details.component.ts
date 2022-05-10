@@ -13,11 +13,13 @@ export class DetailsComponent implements OnInit {
 
   application: Application | undefined;
   application$: Observable<Application> = new Observable<Application>();
+  applicationId = 0;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.applicationId = params['id'];
       this.application$ = this.applicationService.get$(params['id']);
       this.application$.subscribe(res => {
         this.application = res;

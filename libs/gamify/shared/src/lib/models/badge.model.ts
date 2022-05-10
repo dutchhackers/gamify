@@ -8,6 +8,6 @@ export class Badge implements IBadge {
     applicationId: number;
     iconPath?: string;
     tier: BadgeTier;
-    repeatableObtainable: boolean;
+    repeatedlyObtainable: boolean;
     totalScore?: number;
 }

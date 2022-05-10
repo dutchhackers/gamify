@@ -26,7 +26,7 @@ export class ApplicationDetailsGeneralComponent implements OnInit {
   
   errorMessage$: Subject<string|string[]> = new Subject<string|string[]>();
 
-  constructor(private applicationsService: ApplicationService, private _snackBar: MatSnackBar) { }
+  constructor(private applicationsService: ApplicationService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.application$?.subscribe(application => {
@@ -54,7 +54,7 @@ export class ApplicationDetailsGeneralComponent implements OnInit {
 
     const request = this.applicationsService.update$(id, data).pipe(
       catchError((err: HttpErrorResponse, caught: Observable<Application>) => {
-        this._snackBar.open('Error while saving application, please try again', 'Close', {
+        this.snackBar.open('Error while saving application, please try again', 'Close', {
           horizontalPosition: 'center',	
           verticalPosition: 'top',
           duration: 3000
@@ -65,7 +65,7 @@ export class ApplicationDetailsGeneralComponent implements OnInit {
     );
     request.subscribe(res => {
       this.applicationUpdated.emit(res);
-      this._snackBar.open('Application saved!', 'Close', {
+      this.snackBar.open('Application saved!', 'Close', {
         horizontalPosition: 'center',	
         verticalPosition: 'top',
         duration: 3000
