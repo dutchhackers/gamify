@@ -12,7 +12,7 @@ export class UsersService {
         });
     }
 
-    giveBadgeToUser(userId: number, badgeId: number) {
+    assignBadgeToUser(userId: number, badgeId: number) {
         return this.data.userBadge.create({
             data: {
                 userId,

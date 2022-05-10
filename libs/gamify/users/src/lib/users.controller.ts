@@ -35,7 +35,7 @@ export class UsersController {
       }
     }
     
-    return await this.usersService.giveBadgeToUser(id, badge.id);
+    return await this.usersService.assignBadgeToUser(id, badge.id);
   }
 
   @Get('/:id/badges')
