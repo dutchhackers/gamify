@@ -70,7 +70,7 @@
     "@nrwl/workspace": "14.0.2",
     "@types/cache-manager": "^3.4.3",
     "@types/google-spreadsheet": "^3.2.1",
-    "@types/jest": "27.4.1",
+    "@types/jest": "27.5.0",
     "@types/luxon": "^2.0.9",
     "@typescript-eslint/parser": "5.18.0",
     "@types/node": "17.0.29",
