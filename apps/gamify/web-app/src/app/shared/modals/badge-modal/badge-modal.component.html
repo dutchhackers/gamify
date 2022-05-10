@@ -14,7 +14,7 @@
 <mat-form-field appearance="fill" style="width: 100%">
     <mat-label>Tier</mat-label>
     <mat-select [(ngModel)]="data.tier">
-        <mat-option *ngFor="let tier of tiers | keyvalue" [value]="tier.key">
+        <mat-option *ngFor="let tier of tiers" [value]="tier.key">
             {{tier.value}}
         </mat-option>
     </mat-select>

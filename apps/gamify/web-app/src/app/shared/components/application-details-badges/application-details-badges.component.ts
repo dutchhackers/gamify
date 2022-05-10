@@ -7,6 +7,7 @@ import { catchError, throwError } from 'rxjs';
 import { BadgeDialogData } from '../../../core/interfaces/badge-dialog-data.interface';
 import { BadgesService } from '../../../services/badges.service';
 import { BadgeModalComponent } from '../../modals/badge-modal/badge-modal.component';
+import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'coders-application-details-badges',
@@ -17,13 +18,9 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
 
   @Input() applicationId = 0;
 
-  badgesDisplayedColumns: string[] = ['id', 'name', 'tier', 'repeatedlyObtainable', 'actions'];
+  badgesDisplayedColumns: string[] = ['name', 'tier', 'repeatedlyObtainable', 'actions'];
   badgesDataSource: Badge[] = [];
   @ViewChild('badgesTable') badgesTable: any;
-
-  badgeName = "";
-  badgeTier = BadgeTier.BRONZE;
-  repeatedlyObtainable = false;
 
   constructor(
     public dialog: MatDialog, 
@@ -32,7 +29,8 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.badgesService.list$().subscribe(res => {
+    console.log('Application id: ' + this.applicationId);
+    this.badgesService.list$(this.applicationId).subscribe(res => {
       this.badgesDataSource = res;
     });
   }
@@ -66,24 +64,20 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
       if (! result) {
         return;
       }
-      console.log(result);
-      this.badgeName = result.name;
-      this.badgeTier = result.tier;
-      this.repeatedlyObtainable = result.repeatedlyObtainable;
 
       this.badgesService.create$({
-        name: this.badgeName,
-        tier: this.badgeTier, 
+        name: result.name,
+        tier: result.tier, 
         applicationId: this.applicationId, 
-        repeatedlyObtainable: this.repeatedlyObtainable
+        repeatedlyObtainable: result.repeatedlyObtainable
       }).pipe(
         catchError((err: HttpErrorResponse) => {
           console.log('Error creating badge');
 
           this.openCreateBadgeModal({
-            name: this.badgeName,
-            tier: this.badgeTier,
-            repeatedlyObtainable: this.repeatedlyObtainable,
+            name: result.name,
+            tier: result.tier, 
+            repeatedlyObtainable: result.repeatedlyObtainable,
             error: err.error.message
           });
 
@@ -101,17 +95,31 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
     });
   }
 
-  openEditBadgeModal(badgeId: number) {
+  openEditBadgeModal(badgeId: number, payload?: { name: string, tier: BadgeTier, repeatedlyObtainable: boolean, error?: string|string[] }) {
     console.log('Edit badge: ' + badgeId);
-    const badge = this.badgesDataSource[badgeId - 1];
+    const badge = this.badgesDataSource.find(badge => badge.id === badgeId);
+  
+    if (!badge) return;
+
+    const data: BadgeDialogData = {
+      action: 'edit',
+      name: badge.name,
+      tier: badge.tier,
+      repeatedlyObtainable: badge.repeatedlyObtainable,
+    }
+    if (payload) {
+      data.name = payload.name;
+      data.tier = payload.tier;
+      data.repeatedlyObtainable = payload.repeatedlyObtainable;
+
+      if (payload.error) {
+        data.error = payload.error;
+      }
+    }
+
     const dialogRef = this.dialog.open(BadgeModalComponent, {
       width: '400px',
-      data: {
-        action: 'edit',
-        name: badge.name,
-        tier: badge.tier,
-        repeatedlyObtainable: badge.repeatedlyObtainable
-      }
+      data
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -119,10 +127,61 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
       if (! result) {
         return;
       }
+
       console.log(result);
-      this.badgeName = result.name;
-      this.badgeTier = result.tier;
-      this.repeatedlyObtainable = result.repeatedlyObtainable;
+      this.badgesService.update$(badgeId, {
+        name: result.name,
+        tier: result.tier,
+        repeatedlyObtainable: result.repeatedlyObtainable
+      }).pipe(
+        catchError((err: HttpErrorResponse) => {
+          this.openEditBadgeModal(badgeId,{
+            name: result.name,
+            tier: result.tier, 
+            repeatedlyObtainable: result.repeatedlyObtainable,
+            error: err.error.message
+          });
+          
+          return throwError(() => new Error(err.error.message));
+        })
+      ).subscribe(res => {
+        this.badgesDataSource = this.badgesDataSource.map(badge => {
+          if (badge.id === res.id) {
+            return res;
+          }
+          return badge;
+        });
+        this.badgesTable.renderRows();
+        this.snackBar.open('Badge succesfully edited!', 'Close', {
+          horizontalPosition: 'center',	
+          verticalPosition: 'top',
+          duration: 3000
+        });
+      });
+    });
+  }
+
+  openDeleteBadgeModal(badgeId: number) {
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      width: '400px',
+      data: {
+        title: 'Delete badge',
+        message: 'Are you sure you want to delete this badge?',
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== 'confirm') return;
+
+      this.badgesService.delete$(badgeId).subscribe(() => {
+        this.badgesDataSource = this.badgesDataSource.filter(item => item.id !== badgeId);
+        this.badgesTable.renderRows();
+        this.snackBar.open('Badge succesfully deleted!', 'Close', {
+          horizontalPosition: 'center',	
+          verticalPosition: 'top',
+          duration: 3000
+        });
+      });
     });
   }
 }

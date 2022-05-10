@@ -9,7 +9,12 @@ export class BadgesService {
 
     constructor(private readonly data: DataService) {}
 
-    async findMany(): Promise<Badge[]> {
+    async findMany(applicationId?: number): Promise<Badge[]> {
+        if (applicationId) {
+            return (await this.data.badge.findMany({
+                where: { applicationId }
+            })).map(badge => BadgeConverter.fromPrismaBadge(badge));
+        }
         return (await this.data.badge.findMany()).map(badge => BadgeConverter.fromPrismaBadge(badge));
     }
 

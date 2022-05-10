@@ -30,7 +30,7 @@
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
                 <button mat-raised-button color="primary" (click)="openEditBadgeModal(element.id)">Edit</button>
-                <button mat-raised-button color="warn" style="margin-left: 6px">Delete</button>
+                <button mat-raised-button color="warn" style="margin-left: 6px" (click)="openDeleteBadgeModal(element.id)">Delete</button>
             </td>
         </ng-container>
       

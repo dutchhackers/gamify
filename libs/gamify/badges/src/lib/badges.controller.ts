@@ -1,7 +1,7 @@
 import { ApplicationsService } from '@gamify/application';
 import { Roles, User, UserModel } from '@gamify/auth';
 import { Role } from '@gamify/core';
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query, UnauthorizedException } from '@nestjs/common';
 import { BadgesService } from './badges.service';
 import { CreateBadgeInput } from './dto/create-badge.input';
 import { UpdateBadgeInput } from './dto/update-badge.input';
@@ -27,8 +27,8 @@ export class BadgesController {
   }
 
   @Get()
-  findAll(): Promise<Badge[]> {
-    return this.badgesService.findMany();
+  findAll(@Query('applicationId') applicationId?: number): Promise<Badge[]> {
+    return this.badgesService.findMany(applicationId);
   }
 
   @Get(':id')

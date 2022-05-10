@@ -13,8 +13,12 @@ export class BadgesService {
 
   constructor(private http: HttpClient) { }
 
-  list$(): Observable<Badge[]> {
-    return this.http.get<IBadge[]>(`${environment.apiUrl}${BADGES_API_PATH}`).pipe(
+  list$(applicationId?: number): Observable<Badge[]> {
+    let params = '';
+    if (applicationId) {
+      params = `?applicationId=${applicationId}`;
+    }
+    return this.http.get<IBadge[]>(`${environment.apiUrl}${BADGES_API_PATH}${params}`).pipe(
       map(res => res as Badge[])
     )
   }

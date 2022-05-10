@@ -10,12 +10,12 @@ import { BadgeDialogData } from '../../../core/interfaces/badge-dialog-data.inte
 })
 export class BadgeModalComponent implements OnInit {
 
-  tiers: {[key in BadgeTier]: string} = {
-    BRONZE: 'Bronze',
-    SILVER: 'Silver',
-    GOLD: 'Gold',
-    PLATINUM: 'Platinum',
-  };
+  tiers: { key: BadgeTier, value: string }[] = [
+    { key: BadgeTier.BRONZE, value: 'Bronze' },
+    { key: BadgeTier.SILVER, value: 'Silver' },
+    { key: BadgeTier.GOLD, value: 'Gold' },
+    { key: BadgeTier.PLATINUM, value: 'Platinum' },
+  ];
 
   errorMessage: string|string[]|undefined = undefined;
 
@@ -26,7 +26,6 @@ export class BadgeModalComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    console.log(this.data.error);
     if (this.data.error) {
       this.errorMessage = this.data.error;
     }
