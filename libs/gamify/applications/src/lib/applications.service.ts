@@ -1,4 +1,4 @@
-import { Role } from '@gamify/core';
+import { Role } from '@gamify/shared';
 import { DataService } from '@gamify/data';
 import { ApplicationConverter, Application } from '@gamify/shared';
 import { UsersService } from '@gamify/users';

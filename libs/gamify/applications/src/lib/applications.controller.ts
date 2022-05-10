@@ -4,7 +4,7 @@ import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
 import { IApplication } from '@gamify/shared';
 import { Roles, User, UserModel } from '@gamify/auth';
-import { Role } from '@gamify/core';
+import { Role } from '@gamify/shared';
 
 @Controller('applications')
 export class ApplicationsController {
