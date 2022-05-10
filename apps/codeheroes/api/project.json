@@ -44,7 +44,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/codeheroes-api"],
       "options": {
-        "jestConfig": "apps/codeheroes/api/jest.config.js",
+        "jestConfig": "apps/codeheroes/api/jest.config.ts",
         "passWithNoTests": true
       }
     },

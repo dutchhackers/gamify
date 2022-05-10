@@ -13,7 +13,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/gamify/core"],
       "options": {
-        "jestConfig": "libs/gamify/core/jest.config.js",
+        "jestConfig": "libs/gamify/core/jest.config.ts",
         "passWithNoTests": true
       }
     }
