@@ -28,7 +28,7 @@
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
     "@prisma/client": "^3.14.0",
-    "apollo-server-core": "^3.6.3",
+    "apollo-server-core": "^3.7.0",
     "apollo-server-express": "^3.6.7",
     "bcryptjs": "^2.4.3",
     "cache-manager": "^3.6.1",
