@@ -3,7 +3,7 @@
     "studio": "prisma studio --schema prisma/schema.prisma",
     "generate": "prisma generate --schema prisma/schema.prisma",
     "migrate": "prisma migrate dev --name init",
-    "push": "prisma db push",
+    "push": "prisma db push --accept-data-loss",
     "seed": "prisma db seed"
   },
   "prisma": {

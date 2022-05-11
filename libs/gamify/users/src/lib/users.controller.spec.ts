@@ -1,14 +1,13 @@
-import { DataService } from '@gamify/data';
+import { ApplicationsService, BadgesService, DataService, UsersService } from '@gamify/data';
 import { Test } from '@nestjs/testing';
 import { UsersController } from './users.controller';
-import { UsersService } from './users.service';
 
 describe('UsersController', () => {
   let controller: UsersController;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      providers: [UsersService, DataService],
+      providers: [UsersService, DataService, BadgesService, ApplicationsService],
       controllers: [UsersController],
     }).compile();
 

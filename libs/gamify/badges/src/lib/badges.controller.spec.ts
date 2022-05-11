@@ -1,9 +1,6 @@
-import { ApplicationsService } from '@gamify/application';
-import { DataService } from '@gamify/data';
-import { UsersService } from '@gamify/users';
+import { DataService, ApplicationsService, UsersService, BadgesService } from '@gamify/data';
 import { Test } from '@nestjs/testing';
 import { BadgesController } from './badges.controller';
-import { BadgesService } from './badges.service';
 
 describe('BadgesController', () => {
   let controller: BadgesController;
