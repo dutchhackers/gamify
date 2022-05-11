@@ -6,12 +6,6 @@ export interface IApplication {
     name: string;
     description: string;
     applicationType: ApplicationType;
+    ownerUserId: number;
     externalApplicationUrl: string;
-    overviewPriority?: number;
-    overviewImagePath?: string;
-    apiKey?: string;
-    adminUserId?: number;
-    inOverview?: boolean;
-    startDate?: Date;
-    endDate?: Date;
 }

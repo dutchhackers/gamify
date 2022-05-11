@@ -1,4 +1,4 @@
-import { ApplicationModel, ApplicationUserModel, CreateApplicationInput, UpdateApplicationInput } from '@gamify/application';
+import { ApplicationUserModel, CreateApplicationInput, UpdateApplicationInput } from '@gamify/application';
 import { Role, ApplicationConverter, Application } from '@gamify/shared';
 import { DataService } from './../data.service';
 import { Injectable } from '@nestjs/common';
@@ -16,25 +16,27 @@ export class ApplicationsService {
         return (await this.data.application.findMany()).map(app => ApplicationConverter.fromPrismaApplication(app));
     }
 
-    findOne(id: number): Promise<ApplicationModel> {
-        return this.data.application.findUnique({ where: { id }});
+    async findOne(id: number): Promise<Application> {
+        return ApplicationConverter.fromPrismaApplication(
+            await this.data.application.findUnique({ where: { id }})
+        );
     }
 
-    create(createApplicationInput: CreateApplicationInput): Promise<ApplicationModel> {
-        return this.data.application.create({
+    async create(createApplicationInput: CreateApplicationInput): Promise<Application> {
+        return ApplicationConverter.fromPrismaApplication(await this.data.application.create({
             data: createApplicationInput
-        });
+        }));
     }
 
-    update(id: number, updateApplicationInput: UpdateApplicationInput): Promise<ApplicationModel> {
-        return this.data.application.update({
+    async update(id: number, updateApplicationInput: UpdateApplicationInput): Promise<Application> {
+        return ApplicationConverter.fromPrismaApplication(await this.data.application.update({
             where: { id },
             data: updateApplicationInput
-        })
+        }));
     }
 
-    remove(id: number): Promise<ApplicationModel> {
-        return this.data.application.delete({ where: { id }});
+    async remove(id: number): Promise<Application> {
+        return ApplicationConverter.fromPrismaApplication(await this.data.application.delete({ where: { id }}));
     }
 
     async findApplicationUser(applicationId: number, userId: number): Promise<ApplicationUserModel> {
@@ -76,6 +78,10 @@ export class ApplicationsService {
 
     async canModerateApplication(applicationId: number, userId: number): Promise<boolean> {
         const user = await this.usersService.findOne(userId);
+        if (!user) {
+            return false;
+        }
+
         if (user.moderationRole === Role.ADMIN) {
             return true;
         }

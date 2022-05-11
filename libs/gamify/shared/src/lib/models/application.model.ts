@@ -7,12 +7,6 @@ export class Application implements IApplication {
     name: string;
     description: string;
     applicationType: ApplicationType;
+    ownerUserId: number;
     externalApplicationUrl: string;
-    overviewPriority?: number | undefined;
-    overviewImagePath?: string | undefined;
-    apiKey?: string | undefined;
-    adminUserId?: number | undefined;
-    inOverview?: boolean | undefined;
-    startDate?: Date | undefined;
-    endDate?: Date | undefined;
 }
