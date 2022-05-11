@@ -13,9 +13,15 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/gamify/applications"],
       "options": {
-        "jestConfig": "libs/gamify/applications/jest.config.js",
+        "jestConfig": "libs/gamify/applications/jest.config.ts",
         "passWithNoTests": true
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "generate",
+          "projects": "dependencies"
+        }
+      ]
     }
   },
   "tags": ["scope:gamify", "type:feature"]

@@ -1,8 +1,6 @@
-import { DataService } from '@gamify/data';
-import { UsersService } from '@gamify/users';
+import { DataService, ApplicationsService, UsersService } from '@gamify/data';
 import { Test } from '@nestjs/testing';
 import { ApplicationsController } from './applications.controller';
-import { ApplicationsService } from './applications.service';
 
 describe('ApplicationsController', () => {
   let controller: ApplicationsController;

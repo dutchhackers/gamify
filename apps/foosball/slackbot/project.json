@@ -44,7 +44,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/foosball/slackbot"],
       "options": {
-        "jestConfig": "apps/foosball/slackbot/jest.config.js",
+        "jestConfig": "apps/foosball/slackbot/jest.config.ts",
         "passWithNoTests": true
       }
     }

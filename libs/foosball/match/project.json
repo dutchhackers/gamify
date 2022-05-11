@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/foosball/match"],
       "options": {
-        "jestConfig": "libs/foosball/match/jest.config.js",
+        "jestConfig": "libs/foosball/match/jest.config.ts",
         "passWithNoTests": true
       }
     }

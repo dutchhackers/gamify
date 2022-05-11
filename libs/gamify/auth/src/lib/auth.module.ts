@@ -1,12 +1,13 @@
-import { UsersModule } from '@gamify/users';
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { FirebaseAuthStrategy } from './strategies/firebase-auth.strategy';
+import { AuthService } from './auth.service';
+import { DataModule } from '@gamify/data';
 
 @Module({
   controllers: [],
-  imports: [PassportModule, UsersModule],
-  providers: [FirebaseAuthStrategy],
+  imports: [PassportModule, DataModule],
+  providers: [FirebaseAuthStrategy, AuthService],
   exports: [],
 })
 export class AuthModule {}
