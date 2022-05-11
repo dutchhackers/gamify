@@ -15,7 +15,13 @@
       "options": {
         "jestConfig": "libs/gamify/applications/jest.config.ts",
         "passWithNoTests": true
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "generate",
+          "projects": "dependencies"
+        }
+      ]
     }
   },
   "tags": ["scope:gamify", "type:feature"]
