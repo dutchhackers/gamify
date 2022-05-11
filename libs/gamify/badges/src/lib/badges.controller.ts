@@ -1,10 +1,9 @@
 import { Roles, User, UserModel } from '@gamify/auth';
-import { Role } from '@gamify/core';
 import { ApplicationsService, BadgesService } from '@gamify/data';
 import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query, UnauthorizedException } from '@nestjs/common';
 import { CreateBadgeInput } from './dto/create-badge.input';
 import { UpdateBadgeInput } from './dto/update-badge.input';
-import { Badge } from '@gamify/shared';
+import { Badge, Role } from '@gamify/shared';
 
 @Controller('badges')
 export class BadgesController {

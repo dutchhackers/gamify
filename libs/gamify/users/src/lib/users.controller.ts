@@ -1,5 +1,5 @@
 import { Roles, User, UserModel } from '@gamify/auth';
-import { Role } from '@gamify/core';
+import { Role } from '@gamify/shared';
 import { ApplicationsService, BadgesService, UsersService } from '@gamify/data';
 import { BadRequestException, Body, Controller, Get, Param, ParseIntPipe, Post, UnauthorizedException } from '@nestjs/common';
 import { GiveBadgeDto } from './dto/give-badge.dto';

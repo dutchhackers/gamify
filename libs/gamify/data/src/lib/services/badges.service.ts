@@ -1,6 +1,7 @@
-import { BadgeModel, CreateBadgeInput, UpdateBadgeInput } from '@gamify/badge';
+import { CreateBadgeInput, UpdateBadgeInput } from '@gamify/badge';
 import { DataService } from '../data.service';
 import { Injectable } from '@nestjs/common';
+import { Badge, BadgeConverter } from '@gamify/shared';
 
 @Injectable()
 export class BadgesService {
