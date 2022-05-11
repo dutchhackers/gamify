@@ -14,6 +14,7 @@ import { CreateApplicationComponent } from './create-application/create-applicat
 import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
 import { MessageBoxComponent } from '../../../shared/components/message-box/message-box.component';
 import { UcfirstPipe } from '../../../core/pipes/ucfirst.pipe';
+import { UserBadgesModalComponent } from '../../../shared/modals/user-badges-modal/user-badges-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UcfirstPipe } from '../../../core/pipes/ucfirst.pipe';
     ApplicationDetailsPlayersComponent,
     ApplicationDetailsModeratorsComponent,
     MessageBoxComponent,
+    UserBadgesModalComponent,
     UcfirstPipe,
   ],
   imports: [

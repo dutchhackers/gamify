@@ -1,0 +1,55 @@
+<div style="display: flex; flex-direction: column;">
+    <h1>User badges</h1>
+
+    <h4>Select badge to add</h4>
+    <div style="display: flex;">
+        <mat-form-field appearance="fill" style="flex-grow: 1;">
+            <mat-label>Badge</mat-label>
+            <mat-select>
+                <mat-option value="volvo">Badge 1 (Bronze)</mat-option>
+                <mat-option value="saab">Badge 2 (Silver)</mat-option>
+                <mat-option value="mercedes">Badge 3 (Bronze)</mat-option>
+                <mat-option value="audi">Badge 4 (Platinum)</mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" style="margin-left: 10px; margin-bottom: 1.34375em">Add badge</button>
+    </div>
+    
+
+    <div style="overflow-y: scroll; max-height: 70vh;">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" style="width: 100%;">
+            <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Badge </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="increaseDecrease">
+            <th mat-header-cell *matHeaderCellDef> Increase/Decrease </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-icon-button color="primary" aria-label="Example icon button with a plus one icon">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" aria-label="Example icon button with a plus one icon">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+            </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-raised-button color="warn">Remove</button>
+            </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

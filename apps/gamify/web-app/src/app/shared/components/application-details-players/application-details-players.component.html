@@ -15,7 +15,7 @@
         <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let element"> 
-            <button mat-raised-button color="primary">Manage Badges</button>
+            <button mat-raised-button color="primary" (click)="openManageBadgesModal()">Manage Badges</button>
         </td>
         </ng-container>
     
