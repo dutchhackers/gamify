@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Application, ApplicationType, IApplication } from '@gamify/shared';
+import { Application, ApplicationType, ApplicationUser, IApplication } from '@gamify/shared';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -39,5 +39,9 @@ export class ApplicationService {
 
   delete$(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}${APPLICATIONS_API_PATH}/${id}`)
+  }
+
+  listUsers$(id: number): Observable<ApplicationUser[]> {
+    return this.http.get<ApplicationUser[]>(`${environment.apiUrl}${APPLICATIONS_API_PATH}/${id}/users`)
   }
 }

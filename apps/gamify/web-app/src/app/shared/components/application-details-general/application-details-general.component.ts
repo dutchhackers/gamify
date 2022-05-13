@@ -53,12 +53,7 @@ export class ApplicationDetailsGeneralComponent implements OnInit {
     }
 
     const request = this.applicationsService.update$(id, data).pipe(
-      catchError((err: HttpErrorResponse, caught: Observable<Application>) => {
-        this.snackBar.open('Error while saving application, please try again', 'Close', {
-          horizontalPosition: 'center',	
-          verticalPosition: 'top',
-          duration: 3000
-        });
+      catchError((err: HttpErrorResponse) => {
         this.errorMessage$.next(err.error.message);
         return throwError(() => new Error('Error while saving application, please try again'));
       })

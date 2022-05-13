@@ -1,5 +1,5 @@
 import { ApplicationUserModel, CreateApplicationInput, UpdateApplicationInput } from '@gamify/application';
-import { Role, ApplicationConverter, Application } from '@gamify/shared';
+import { Role, ApplicationConverter, Application, ApplicationUser, ApplicationUserConverter } from '@gamify/shared';
 import { DataService } from './../data.service';
 import { Injectable } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -37,6 +37,23 @@ export class ApplicationsService {
 
     async remove(id: number): Promise<Application> {
         return ApplicationConverter.fromPrismaApplication(await this.data.application.delete({ where: { id }}));
+    }
+
+    async findApplicationUsers(applicationId: number): Promise<ApplicationUser[]> {
+        return (await this.data.applicationUser.findMany({ 
+            where: { applicationId },
+            select: {
+                userId: true,
+                applicationId: true,
+                joinedAt: true,
+                user: {
+                    select: {
+                        firstName: true,
+                        lastName: true,
+                    }
+                }
+            }
+        })).map(appUser => ApplicationUserConverter.fromPrismaApplicationUser(appUser));
     }
 
     async findApplicationUser(applicationId: number, userId: number): Promise<ApplicationUserModel> {

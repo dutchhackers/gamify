@@ -1,7 +1,7 @@
 import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UnauthorizedException } from '@nestjs/common';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
-import { Application, IApplication, Role } from '@gamify/shared';
+import { Application, ApplicationUser, IApplication, Role } from '@gamify/shared';
 import { Roles, User, UserModel } from '@gamify/auth';
 import { ApplicationUserModel } from './models';
 import { ApplicationsService } from '@gamify/data';
@@ -53,6 +53,14 @@ export class ApplicationsController {
 
     return await this.applicationsService.remove(id);
   }
+
+  @Get('/:id/users')
+  async findUsers(@Param('id', ParseIntPipe) id: number): Promise<ApplicationUser[]> {
+    await this.findApplicationOrFail(id);
+
+    return this.applicationsService.findApplicationUsers(id);
+  }
+
 
   @Post('/:id/join')
   async join(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<ApplicationUserModel> {

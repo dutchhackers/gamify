@@ -18,7 +18,7 @@ export class BadgesService {
     if (applicationId) {
       params = `?applicationId=${applicationId}`;
     }
-    return this.http.get<IBadge[]>(`${environment.apiUrl}${BADGES_API_PATH}${params}`).pipe(
+    return this.http.get<Badge[]>(`${environment.apiUrl}${BADGES_API_PATH}${params}`).pipe(
       map(res => res as Badge[])
     )
   }
