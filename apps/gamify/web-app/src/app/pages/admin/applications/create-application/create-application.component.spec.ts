@@ -1,4 +1,6 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { CreateApplicationComponent } from './create-application.component';
 
@@ -8,6 +10,8 @@ describe('CreateApplicationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule, HttpClientModule],
+      providers: [HttpClient],
       declarations: [ CreateApplicationComponent ]
     })
     .compileComponents();

@@ -7,8 +7,6 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'gamify-web-app';
-
   isOnAdminPage = false;
 
   constructor(private router: Router) {}

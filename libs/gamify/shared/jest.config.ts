@@ -1,6 +1,6 @@
 module.exports = {
   displayName: 'gamify-shared',
-  preset: '../../../jest.preset.js',
+  
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,4 +11,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../coverage/libs/gamify/shared',
+  preset: '../../../jest.preset.ts',
 };
