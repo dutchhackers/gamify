@@ -4,7 +4,7 @@ import { UiModule } from '../../../ui.module';
 
 import { ApplicationDetailsUsersComponent } from './application-details-users.component';
 
-describe('ApplicationDetailsPlayersComponent', () => {
+describe('ApplicationDetailsUsersComponent', () => {
   let component: ApplicationDetailsUsersComponent;
   let fixture: ComponentFixture<ApplicationDetailsUsersComponent>;
 
