@@ -2,23 +2,23 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UiModule } from '../../../ui.module';
 
-import { ApplicationDetailsPlayersComponent } from './application-details-players.component';
+import { ApplicationDetailsUsersComponent } from './application-details-users.component';
 
 describe('ApplicationDetailsPlayersComponent', () => {
-  let component: ApplicationDetailsPlayersComponent;
-  let fixture: ComponentFixture<ApplicationDetailsPlayersComponent>;
+  let component: ApplicationDetailsUsersComponent;
+  let fixture: ComponentFixture<ApplicationDetailsUsersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [UiModule, HttpClientModule],
       providers: [HttpClient],
-      declarations: [ ApplicationDetailsPlayersComponent ]
+      declarations: [ ApplicationDetailsUsersComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApplicationDetailsPlayersComponent);
+    fixture = TestBed.createComponent(ApplicationDetailsUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

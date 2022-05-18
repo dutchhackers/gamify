@@ -6,11 +6,11 @@ import { BadgesService } from '../../../services/badges.service';
 import { UserBadgesModalComponent } from '../../modals/user-badges-modal/user-badges-modal.component';
 
 @Component({
-  selector: 'coders-application-details-players',
-  templateUrl: './application-details-players.component.html',
-  styleUrls: ['./application-details-players.component.scss']
+  selector: 'coders-application-details-users',
+  templateUrl: './application-details-users.component.html',
+  styleUrls: ['./application-details-users.component.scss']
 })
-export class ApplicationDetailsPlayersComponent implements OnInit {
+export class ApplicationDetailsUsersComponent implements OnInit {
   
   @Input() applicationId = 0;
 

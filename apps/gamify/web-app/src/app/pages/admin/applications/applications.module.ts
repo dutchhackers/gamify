@@ -8,7 +8,7 @@ import { UiModule } from '../../../ui.module';
 import { BadgeModalComponent } from '../../../shared/modals/badge-modal/badge-modal.component';
 import { ApplicationDetailsBadgesComponent } from '../../../shared/components/application-details-badges/application-details-badges.component';
 import { ApplicationDetailsGeneralComponent } from '../../../shared/components/application-details-general/application-details-general.component';
-import { ApplicationDetailsPlayersComponent } from '../../../shared/components/application-details-players/application-details-players.component';
+import { ApplicationDetailsUsersComponent } from '../../../shared/components/application-details-users/application-details-users.component';
 import { ApplicationDetailsModeratorsComponent } from '../../../shared/components/application-details-moderators/application-details-moderators.component';
 import { CreateApplicationComponent } from './create-application/create-application.component';
 import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
@@ -24,7 +24,7 @@ import { UserBadgesModalComponent } from '../../../shared/modals/user-badges-mod
     ConfirmModalComponent,
     ApplicationDetailsGeneralComponent,
     ApplicationDetailsBadgesComponent,
-    ApplicationDetailsPlayersComponent,
+    ApplicationDetailsUsersComponent,
     ApplicationDetailsModeratorsComponent,
     MessageBoxComponent,
     UserBadgesModalComponent,
