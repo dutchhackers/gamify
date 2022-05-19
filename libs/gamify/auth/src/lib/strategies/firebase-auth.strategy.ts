@@ -2,7 +2,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Strategy, ExtractJwt } from 'passport-firebase-jwt';
 import * as firebase from 'firebase-admin';
-import { UsersService } from '@gamify/users';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class FirebaseAuthStrategy extends PassportStrategy(
@@ -13,7 +13,7 @@ export class FirebaseAuthStrategy extends PassportStrategy(
   private defaultApp: firebase.app.App;
 
   constructor(
-    private readonly usersService: UsersService
+    private readonly authService: AuthService
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -45,24 +45,23 @@ export class FirebaseAuthStrategy extends PassportStrategy(
   }
 
   private async createOrUpdateUser(firebaseUser) {
-    let user = await this.usersService.findByFirebaseId(firebaseUser.uid);
+    let user = await this.authService.findByFirebaseId(firebaseUser.uid);
 
     if (user) {
       return user;
     }
 
-
     if (firebaseUser.email) {
-      user = await this.usersService.findByEmail(firebaseUser.email);
+      user = await this.authService.findByEmail(firebaseUser.email);
       if (user) {
         // the email already exists in the database, add the relevant firebase uid.
-        user = await this.usersService.updateFirebaseUid(user.id, firebaseUser.uid);
+        user = await this.authService.updateFirebaseUid(user.id, firebaseUser.uid);
         return user;
       }
     }
     
     // Create new user
-    user = await this.usersService.create(firebaseUser.email, firebaseUser.uid);
+    user = await this.authService.create(firebaseUser.email, firebaseUser.uid);
 
     return user;
   }

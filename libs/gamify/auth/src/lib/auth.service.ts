@@ -2,10 +2,10 @@ import { DataService } from '@gamify/data';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class UsersService {
+export class AuthService {
 
     constructor(private readonly data: DataService) {}
-
+    
     findByFirebaseId(firebaseUid: string) {
         return this.data.user.findUnique({
             where: { firebaseUid }
@@ -15,12 +15,6 @@ export class UsersService {
     findByEmail(email: string) {
         return this.data.user.findUnique({
             where: { email }
-        })
-    }
-
-    find(id: number) {
-        return this.data.user.findUnique({
-            where: { id }
         })
     }
 

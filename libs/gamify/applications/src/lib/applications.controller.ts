@@ -1,14 +1,16 @@
 import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UnauthorizedException } from '@nestjs/common';
-import { ApplicationsService } from './applications.service';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
 import { Roles, User, UserModel } from '@gamify/auth';
 import { Role } from '@gamify/core';
 import { ApplicationModel, ApplicationUserModel } from './models';
+import { ApplicationsService } from '@gamify/data';
 
 @Controller('applications')
 export class ApplicationsController {
-  constructor(private applicationsService: ApplicationsService) {}
+  constructor(
+    private applicationsService: ApplicationsService,
+  ) {}
 
   @Post()
   @Roles(Role.ADMIN, Role.MODERATOR)
