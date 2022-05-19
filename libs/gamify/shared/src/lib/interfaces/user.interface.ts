@@ -4,7 +4,8 @@ export interface IUser {
     id: number;
     createdAt: Date;
     email: string;
-    firstname: string;
-    lastname: string;
+    firstname?: string;
+    lastname?: string;
+    firebaseUid?: string;
     moderationRole: Role;
 }

@@ -1,5 +1,5 @@
-import { DataService } from '@gamify/data';
 import { Controller, Get } from '@nestjs/common';
+import { ApiResponse } from '@nestjs/swagger';
 
 import { AppService } from './app.service';
 
@@ -7,21 +7,16 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly dataService: DataService
   ) {}
 
   @Get()
+  @ApiResponse({
+    status: 200,
+    description: 'The root of the API',
+  })
   getData() {
-    return this.appService.getData();
-  }
-  
-  @Get('test')
-  async testAction() {
-
-    // const users = await this.dataService.allApplications();
-
-    // return users;
-
-    return { 'blah': 'blah2' };
+    return {
+      "message": "Welcome to gamify-api!",
+    }
   }
 }

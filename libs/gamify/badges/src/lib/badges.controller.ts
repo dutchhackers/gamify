@@ -4,7 +4,10 @@ import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, 
 import { CreateBadgeInput } from './dto/create-badge.input';
 import { UpdateBadgeInput } from './dto/update-badge.input';
 import { Badge, Role } from '@gamify/shared';
+import { ApiBearerAuth, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
+@ApiTags('badges')
+@ApiBearerAuth()
 @Controller('badges')
 export class BadgesController {
   constructor(
@@ -12,6 +15,7 @@ export class BadgesController {
     private applicationsService: ApplicationsService,
   ) {}
 
+  @ApiCreatedResponse({ type: Badge, description: 'The created badge' })
   @Post()
   @Roles(Role.ADMIN, Role.MODERATOR)
   async create(@Body() createBadgeInput: CreateBadgeInput, @User() user: UserModel): Promise<Badge> {
@@ -27,16 +31,22 @@ export class BadgesController {
     return this.badgesService.create(createBadgeInput);
   }
 
+  @ApiOkResponse({ type: [Badge], description: 'List of badges' })
   @Get()
   findAll(@Query('applicationId') applicationId?: number): Promise<Badge[]> {
     return this.badgesService.findMany(applicationId);
   }
 
+  @ApiOkResponse({ type: Badge, description: 'Single badge' })
+  @ApiNotFoundResponse({ description: 'Badge not found' })
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number): Promise<Badge> {
     return this.findBadgeOrFail(id);
   }
 
+  @ApiOkResponse({ type: Badge, description: 'The updated badge' })
+  @ApiUnauthorizedResponse({ description: 'User is authorized to modify the badge of that application' })
+  @ApiNotFoundResponse({ description: 'Badge not found' })
   @Put(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
   async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput, @User() user: UserModel): Promise<Badge> {
@@ -49,6 +59,9 @@ export class BadgesController {
     return this.badgesService.update(id, updateBadgeInput);
   }
 
+  @ApiOkResponse({ type: Badge, description: 'The deleted badge' })
+  @ApiUnauthorizedResponse({ description: 'User is authorized to delete the badge' })
+  @ApiNotFoundResponse({ description: 'Badge not found' })
   @Delete(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
   async remove(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<Badge> {
