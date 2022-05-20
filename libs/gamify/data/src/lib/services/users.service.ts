@@ -1,3 +1,4 @@
+import { UserBadge, UserBadgeConverter } from '@gamify/shared';
 import { Injectable } from '@nestjs/common';
 import { DataService } from '../data.service';
 
@@ -12,7 +13,7 @@ export class UsersService {
         });
     }
 
-    assignBadgeToUser(userId: number, badgeId: number) {
+    assignBadgeToUser(userId: number, badgeId: number): Promise<UserBadge> {
         return this.data.userBadge.create({
             data: {
                 userId,
@@ -21,7 +22,7 @@ export class UsersService {
         });
     }
 
-    findUserBadge(userBadgeId: number) {
+    findUserBadge(userBadgeId: number): Promise<UserBadge> {
         return this.data.userBadge.findUnique({
             where: {
                 id: userBadgeId
@@ -29,7 +30,7 @@ export class UsersService {
         });
     }
 
-    findUserBadges(userId: number, applicationId?: number) {
+    async findUserBadges(userId: number, applicationId?: number): Promise<UserBadge[]> {
         const select = {
             id: true,
             badgeId: true,
@@ -44,20 +45,20 @@ export class UsersService {
             }
         };
         if (applicationId) {
-            return this.data.userBadge.findMany({
+            return (await this.data.userBadge.findMany({
                 where: {
                     userId,
                     badge: { applicationId }
                 },
                 select
-            });
+            })).map(userBadge => UserBadgeConverter.fromPrismaUserBadge(userBadge));
         }
-        return this.data.userBadge.findMany({
+        return (await this.data.userBadge.findMany({
             where: {
                 userId
             },
             select
-        });
+        })).map(userBadge => UserBadgeConverter.fromPrismaUserBadge(userBadge));
     }
 
     removeUserBadge(userBadgeId: number) {
