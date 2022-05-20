@@ -41,6 +41,7 @@
       "@gamify/badge": ["libs/gamify/badges/src/index.ts"],
       "@gamify/core": ["libs/gamify/core/src/index.ts"],
       "@gamify/data": ["libs/gamify/data/src/index.ts"],
+      "@gamify/shared": ["libs/gamify/shared/src/index.ts"],
       "@gamify/users": ["libs/gamify/users/src/index.ts"]
     }
   },

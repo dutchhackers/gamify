@@ -1,34 +1,42 @@
-import { BadgeModel, CreateBadgeInput, UpdateBadgeInput } from '@gamify/badge';
+import { CreateBadgeInput, UpdateBadgeInput } from '@gamify/badge';
 import { DataService } from '../data.service';
 import { Injectable } from '@nestjs/common';
+import { Badge, BadgeConverter } from '@gamify/shared';
 
 @Injectable()
 export class BadgesService {
 
     constructor(private readonly data: DataService) {}
 
-    findMany(): Promise<BadgeModel[]> {
-        return this.data.badge.findMany();
+    async findMany(applicationId?: number): Promise<Badge[]> {
+        if (applicationId) {
+            return (await this.data.badge.findMany({
+                where: { applicationId }
+            })).map(badge => BadgeConverter.fromPrismaBadge(badge));
+        }
+        return (await this.data.badge.findMany()).map(badge => BadgeConverter.fromPrismaBadge(badge));
     }
 
-    findOne(id: number): Promise<BadgeModel> {
-        return this.data.badge.findUnique({ where: { id }});
+    async findOne(id: number): Promise<Badge> {
+        return BadgeConverter.fromPrismaBadge(await this.data.badge.findUnique({ where: { id }}));
     }
 
-    create(createBadgeInput: CreateBadgeInput): Promise<BadgeModel> {
-        return this.data.badge.create({
+    async create(createBadgeInput: CreateBadgeInput): Promise<Badge> {
+        return BadgeConverter.fromPrismaBadge(await this.data.badge.create({
             data: createBadgeInput
-        });
+        }));
     }
 
-    update(id: number, updateBadgeInput: UpdateBadgeInput): Promise<BadgeModel> {
-        return this.data.badge.update({
+    async update(id: number, updateBadgeInput: UpdateBadgeInput): Promise<Badge> {
+        return BadgeConverter.fromPrismaBadge(await this.data.badge.update({
             where: { id },
             data: updateBadgeInput
-        })
+        }));
     }
 
-    remove(id: number): Promise<BadgeModel> {
-        return this.data.badge.delete({ where: { id }});
+    async remove(id: number): Promise<Badge> {
+        return BadgeConverter.fromPrismaBadge(await this.data.badge.delete({ 
+            where: { id }
+        }));
     }
 }

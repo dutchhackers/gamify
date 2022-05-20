@@ -44,7 +44,7 @@ export class FirebaseAuthStrategy extends PassportStrategy(
     };
   }
 
-  private async createOrUpdateUser(firebaseUser) {
+  private async createOrUpdateUser(firebaseUser: any) {
     let user = await this.authService.findByFirebaseId(firebaseUser.uid);
 
     if (user) {

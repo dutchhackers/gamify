@@ -1,0 +1,21 @@
+<div style="display: flex; justify-content: space-between;">
+    <h1>Application: {{application?.name}}</h1>
+    <div>
+        <a mat-raised-button color="primary" routerLink="/admin/applications">
+            <mat-icon>arrow_back</mat-icon>
+            Go Back
+        </a>
+    </div>
+</div>
+<mat-tab-group>
+    <mat-tab label="General"> 
+        <coders-application-details-general [application$]="application$" (applicationUpdated)="updateApplication($event)"></coders-application-details-general>
+    </mat-tab>
+    <mat-tab label="Badges">
+        <coders-application-details-badges [applicationId]="applicationId"></coders-application-details-badges>
+    </mat-tab>
+    <mat-tab label="Users"> 
+        <coders-application-details-users [applicationId]="applicationId"></coders-application-details-users>
+    </mat-tab>
+    <mat-tab label="Moderators"> Content 4 </mat-tab>
+</mat-tab-group>

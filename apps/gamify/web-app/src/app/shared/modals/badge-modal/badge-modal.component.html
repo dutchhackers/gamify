@@ -1,0 +1,28 @@
+<h1>
+    <span *ngIf="data.action === 'create'">Create</span> 
+    <span *ngIf="data.action === 'edit'">Edit</span>
+    Badge
+</h1>
+
+<coders-message-box [message]="errorMessage"></coders-message-box>
+
+<mat-form-field appearance="fill" style="width: 100%; margin-top: 10px;">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+</mat-form-field>
+
+<mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Tier</mat-label>
+    <mat-select [(ngModel)]="data.tier">
+        <mat-option *ngFor="let tier of tiers" [value]="tier.key">
+            {{tier.value}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-checkbox [(ngModel)]="data.repeatedlyObtainable">Repeatedly Obtainable</mat-checkbox>
+
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="data" color="primary">Save</button>
+    <button mat-raised-button (click)="onNoClick()">Cancel</button>
+</div>

@@ -1,6 +1,5 @@
-import { ApplicationType } from '@gamify/core';
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsUrl } from 'class-validator';
-import { Type } from "class-transformer";
+import { ApplicationType } from '@gamify/shared';
+import { IsEnum, IsNotEmpty, IsOptional, IsUrl } from 'class-validator';
 
 export class CreateApplicationInput {
 
@@ -17,10 +16,5 @@ export class CreateApplicationInput {
     @IsUrl()
     externalApplicationUrl: string;
 
-    // Owner user id should not be provided by the client as input value but 
-    // should be obtained from current authenticated user.
-    @IsOptional()
-    @IsInt()
-    @Type(() => Number)
     ownerUserId: number;
 }

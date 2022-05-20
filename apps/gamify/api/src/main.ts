@@ -19,11 +19,11 @@ async function bootstrap() {
     transform: true,
     whitelist: true,
   }));
+  app.enableCors();
 
   const authGuard = app.get(FirebaseAuthGuard);
   const rolesGuard = app.get(RolesGuard);
   app.useGlobalGuards(authGuard, rolesGuard);
-
 
   const port = config.get<number>('port');
   await app.listen(port);

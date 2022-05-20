@@ -1,4 +1,4 @@
-import { BadgeTier } from "@gamify/core";
+import { BadgeTier } from "@gamify/shared";
 import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsPositive, IsUrl } from "class-validator";
 import { Type } from "class-transformer";
 

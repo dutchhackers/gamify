@@ -1,0 +1,40 @@
+<div style="display: flex; flex-direction: column;">
+    <h2 style="margin-top: 10px;">Application Badges</h2>
+
+    <div>
+        <button mat-raised-button color="primary" (click)="openCreateBadgeModal()">Create Badge</button> 
+    </div>
+
+    <table #badgesTable mat-table [dataSource]="badgesDataSource" class="mat-elevation-z2" style="margin: 20px 0">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="tier">
+            <th mat-header-cell *matHeaderCellDef> Tier </th>
+            <td mat-cell *matCellDef="let element"> {{element.tier}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="repeatedlyObtainable">
+            <th mat-header-cell *matHeaderCellDef> Repeatedly Obtainable</th>
+            <td mat-cell *matCellDef="let element"> {{element.repeatedlyObtainable}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="primary" (click)="openEditBadgeModal(element.id)">Edit</button>
+                <button mat-raised-button color="warn" style="margin-left: 6px" (click)="openDeleteBadgeModal(element.id)">Delete</button>
+            </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="badgesDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: badgesDisplayedColumns;"></tr>
+      </table>
+</div>
