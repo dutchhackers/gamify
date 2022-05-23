@@ -41,7 +41,7 @@
     "graphql-tools": "^8.2.11",
     "joi": "^17.6.0",
     "luxon": "^2.3.2",
-    "passport": "^0.5.3",
+    "passport": "^0.6.0",
     "passport-firebase-jwt": "^1.2.1",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
