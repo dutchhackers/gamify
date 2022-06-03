@@ -1,5 +1,4 @@
 {
-  "root": "libs/codeheroes/auth",
   "sourceRoot": "libs/codeheroes/auth/src",
   "projectType": "library",
   "targets": {

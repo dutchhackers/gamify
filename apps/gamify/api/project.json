@@ -1,5 +1,4 @@
 {
-  "root": "apps/gamify/api",
   "sourceRoot": "apps/gamify/api/src",
   "projectType": "application",
   "targets": {

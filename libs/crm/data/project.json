@@ -1,5 +1,4 @@
 {
-  "root": "libs/crm/data",
   "sourceRoot": "libs/crm/data/src",
   "projectType": "library",
   "targets": {
