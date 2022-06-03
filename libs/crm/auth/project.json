@@ -1,5 +1,4 @@
 {
-  "root": "libs/crm/auth",
   "sourceRoot": "libs/crm/auth/src",
   "projectType": "library",
   "targets": {

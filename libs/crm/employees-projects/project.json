@@ -1,5 +1,4 @@
 {
-  "root": "libs/crm/employees-projects",
   "sourceRoot": "libs/crm/employees-projects/src",
   "projectType": "library",
   "targets": {

@@ -1,5 +1,4 @@
 {
-  "root": "libs/gamify/applications",
   "sourceRoot": "libs/gamify/applications/src",
   "targets": {
     "lint": {
