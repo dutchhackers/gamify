@@ -1,7 +1,7 @@
 import { UserModel } from '@gamify/auth';
 import { DataService, ApplicationsService, UsersService } from '@gamify/data';
-import { ApplicationType } from '@gamify/shared';
-import { NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { Application, ApplicationType } from '@gamify/shared';
+import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { ApplicationsController } from './applications.controller';
 
@@ -40,7 +40,7 @@ describe('ApplicationsController', () => {
     it('should return an application', async () => {
       const result = await controller.findOne(1);
       expect(result).toBeDefined();
-      expect(result).toBeInstanceOf(Object);
+      expect(result).toBeInstanceOf(Application);
     });
 
     it('should return NotFoundException if application does not exist', async () => {
@@ -60,7 +60,7 @@ describe('ApplicationsController', () => {
         ownerUserId: 1
       }, user);
       expect(result).toBeDefined();
-      expect(result).toBeInstanceOf(Object);
+      expect(result).toBeInstanceOf(Application);
     });
   });
 
@@ -72,7 +72,7 @@ describe('ApplicationsController', () => {
         externalApplicationUrl: "http://test.com",
       }, user);
       expect(result).toBeDefined();
-      expect(result).toBeInstanceOf(Object);
+      expect(result).toBeInstanceOf(Application);
     })
   });
 });
