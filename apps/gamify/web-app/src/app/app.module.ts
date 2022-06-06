@@ -9,10 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiModule } from './ui.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthInterceptor } from './core/interceptors/auth-interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { LoginComponent } from './pages/login/login.component';
+import { UnauthorizedInterceptor } from './core/interceptors/unauthorized.interceptor';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [AppComponent, DashboardComponent, LoginComponent],
   imports: [
     BrowserModule, 
     ReactiveFormsModule,
@@ -22,7 +24,10 @@ import { AuthInterceptor } from './core/interceptors/auth-interceptor';
     BrowserAnimationsModule,
     UiModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
