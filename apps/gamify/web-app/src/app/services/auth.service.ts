@@ -20,8 +20,6 @@ export class AuthService {
   }
 
   attemptLogin(body: { email: string; password: string }) {
-    console.log('attempt login');
-
     const options = {
       headers: new HttpHeaders().set('Content-type', 'application/json'),
     };
