@@ -1,7 +1,7 @@
 import { Roles, User, UserModel } from '@gamify/auth';
 import { Role } from '@gamify/shared';
 import { ApplicationsService, BadgesService, UsersService } from '@gamify/data';
-import { BadRequestException, Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Query, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, Param, ParseIntPipe, Post, Query, UnauthorizedException } from '@nestjs/common';
 import { AssignBadgeDto } from './dto/give-badge.dto';
 
 @Controller('users')
@@ -23,7 +23,7 @@ export class UsersController {
     }
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, authUser.id)) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     // Check if the user joined the application, this will indirectly check if the user exists.
@@ -54,7 +54,7 @@ export class UsersController {
     const badge = await this.badgesService.findOne(userBadge.badgeId);
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, authUser.id)) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     return this.usersService.removeUserBadge(id);

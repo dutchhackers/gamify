@@ -1,6 +1,6 @@
 import { Roles, User, UserModel } from '@gamify/auth';
 import { ApplicationsService, BadgesService } from '@gamify/data';
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { CreateBadgeInput } from './dto/create-badge.input';
 import { UpdateBadgeInput } from './dto/update-badge.input';
 import { Badge, Role } from '@gamify/shared';
@@ -21,7 +21,7 @@ export class BadgesController {
     }
 
     if (! await this.applicationsService.canModerateApplication(application.id, user.id)) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     return this.badgesService.create(createBadgeInput);
@@ -43,7 +43,7 @@ export class BadgesController {
     const badge = await this.findBadgeOrFail(id);
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     return this.badgesService.update(id, updateBadgeInput);
@@ -55,7 +55,7 @@ export class BadgesController {
     const badge = await this.findBadgeOrFail(id);
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     return this.badgesService.remove(id);
