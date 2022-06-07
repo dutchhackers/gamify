@@ -2,7 +2,7 @@ import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get,
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
 import { Application, ApplicationUser, Role } from '@gamify/shared';
-import { Roles, User, UserModel } from '@gamify/auth';
+import { Roles, User, AuthUserModel } from '@gamify/auth';
 import { ApplicationUserModel } from './models';
 import { ApplicationsService } from '@gamify/data';
 
@@ -14,7 +14,7 @@ export class ApplicationsController {
 
   @Post()
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async create(@Body() createApplicationInput: CreateApplicationInput, @User() user: UserModel): Promise<Application> {
+  async create(@Body() createApplicationInput: CreateApplicationInput, @User() user: AuthUserModel): Promise<Application> {
     createApplicationInput.ownerUserId = user.id;
 
     return await this.applicationsService.create(createApplicationInput);
@@ -32,7 +32,7 @@ export class ApplicationsController {
 
   @Put(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @User() user: UserModel): Promise<Application> {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @User() user: AuthUserModel): Promise<Application> {
     if (! await this.applicationsService.canModerateApplication(id, user.id)) {
       console.log('User is not allowed to moderate this application');
       throw new ForbiddenException();
@@ -45,7 +45,7 @@ export class ApplicationsController {
 
   @Delete(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async remove(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<Application> {
+  async remove(@Param('id', ParseIntPipe) id: number, @User() user: AuthUserModel): Promise<Application> {
     if (! await this.applicationsService.canModerateApplication(id, user.id)) {
       throw new ForbiddenException();
     }
@@ -64,7 +64,7 @@ export class ApplicationsController {
 
 
   @Post('/:id/join')
-  async join(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<ApplicationUserModel> {
+  async join(@Param('id', ParseIntPipe) id: number, @User() user: AuthUserModel): Promise<ApplicationUserModel> {
     await this.findApplicationOrFail(id);
 
     if (await this.applicationsService.findApplicationUser(id, user.id)) {
@@ -75,7 +75,7 @@ export class ApplicationsController {
   }
 
   @Delete('/:id/leave')
-  async leave(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<ApplicationUserModel> {
+  async leave(@Param('id', ParseIntPipe) id: number, @User() user: AuthUserModel): Promise<ApplicationUserModel> {
     await this.findApplicationOrFail(id);
 
     const applicationUser = await this.applicationsService.findApplicationUser(id, user.id);

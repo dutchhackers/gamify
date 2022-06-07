@@ -1,4 +1,4 @@
-import { Roles, User, UserModel } from '@gamify/auth';
+import { Roles, User, AuthUserModel } from '@gamify/auth';
 import { ApplicationsService, BadgesService } from '@gamify/data';
 import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { CreateBadgeInput } from './dto/create-badge.input';
@@ -14,7 +14,7 @@ export class BadgesController {
 
   @Post()
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async create(@Body() createBadgeInput: CreateBadgeInput, @User() user: UserModel): Promise<Badge> {
+  async create(@Body() createBadgeInput: CreateBadgeInput, @User() user: AuthUserModel): Promise<Badge> {
     const application = await this.applicationsService.findOne(createBadgeInput.applicationId);
     if (application === null) {
       throw new BadRequestException('Application not found');
@@ -39,7 +39,7 @@ export class BadgesController {
 
   @Put(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput, @User() user: UserModel): Promise<Badge> {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput, @User() user: AuthUserModel): Promise<Badge> {
     const badge = await this.findBadgeOrFail(id);
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
@@ -51,7 +51,7 @@ export class BadgesController {
 
   @Delete(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async remove(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<Badge> {
+  async remove(@Param('id', ParseIntPipe) id: number, @User() user: AuthUserModel): Promise<Badge> {
     const badge = await this.findBadgeOrFail(id);
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
