@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { IUser, User } from '@gamify/shared';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -10,13 +11,18 @@ export class AuthService {
 
   private authenticated = false;
 
+  private user: User;
+
   constructor(private http: HttpClient) {
 
   }
 
-
   public isAuthenticated(): boolean {
     return this.authenticated;
+  }
+
+  public getUser(): User {
+    return this.user;
   }
 
   attemptLogin(body: { email: string; password: string }) {
@@ -32,9 +38,18 @@ export class AuthService {
 
     return this.http.post(`https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${environment.clientId}`, login, options).pipe(
       tap((res: { idToken: string; refreshToken: string; expiresIn: number; }) => {
-        console.log('Successfull login!');
         localStorage.setItem('accessToken', res.idToken);
         localStorage.setItem('refreshToken', res.refreshToken);
+      })
+    )
+  }
+
+  me(): Observable<User> {
+    return this.http.get<IUser>(`${environment.apiUrl}/users/me`).pipe(
+      map(res => res as User),
+      tap(user => {
+        this.user = user;
+        this.authenticated = true;
       })
     )
   }
