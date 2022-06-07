@@ -9,6 +9,9 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
+// Primary color #001e4b
+// Secondary color #f92822
+
 $m4m-primary-palette: (
   50: #e0e4e9,
   100: #b3bcc9,
@@ -82,9 +85,8 @@ $m4m-secondary-palette: (
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $gamify-web-app-primary: mat.define-palette($m4m-primary-palette);
-// $gamify-web-app-primary: #001e4b;
+
 $gamify-web-app-accent: mat.define-palette($m4m-secondary-palette);
-// $gamify-web-app-accent: #f92822;
 
 // The warn palette is optional (defaults to red).
 $gamify-web-app-warn: mat.define-palette(mat.$red-palette);
