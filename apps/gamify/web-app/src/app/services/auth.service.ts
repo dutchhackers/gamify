@@ -13,16 +13,25 @@ export class AuthService {
 
   private user: User;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) { }
 
-  }
-
-  public isAuthenticated(): boolean {
+  isAuthenticated(): boolean {
     return this.authenticated;
   }
 
-  public getUser(): User {
+  getUser(): User {
     return this.user;
+  }
+
+  canModerate(): boolean {
+    if (! this.user) return false;
+
+    switch (this.user.moderationRole) {
+      case 'ADMIN':
+      case 'MODERATOR':
+        return true;
+    }
+    return false;
   }
 
   attemptLogin(body: { email: string; password: string }) {
@@ -50,7 +59,7 @@ export class AuthService {
       tap(user => {
         this.user = user;
         this.authenticated = true;
-      })
+      }),
     )
   }
 }
