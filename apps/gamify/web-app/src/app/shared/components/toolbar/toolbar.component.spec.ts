@@ -1,4 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UiModule } from '../../../ui.module';
 
 import { ToolbarComponent } from './toolbar.component';
 
@@ -8,6 +10,7 @@ describe('ToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientModule, UiModule],
       declarations: [ ToolbarComponent ]
     })
     .compileComponents();
