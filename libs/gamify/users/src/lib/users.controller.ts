@@ -22,7 +22,7 @@ export class UsersController {
       throw new BadRequestException('Badge not found');
     }
 
-    if (! await this.applicationsService.canModerateApplication(badge.applicationId, authUser.id)) {
+    if (! await this.applicationsService.canModerateApplicationById(badge.applicationId, authUser.id)) {
       throw new UnauthorizedException();
     }
 
@@ -53,7 +53,7 @@ export class UsersController {
 
     const badge = await this.badgesService.findOne(userBadge.badgeId);
 
-    if (! await this.applicationsService.canModerateApplication(badge.applicationId, authUser.id)) {
+    if (! await this.applicationsService.canModerateApplicationById(badge.applicationId, authUser.id)) {
       throw new UnauthorizedException();
     }
 

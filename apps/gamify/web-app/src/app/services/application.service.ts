@@ -13,8 +13,12 @@ export class ApplicationService {
 
   constructor(private http: HttpClient) { }
 
-  list$(): Observable<Application[]> {
-    return this.http.get<IApplication[]>(`${environment.apiUrl}${APPLICATIONS_API_PATH}`).pipe(
+  list$(filter?: string): Observable<Application[]> {
+    let filterString = '';
+    if (filter) {
+      filterString = `?filter=${filter}`;
+    }
+    return this.http.get<IApplication[]>(`${environment.apiUrl}${APPLICATIONS_API_PATH}${filterString}`).pipe(
       map(res => res as Application[])
     )
   }

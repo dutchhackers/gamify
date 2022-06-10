@@ -18,7 +18,7 @@ export class ApplicationsComponent implements OnInit {
   constructor(private applicationService: ApplicationService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.applicationService.list$().subscribe(res => {
+    this.applicationService.list$('moderatable').subscribe(res => {
       this.dataSource = res;
     });
   }
