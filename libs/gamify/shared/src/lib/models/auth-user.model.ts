@@ -1,13 +1,6 @@
-import { Role } from "@gamify/shared";
+import { User } from "./user.model";
 
-export class AuthUserModel {
-    id: number;
-    createdAt: Date;
-    email: string;
-    firstname?: string;
-    lastname?: string;
-    moderationRole: Role;
-
+export class AuthUser extends User {
     firebaseUid: string;
     firebaseData: object;
 }

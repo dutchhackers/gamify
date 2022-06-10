@@ -1,5 +1,5 @@
 import { Roles, User } from '@gamify/auth';
-import { Role, UserConverter, AuthUserModel } from '@gamify/shared';
+import { Role, UserConverter, AuthUser } from '@gamify/shared';
 import { ApplicationsService, BadgesService, UsersService } from '@gamify/data';
 import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
 import { AssignBadgeDto } from './dto/give-badge.dto';
@@ -13,13 +13,13 @@ export class UsersController {
   ) {}
 
   @Get('/me')
-  me(@User() authUser: AuthUserModel) {
+  me(@User() authUser: AuthUser) {
     return UserConverter.fromAuthUserModel(authUser);
   }
   
   @Post('/:id/badges')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async assignBadge(@Param('id', ParseIntPipe) id: number, @Body() assignBadgeDto: AssignBadgeDto, @User() authUser: AuthUserModel) {
+  async assignBadge(@Param('id', ParseIntPipe) id: number, @Body() assignBadgeDto: AssignBadgeDto, @User() authUser: AuthUser) {
     const badge = await this.badgesService.findOne(assignBadgeDto.badgeId);
 
     if (! badge) {
@@ -48,7 +48,7 @@ export class UsersController {
 
   @Delete('/badges/:userBadgeId')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async removeBadge(@Param('userBadgeId', ParseIntPipe) id: number, @User() authUser: AuthUserModel) {
+  async removeBadge(@Param('userBadgeId', ParseIntPipe) id: number, @User() authUser: AuthUser) {
     const userBadge = await this.usersService.findUserBadge(id);
 
     if (!userBadge) {

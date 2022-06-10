@@ -1,8 +1,8 @@
-import { AuthUserModel } from "../models";
+import { AuthUser } from "../models";
 import { IUser } from "../interfaces";
 
 export class UserConverter {
-    static fromAuthUserModel(authUserModel: AuthUserModel): IUser {
+    static fromAuthUserModel(authUserModel: AuthUser): IUser {
         return {
             id: authUserModel.id,
             createdAt: authUserModel.createdAt,
