@@ -1,8 +1,8 @@
 import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
-import { Application, ApplicationUser, Role } from '@gamify/shared';
-import { Roles, User, AuthUserModel } from '@gamify/auth';
+import { Application, ApplicationUser, Role, AuthUserModel } from '@gamify/shared';
+import { Roles, User } from '@gamify/auth';
 import { ApplicationUserModel } from './models';
 import { ApplicationsService } from '@gamify/data';
 

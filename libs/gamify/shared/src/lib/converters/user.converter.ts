@@ -1,4 +1,4 @@
-import { AuthUserModel } from "@gamify/auth";
+import { AuthUserModel } from "../models";
 import { IUser } from "../interfaces";
 
 export class UserConverter {
