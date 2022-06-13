@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserBadge } from '@gamify/shared';
+import { ApplicationUser, UserBadge } from '@gamify/shared';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -25,5 +25,13 @@ export class UsersService {
 
   removeUserBadge$(userBadge: number): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}/users/badges/${userBadge}`);
+  }
+
+  listUserApplications$(userId: number): Observable<ApplicationUser[]> {
+    return this.http.get<ApplicationUser[]>(`${environment.apiUrl}/users/${userId}/applications`);
+  }
+
+  joinApplication$(applicationId: number) {
+    return this.http.post<ApplicationUser>(`${environment.apiUrl}/applications/${applicationId}/join`, {});
   }
 }

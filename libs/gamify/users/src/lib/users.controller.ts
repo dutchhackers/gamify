@@ -71,4 +71,11 @@ export class UsersController {
   ) {
     return this.usersService.findUserBadges(id, applicationId);
   }
+
+  @Get('/:id/applications')
+  async getUserApplications(
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.usersService.findUserApplications(id);
+  }
 }

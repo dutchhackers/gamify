@@ -1,0 +1,16 @@
+<div style="display: flex; justify-content: center;">
+    <div style="width: 1176px;">
+        <h1 style="margin-left: 10px;">Applications</h1>
+
+        <div style="display: flex; flex-wrap: wrap;">
+            <mat-card *ngFor="let application of applications" style="width: 340px; margin: 10px;">
+                <h1 style="text-align: center">{{ application.name }}</h1>
+
+                <div style="display: flex; justify-content: right; margin-top: 40px;">
+                    <button mat-raised-button color="accent" *ngIf="! hasJoinedApplication(application.id)" (click)="joinApplication(application.id)">Join game</button>
+                    <button mat-raised-button disabled *ngIf="hasJoinedApplication(application.id)">Joined</button>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

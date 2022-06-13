@@ -4,7 +4,7 @@ export interface IApplicationUser {
     earnedAt: Date;
 
     user?: {
-        firstName?: string;
-        lastName?: string;
+        firstname?: string;
+        lastname?: string;
     }
 }

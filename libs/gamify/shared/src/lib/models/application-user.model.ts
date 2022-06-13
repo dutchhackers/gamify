@@ -6,7 +6,7 @@ export class ApplicationUser implements IApplicationUser {
     earnedAt: Date;
 
     user?: {
-        firstName?: string;
-        lastName?: string;
+        firstname?: string;
+        lastname?: string;
     }
 }
