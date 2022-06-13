@@ -1,9 +1,8 @@
 import { ApplicationUserModel, CreateApplicationInput, UpdateApplicationInput } from '@gamify/application';
-import { Role, ApplicationConverter, Application, ApplicationUser, ApplicationUserConverter } from '@gamify/shared';
+import { Role, ApplicationConverter, Application, ApplicationUser, ApplicationUserConverter, User } from '@gamify/shared';
 import { DataService } from './../data.service';
 import { Injectable } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { UserModel } from '@gamify/auth';
 
 @Injectable()
 export class ApplicationsService {
@@ -13,7 +12,7 @@ export class ApplicationsService {
         private readonly usersService: UsersService
     ) {}
 
-    async findMany(filter?: string|undefined, user?: UserModel): Promise<Application[]> {
+    async findMany(filter?: string|undefined, user?: User): Promise<Application[]> {
         const applications = (await this.data.application.findMany()).map(app => ApplicationConverter.fromPrismaApplication(app));
         if (! filter) {
             return applications;
@@ -125,7 +124,7 @@ export class ApplicationsService {
         return false;
     }
 
-    canModerateApplication(application: Application, user: UserModel): boolean {
+    canModerateApplication(application: Application, user: User): boolean {
         if (user.moderationRole === Role.ADMIN) {
             return true;
         }
