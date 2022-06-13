@@ -3,6 +3,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Strategy, ExtractJwt } from 'passport-firebase-jwt';
 import * as firebase from 'firebase-admin';
 import { AuthService } from '../auth.service';
+import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
 
 @Injectable()
 export class FirebaseAuthStrategy extends PassportStrategy(
@@ -24,7 +25,7 @@ export class FirebaseAuthStrategy extends PassportStrategy(
   }
 
   async validate(token: string) {
-    const firebaseUser: firebase.auth.DecodedIdToken = await this.defaultApp
+    const firebaseUser: DecodedIdToken = await this.defaultApp
       .auth()
       .verifyIdToken(token, true)
       .catch((err) => {
@@ -44,7 +45,7 @@ export class FirebaseAuthStrategy extends PassportStrategy(
     };
   }
 
-  private async createOrUpdateUser(firebaseUser: any) {
+  private async createOrUpdateUser(firebaseUser: DecodedIdToken) {
     let user = await this.authService.findByFirebaseId(firebaseUser.uid);
 
     if (user) {

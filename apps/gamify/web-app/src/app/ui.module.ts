@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
     declarations: [],
@@ -37,6 +38,7 @@ import { MatCardModule } from '@angular/material/card';
         MatCheckboxModule,
         MatSnackBarModule,
         MatCardModule,
+        MatProgressSpinnerModule
     ]
   })
   export class UiModule {}

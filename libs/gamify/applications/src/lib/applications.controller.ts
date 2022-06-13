@@ -1,8 +1,8 @@
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
-import { Application, ApplicationUser, IApplication, Role } from '@gamify/shared';
-import { Roles, User, UserModel } from '@gamify/auth';
+import { Application, ApplicationUser, Role, AuthUser } from '@gamify/shared';
+import { Roles, User } from '@gamify/auth';
 import { ApplicationUserModel } from './models';
 import { ApplicationsService } from '@gamify/data';
 
@@ -14,14 +14,14 @@ export class ApplicationsController {
 
   @Post()
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async create(@Body() createApplicationInput: CreateApplicationInput, @User() user: UserModel): Promise<Application> {
+  async create(@Body() createApplicationInput: CreateApplicationInput, @User() user: AuthUser): Promise<Application> {
     createApplicationInput.ownerUserId = user.id;
 
     return await this.applicationsService.create(createApplicationInput);
   }
 
   @Get()
-  findAll(@Query('filter') filter: string, @User() user: UserModel): Promise<Application[]> {
+  findAll(@Query('filter') filter: string, @User() user: AuthUser): Promise<Application[]> {
     return this.applicationsService.findMany(filter, user);
   }
 
@@ -32,9 +32,9 @@ export class ApplicationsController {
 
   @Put(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @User() user: UserModel): Promise<Application> {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @User() user: AuthUser): Promise<Application> {
     if (! await this.applicationsService.canModerateApplicationById(id, user.id)) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     await this.findApplicationOrFail(id);
@@ -44,9 +44,9 @@ export class ApplicationsController {
 
   @Delete(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async remove(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<Application> {
+  async remove(@Param('id', ParseIntPipe) id: number, @User() user: AuthUser): Promise<Application> {
     if (! await this.applicationsService.canModerateApplicationById(id, user.id)) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     await this.findApplicationOrFail(id);
@@ -63,7 +63,7 @@ export class ApplicationsController {
 
 
   @Post('/:id/join')
-  async join(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<ApplicationUserModel> {
+  async join(@Param('id', ParseIntPipe) id: number, @User() user: AuthUser): Promise<ApplicationUserModel> {
     await this.findApplicationOrFail(id);
 
     if (await this.applicationsService.findApplicationUser(id, user.id)) {
@@ -74,7 +74,7 @@ export class ApplicationsController {
   }
 
   @Delete('/:id/leave')
-  async leave(@Param('id', ParseIntPipe) id: number, @User() user: UserModel): Promise<ApplicationUserModel> {
+  async leave(@Param('id', ParseIntPipe) id: number, @User() user: AuthUser): Promise<ApplicationUserModel> {
     await this.findApplicationOrFail(id);
 
     const applicationUser = await this.applicationsService.findApplicationUser(id, user.id);

@@ -1,5 +1,9 @@
-<div style="display: flex; justify-content: center;">
-    <mat-card style="width: 400px">
+<div style="display: flex; justify-content: center; height: 100vh; align-items: center; background-color: #001e4b;">
+
+    <mat-card class="column-width">
+        <img src="/assets/move4mobile.svg" alt="Move4Mobile" class="column-width">
+        <h1 style="text-align: center;">Gamify</h1>
+
         <mat-card-title>Login</mat-card-title>
         <mat-card-content>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column;">
@@ -11,7 +15,7 @@
                     <mat-label>Password</mat-label>
                     <input matInput type="password" placeholder="Password" formControlName="password">
                 </mat-form-field>
-                <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid || loading">Login</button>
             </form>
         </mat-card-content>
     </mat-card>
