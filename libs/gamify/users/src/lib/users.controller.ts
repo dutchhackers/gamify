@@ -1,7 +1,7 @@
-import { Roles, User, UserModel } from '@gamify/auth';
-import { Role } from '@gamify/shared';
+import { Roles, User } from '@gamify/auth';
+import { Role, UserConverter, AuthUser } from '@gamify/shared';
 import { ApplicationsService, BadgesService, UsersService } from '@gamify/data';
-import { BadRequestException, Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Query, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
 import { AssignBadgeDto } from './dto/give-badge.dto';
 
 @Controller('users')
@@ -12,10 +12,14 @@ export class UsersController {
     private readonly badgesService: BadgesService,
   ) {}
 
+  @Get('/me')
+  me(@User() authUser: AuthUser) {
+    return UserConverter.fromAuthUserModel(authUser);
+  }
   
   @Post('/:id/badges')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async assignBadge(@Param('id', ParseIntPipe) id: number, @Body() assignBadgeDto: AssignBadgeDto, @User() authUser: UserModel) {
+  async assignBadge(@Param('id', ParseIntPipe) id: number, @Body() assignBadgeDto: AssignBadgeDto, @User() authUser: AuthUser) {
     const badge = await this.badgesService.findOne(assignBadgeDto.badgeId);
 
     if (! badge) {
@@ -23,7 +27,7 @@ export class UsersController {
     }
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, authUser.id)) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     // Check if the user joined the application, this will indirectly check if the user exists.
@@ -44,7 +48,7 @@ export class UsersController {
 
   @Delete('/badges/:userBadgeId')
   @Roles(Role.ADMIN, Role.MODERATOR)
-  async removeBadge(@Param('userBadgeId', ParseIntPipe) id: number, @User() authUser: UserModel) {
+  async removeBadge(@Param('userBadgeId', ParseIntPipe) id: number, @User() authUser: AuthUser) {
     const userBadge = await this.usersService.findUserBadge(id);
 
     if (!userBadge) {
@@ -54,7 +58,7 @@ export class UsersController {
     const badge = await this.badgesService.findOne(userBadge.badgeId);
 
     if (! await this.applicationsService.canModerateApplication(badge.applicationId, authUser.id)) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     return this.usersService.removeUserBadge(id);

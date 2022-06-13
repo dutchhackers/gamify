@@ -12,8 +12,8 @@ model User {
     id                 Int               @id @default(autoincrement())
     createdAt          DateTime          @default(now())
     email              String            @unique
-    firstName          String?
-    lastName           String?
+    firstname          String?
+    lastname           String?
     ownedApplications  Application[]
     firebaseUid        String?           @unique
     moderationRole     String            @default("user")
@@ -24,7 +24,7 @@ model User {
 model Application {
     id                     Int               @id @default(autoincrement())
     createdAt              DateTime          @default(now())
-    name                   String            @unique
+    name                   String
     description            String?
     applicationType        String
     externalApplicationUrl String?

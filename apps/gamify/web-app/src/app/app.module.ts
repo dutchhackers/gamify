@@ -3,24 +3,27 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AdminModule } from './pages/admin/admin.module';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiModule } from './ui.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './pages/auth/login/login.component';
 import { UnauthorizedInterceptor } from './core/interceptors/unauthorized.interceptor';
+import { PagesModule } from './pages/pages.module';
+import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
+import { RouterModule } from '@angular/router';
+import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, LoginComponent],
+  declarations: [AppComponent, ToolbarComponent, LoginComponent, NotFoundComponent],
   imports: [
     BrowserModule, 
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
     AppRoutingModule,
-    AdminModule, 
+    PagesModule, 
     BrowserAnimationsModule,
     UiModule,
   ],

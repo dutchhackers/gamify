@@ -48,8 +48,8 @@ export class ApplicationsService {
                 joinedAt: true,
                 user: {
                     select: {
-                        firstName: true,
-                        lastName: true,
+                        firstname: true,
+                        lastname: true,
                     }
                 }
             }

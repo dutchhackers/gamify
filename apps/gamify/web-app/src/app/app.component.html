@@ -1,37 +1,25 @@
-<div class="app-wrapper">
-    <mat-toolbar color="primary">
-        <span>Gamify</span>
+<div *ngIf="uiSettings.showSpinner" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <mat-spinner></mat-spinner>
+</div>
 
-        <a mat-raised-button color="accent" routerLink="/dashboard" class="toolbar-button">Dashboard</a>
-        <a mat-raised-button color="accent" routerLink="/activity-feed" class="toolbar-button">Activity feed</a>
-        <a mat-raised-button color="accent" routerLink="/games" class="toolbar-button">Games</a>
-        <a mat-raised-button color="accent" routerLink="/people" class="toolbar-button">People</a>
+<div *ngIf="!uiSettings.showSpinner">
+    <router-outlet *ngIf="!uiSettings.showAppWrapper"></router-outlet>
 
-        <span class="spacer"></span>
-
-        <button mat-raised-button color="accent" class="toolbar-button" [matMenuTriggerFor]="menu">
-            John Doe
-            <mat-icon>arrow_drop_down</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-            <a mat-menu-item routerLink="/profile">Profile</a>
-            <a mat-menu-item routerLink="/settings">Settings</a>
-            <a mat-menu-item routerLink="/admin/dashboard">Admin Dashboard</a>
-            <a mat-menu-item routerLink="/logout">Logout</a>
-        </mat-menu>
-    </mat-toolbar>
-    
-    <!-- Creates a layout with a left-positioned sidenav and explicit content. -->
-    <mat-sidenav-container>
-        <mat-sidenav #drawer [opened]="isOnAdminPage" mode="side">
-            <mat-nav-list role="list">
-                <mat-list-item routerLink="/admin/dashboard">Dashboard</mat-list-item>
-                <mat-list-item routerLink="/admin/applications">Applications</mat-list-item>
-                <mat-list-item>Users</mat-list-item>
-              </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+    <div class="app-wrapper" *ngIf="uiSettings.showAppWrapper">
+        <coders-toolbar [user]="user"></coders-toolbar>
+        
+        <!-- Creates a layout with a left-positioned sidenav and explicit content. -->
+        <mat-sidenav-container>
+            <mat-sidenav #drawer [opened]="isOnAdminPage" mode="side">
+                <mat-nav-list role="list">
+                    <mat-list-item routerLink="/admin/dashboard">Dashboard</mat-list-item>
+                    <mat-list-item routerLink="/admin/applications">Applications</mat-list-item>
+                    <mat-list-item>Users</mat-list-item>
+                </mat-nav-list>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </div>
 </div>
