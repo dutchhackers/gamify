@@ -1,5 +1,5 @@
 import { ApplicationUserModel, CreateApplicationInput, UpdateApplicationInput } from '@gamify/application';
-import { Role, ApplicationConverter, Application, ApplicationUser, ApplicationUserConverter } from '@gamify/shared';
+import { Role, ApplicationConverter, Application, ApplicationUser, ApplicationUserConverter, User } from '@gamify/shared';
 import { DataService } from './../data.service';
 import { Injectable } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -12,8 +12,17 @@ export class ApplicationsService {
         private readonly usersService: UsersService
     ) {}
 
-    async findMany(): Promise<Application[]> {
-        return (await this.data.application.findMany()).map(app => ApplicationConverter.fromPrismaApplication(app));
+    async findMany(filter?: string|undefined, user?: User): Promise<Application[]> {
+        const applications = (await this.data.application.findMany()).map(app => ApplicationConverter.fromPrismaApplication(app));
+        if (! filter) {
+            return applications;
+        }
+
+        if (filter === 'moderatable') {
+            return applications.filter(app => this.canModerateApplication(app, user));
+        }
+
+        return applications;
     }
 
     async findOne(id: number): Promise<Application> {
@@ -93,7 +102,7 @@ export class ApplicationsService {
         return true;
     }
 
-    async canModerateApplication(applicationId: number, userId: number): Promise<boolean> {
+    async canModerateApplicationById(applicationId: number, userId: number): Promise<boolean> {
         const user = await this.usersService.findOne(userId);
         if (!user) {
             return false;
@@ -104,11 +113,27 @@ export class ApplicationsService {
         }
 
         const application = await this.findOne(applicationId);
+        if (!application) {
+            return false;
+        }
+
         if (application.ownerUserId == user.id) {
             return true;
         }
+        
+        return false;
+    }
 
-        // TODO check if user is added as moderator to the application
+    canModerateApplication(application: Application, user: User): boolean {
+        if (user.moderationRole === Role.ADMIN) {
+            return true;
+        }
+
+        const roles = [Role.ADMIN, Role.MODERATOR];
+
+        if (roles.includes(user.moderationRole as Role) && user.id === application.ownerUserId) {
+            return true
+        }
 
         return false;
     }

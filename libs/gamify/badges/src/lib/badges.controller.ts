@@ -20,7 +20,7 @@ export class BadgesController {
       throw new BadRequestException('Application not found');
     }
 
-    if (! await this.applicationsService.canModerateApplication(application.id, user.id)) {
+    if (! await this.applicationsService.canModerateApplicationById(application.id, user.id)) {
       throw new ForbiddenException();
     }
 
@@ -42,7 +42,7 @@ export class BadgesController {
   async update(@Param('id', ParseIntPipe) id: number, @Body() updateBadgeInput: UpdateBadgeInput, @User() user: AuthUser): Promise<Badge> {
     const badge = await this.findBadgeOrFail(id);
 
-    if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
+    if (! await this.applicationsService.canModerateApplicationById(badge.applicationId, user.id)) {
       throw new ForbiddenException();
     }
 
@@ -54,7 +54,7 @@ export class BadgesController {
   async remove(@Param('id', ParseIntPipe) id: number, @User() user: AuthUser): Promise<Badge> {
     const badge = await this.findBadgeOrFail(id);
 
-    if (! await this.applicationsService.canModerateApplication(badge.applicationId, user.id)) {
+    if (! await this.applicationsService.canModerateApplicationById(badge.applicationId, user.id)) {
       throw new ForbiddenException();
     }
 

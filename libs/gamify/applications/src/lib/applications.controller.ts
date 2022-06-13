@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { CreateApplicationInput } from './dto/create-application.input';
 import { UpdateApplicationInput } from './dto/update-application.input';
 import { Application, ApplicationUser, Role, AuthUser } from '@gamify/shared';
@@ -21,8 +21,8 @@ export class ApplicationsController {
   }
 
   @Get()
-  findAll(): Promise<Application[]> {
-    return this.applicationsService.findMany();
+  findAll(@Query('filter') filter: string, @User() user: AuthUser): Promise<Application[]> {
+    return this.applicationsService.findMany(filter, user);
   }
 
   @Get(':id')
@@ -33,8 +33,7 @@ export class ApplicationsController {
   @Put(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
   async update(@Param('id', ParseIntPipe) id: number, @Body() updateApplicationInput: UpdateApplicationInput, @User() user: AuthUser): Promise<Application> {
-    if (! await this.applicationsService.canModerateApplication(id, user.id)) {
-      console.log('User is not allowed to moderate this application');
+    if (! await this.applicationsService.canModerateApplicationById(id, user.id)) {
       throw new ForbiddenException();
     }
 
@@ -46,7 +45,7 @@ export class ApplicationsController {
   @Delete(':id')
   @Roles(Role.ADMIN, Role.MODERATOR)
   async remove(@Param('id', ParseIntPipe) id: number, @User() user: AuthUser): Promise<Application> {
-    if (! await this.applicationsService.canModerateApplication(id, user.id)) {
+    if (! await this.applicationsService.canModerateApplicationById(id, user.id)) {
       throw new ForbiddenException();
     }
 
