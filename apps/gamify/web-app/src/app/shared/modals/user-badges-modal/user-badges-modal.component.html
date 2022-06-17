@@ -1,0 +1,47 @@
+<div style="display: flex; flex-direction: column; max-height: 80vh;">
+    <h1>User badges of: {{data.user.user.firstName}} {{data.user.user.lastName}}</h1>
+
+    <coders-message-box [message$]="errorMessage$" style="margin-bottom: 10px; display: block;"></coders-message-box>
+
+    <h4>Assign badge to user</h4>
+    
+    <form [formGroup]="form" (ngSubmit)="assignBadge()" style="display: flex;">
+        <mat-form-field appearance="fill" style="flex-grow: 1;">
+            <mat-label>Badge</mat-label>
+            <mat-select formControlName="badge">
+                <mat-option *ngFor="let badge of data.badges" [value]="badge.id">{{ badge.name }} - {{ badge.tier }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <button type="submit" mat-raised-button color="primary" style="margin-left: 10px; margin-bottom: 1.34375em">Assign badge</button>
+    </form>    
+
+    <div style="overflow-y: scroll;">
+        <table #userBadgesTable mat-table [dataSource]="dataSource" class="mat-elevation-z2" style="width: 100%;">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Badge </th>
+                <td mat-cell *matCellDef="let element"> {{element.badge.name}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="tier">
+                <th mat-header-cell *matHeaderCellDef> Tier </th>
+                <td mat-cell *matCellDef="let element"> {{element.badge.tier}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="earnedAt">
+                <th mat-header-cell *matHeaderCellDef> Earned at </th>
+                <td mat-cell *matCellDef="let element"> {{element.earnedAt | date:"medium"}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <button mat-raised-button color="warn" (click)="removeBadge(element.id)">Remove</button>
+                </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

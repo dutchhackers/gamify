@@ -1,7 +1,7 @@
 import { Type } from "class-transformer";
 import { IsInt } from "class-validator";
 
-export class GiveBadgeDto {
+export class AssignBadgeDto {
     
     @IsInt()
     @Type(() => Number)

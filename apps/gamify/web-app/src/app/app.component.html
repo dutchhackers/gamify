@@ -1,1 +1,25 @@
-<coders-nx-welcome></coders-nx-welcome> <router-outlet></router-outlet>
+<div *ngIf="uiSettings.showSpinner" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!uiSettings.showSpinner">
+    <router-outlet *ngIf="!uiSettings.showAppWrapper"></router-outlet>
+
+    <div class="app-wrapper" *ngIf="uiSettings.showAppWrapper">
+        <coders-toolbar [user]="user"></coders-toolbar>
+        
+        <!-- Creates a layout with a left-positioned sidenav and explicit content. -->
+        <mat-sidenav-container>
+            <mat-sidenav #drawer [opened]="isOnAdminPage" mode="side">
+                <mat-nav-list role="list">
+                    <mat-list-item routerLink="/admin/dashboard">Dashboard</mat-list-item>
+                    <mat-list-item routerLink="/admin/applications">Applications</mat-list-item>
+                    <mat-list-item>Users</mat-list-item>
+                </mat-nav-list>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </div>
+</div>

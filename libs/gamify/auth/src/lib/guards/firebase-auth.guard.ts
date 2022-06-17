@@ -9,7 +9,7 @@ export class FirebaseAuthGuard extends AuthGuard('firebase-auth') {
     super();
   }
 
-  canActivate(context: ExecutionContext) {
+  override canActivate(context: ExecutionContext) {
     // Add @SetMetadata('public', true) to the controller method to allow access to the route without authentication.
     const isPublic = this.reflector.getAllAndOverride<boolean>('public', [
       context.getHandler(),

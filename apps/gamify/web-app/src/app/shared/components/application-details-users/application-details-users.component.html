@@ -1,0 +1,25 @@
+<div style="display: flex; flex-direction: column;">
+    <h1 style="margin-top: 10px;">Application Users</h1>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.user?.firstName}} {{element.user?.lastName}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="joinedAt">
+            <th mat-header-cell *matHeaderCellDef> Joined At </th>
+            <td mat-cell *matCellDef="let element"> {{element.joinedAt | date:"medium"}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-raised-button color="primary" (click)="openManageBadgesModal(element)">Manage Badges</button>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

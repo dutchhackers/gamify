@@ -9,6 +9,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { AppModule } from './app/app.module';
 import { FirebaseAuthGuard, RolesGuard } from '@gamify/auth';
+import { configure } from './bootstrap';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,11 +20,14 @@ async function bootstrap() {
     transform: true,
     whitelist: true,
   }));
+  app.enableCors();
 
   const authGuard = app.get(FirebaseAuthGuard);
   const rolesGuard = app.get(RolesGuard);
   app.useGlobalGuards(authGuard, rolesGuard);
 
+  // Swagger config setup
+  configure(app);
 
   const port = config.get<number>('port');
   await app.listen(port);

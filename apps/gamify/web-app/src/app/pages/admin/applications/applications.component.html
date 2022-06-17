@@ -1,0 +1,42 @@
+<h1>Applications</h1>
+
+<a mat-raised-button color="primary" routerLink="create">Create new application</a>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z2" style="width: 100%; margin-top: 10px">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.applicationType}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="players">
+      <th mat-header-cell *matHeaderCellDef> Players </th>
+      <td mat-cell *matCellDef="let element"> {{element.players}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="badges">
+      <th mat-header-cell *matHeaderCellDef> Badges </th>
+      <td mat-cell *matCellDef="let element"> {{element.badges}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element"> 
+        <a mat-raised-button [routerLink]="['/admin/applications/', element.id]" color="primary">Edit</a>
+        <button mat-raised-button color="warn" style="margin-left: 6px" (click)="openDeleteDialog(element)">Delete</button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

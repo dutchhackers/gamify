@@ -48,7 +48,13 @@
           "namedChunks": true
         }
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "production",
+      "dependsOn": [
+        {
+          "target": "generate",
+          "projects": "dependencies"
+        }
+      ]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
@@ -86,5 +92,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["scope:gamify", "type:app"]
 }
