@@ -28,7 +28,7 @@ export class ApplicationsComponent implements OnInit {
       width: '400px',
       data: {
         title: 'Delete application',
-        message: 'Are you sure you want to delete this application?',
+        message: 'Are you sure you want to delete this application? This will permanently delete all associated data, e.g. players, badges, etc.',
       }
     });
 
