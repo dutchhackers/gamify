@@ -1,5 +1,4 @@
 {
-  "root": "libs/crm/badge",
   "sourceRoot": "libs/crm/badge/src",
   "projectType": "library",
   "targets": {

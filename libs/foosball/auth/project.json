@@ -1,5 +1,4 @@
 {
-  "root": "libs/foosball/auth",
   "sourceRoot": "libs/foosball/auth/src",
   "projectType": "library",
   "targets": {

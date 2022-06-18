@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'foosball-data',
 
   globals: {
@@ -12,5 +12,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/foosball/data',
-  preset: '../../../jest.preset.ts',
+  preset: '../../../jest.preset.js',
 };

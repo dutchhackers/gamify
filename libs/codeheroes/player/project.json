@@ -1,5 +1,4 @@
 {
-  "root": "libs/codeheroes/player",
   "sourceRoot": "libs/codeheroes/player/src",
   "projectType": "library",
   "targets": {

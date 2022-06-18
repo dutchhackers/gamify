@@ -1,5 +1,4 @@
 {
-  "root": "libs/crm/core",
   "sourceRoot": "libs/crm/core/src",
   "projectType": "library",
   "targets": {

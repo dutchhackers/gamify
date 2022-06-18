@@ -1,5 +1,4 @@
 {
-  "root": "apps/foosball/api",
   "sourceRoot": "apps/foosball/api/src",
   "projectType": "application",
   "targets": {
