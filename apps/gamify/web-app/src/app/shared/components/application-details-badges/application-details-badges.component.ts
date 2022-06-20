@@ -171,7 +171,7 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
       width: '400px',
       data: {
         title: 'Delete badge',
-        message: 'Are you sure you want to delete this badge?',
+        message: 'Are you sure you want to delete this badge? Every user who obtained this badge will lose it.',
       }
     });
 

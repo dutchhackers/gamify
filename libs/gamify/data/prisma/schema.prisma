@@ -38,7 +38,7 @@ model Badge {
     id                   Int         @id @default(autoincrement())
     createdAt            DateTime    @default(now())
     name                 String
-    application          Application @relation(fields: [applicationId], references: [id])
+    application          Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
     applicationId        Int
     iconPath             String?
     tier                 String
@@ -48,9 +48,9 @@ model Badge {
 }
 
 model ApplicationUser {
-    application   Application @relation(fields: [applicationId], references: [id])
+    application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
     applicationId Int
-    user          User        @relation(fields: [userId], references: [id])
+    user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId        Int
     joinedAt      DateTime    @default(now())
 
@@ -59,9 +59,9 @@ model ApplicationUser {
 
 model UserBadge {
     id       Int      @id @default(autoincrement())
-    user     User     @relation(fields: [userId], references: [id])
+    user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId   Int
-    badge    Badge    @relation(fields: [badgeId], references: [id])
+    badge    Badge    @relation(fields: [badgeId], references: [id], onDelete: Cascade)
     badgeId  Int
     earnedAt DateTime @default(now())
 }

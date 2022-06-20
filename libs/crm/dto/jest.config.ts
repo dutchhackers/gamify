@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'crm-dto',
 
   globals: {
@@ -12,5 +12,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/crm/dto',
-  preset: '../../../jest.preset.ts',
+  preset: '../../../jest.preset.js',
 };

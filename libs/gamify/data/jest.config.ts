@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'gamify-data',
 
   globals: {
@@ -12,5 +12,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../coverage/libs/gamify/data',
-  preset: '../../../jest.preset.ts',
+  preset: '../../../jest.preset.js',
 };

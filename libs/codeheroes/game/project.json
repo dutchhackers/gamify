@@ -1,5 +1,4 @@
 {
-  "root": "libs/codeheroes/game",
   "sourceRoot": "libs/codeheroes/game/src",
   "projectType": "library",
   "targets": {

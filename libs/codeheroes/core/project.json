@@ -1,5 +1,4 @@
 {
-  "root": "libs/codeheroes/core",
   "sourceRoot": "libs/codeheroes/core/src",
   "projectType": "library",
   "targets": {
