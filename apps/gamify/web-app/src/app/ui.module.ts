@@ -20,6 +20,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
     declarations: [],
@@ -46,7 +47,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatDividerModule,
         MatExpansionModule,
         MatProgressBarModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatBadgeModule
     ]
   })
   export class UiModule {}

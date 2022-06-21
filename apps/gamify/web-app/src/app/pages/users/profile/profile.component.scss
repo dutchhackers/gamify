@@ -1,3 +1,5 @@
+$bronze-color: #CD7F32;
+
 .profile-picture {
     width: 100%;
     border-radius: 50%;
@@ -7,18 +9,42 @@
 }
 
 
+.badges-list {
+    .badge-icon {
+        width: 80px;
+        border-radius: 6px;
+        margin: 0 5px;
 
-.badge-icon {
-    width: 80px;
-    border-radius: 6px;
-    margin: 0 5px;
+        &.border {
+            border-width: 2px;
+            border-style: solid;
+        }
+    
+        &.small {
+            width: 60px;
+            margin: 0 3px;
+        }
+
+        &.bronze {
+            border-color: $bronze-color;
+        }
+        &.silver {
+            border-color: #C0C0C0
+        }
+        &.gold {
+            border-color: #FFD700;
+        }
+        &.platinum {
+            border-color: #93ebff;
+        }
+    }
+
+    .badge-icon:first-child {
+        margin-left: 0;
+    }
 }
 
-.favorite-badges .badge-icon:first-child {
-    margin-left: 0;
-}
-
-.application-badges-count {
+.badges-count {
     display: flex;
 
     .badge {
@@ -31,22 +57,33 @@
             font-size: 13px;
             font-weight: 300;
         }
+
+        .bronze {
+            color: $bronze-color;
+        }
+        .silver {
+            color: #C0C0C0
+        }
+        .gold {
+            color: #FFD700;
+        }
+        .platinum {
+            color: #93ebff;
+        }
+
+        &.large {
+            mat-icon {
+                width: 48px;
+                height: 48px;
+                // transform: scale(2);
+                font-size: 48px;
+            }
+        }
     }
 
     .badge:last-child {
         margin-right: 0;
     }
 
-    .bronze {
-        color: #CD7F32;
-    }
-    .silver {
-        color: #C0C0C0
-    }
-    .gold {
-        color: #FFD700;
-    }
-    .platinum {
-        color: #93ebff;
-    }
+    
 }

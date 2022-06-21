@@ -10,37 +10,61 @@
             <mat-divider style="margin: 8px 0;"></mat-divider>
 
             <p>Bla bla</p>
-
-            
         </div>
 
         <div style="width: 80%; margin-left: 30px;">
-            <div>
-                <h2 style="margin-bottom: 8px;">Favorite badges</h2>
-                
-                <div class="favorite-badges">
-                    <img src="https://via.placeholder.com/150" class="badge-icon">
-                    <img src="https://via.placeholder.com/150" class="badge-icon">
-                    <img src="https://via.placeholder.com/150" class="badge-icon">
-                    <img src="https://via.placeholder.com/150" class="badge-icon">
-                    <img src="https://via.placeholder.com/150" class="badge-icon">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <h2 style="margin-bottom: 8px;">Favorite badges</h2>
+                    
+                    <div class="badges-list">
+                        <img src="https://via.placeholder.com/150" class="badge-icon border bronze">
+                        <img src="https://via.placeholder.com/150" class="badge-icon border silver">
+                        <img src="https://via.placeholder.com/150" class="badge-icon border gold">
+                        <img src="https://via.placeholder.com/150" class="badge-icon border gold">
+                        <img src="https://via.placeholder.com/150" class="badge-icon border platinum">
+                    </div>
+                </div>
+                <div>
+                    <h2 style="margin-bottom: 8px;">Total badges</h2>
+                    <div class="badges-count">
+                        <div class="badge large">
+                            <mat-icon class="bronze" aria-hidden="false" aria-label="Bronze Badge Count">workspace_premium</mat-icon>
+                            <span>20</span>
+                        </div>
+                        
+                        <div class="badge large">
+                            <mat-icon class="silver" aria-hidden="false" aria-label="Silver Badge Count">workspace_premium</mat-icon>
+                            <span>20</span>
+                        </div>
+                        
+                        <div class="badge large">
+                            <mat-icon class="gold" aria-hidden="false" aria-label="Gold Badge Count">workspace_premium</mat-icon>
+                            <span>20</span>
+                        </div>
+                        
+                        <div class="badge large">
+                            <mat-icon class="platinum" aria-hidden="false" aria-label="Platinum Badge Count">workspace_premium</mat-icon>
+                            <span>20</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <mat-tab-group>
                 <mat-tab label="Games">
                     
-                    <div style="margin-top: 10px; padding: 10px;">
-                        <mat-accordion>
-                            <mat-expansion-panel>
+                    <div style="margin-top: 10px; padding: 5px;">
+                        <mat-accordion multi>
+                            <mat-expansion-panel *ngFor="let number of [0]" expanded="true">
                                 <mat-expansion-panel-header style="height: 104px;">
-                                    <img src="https://via.placeholder.com/150" style="width: 80px;">
+                                    <img src="https://via.placeholder.com/150" style="width: 80px; border-radius: 6px;">
 
                                     <div style="margin: 0 10px; width: 100%; display: flex; justify-content: space-between; flex-direction: column;">
                                         <div style="display: flex; justify-content: space-between;">
                                             <h2 style="margin-bottom: 0;">Code Heroes</h2>
 
-                                            <div class="application-badges-count">
+                                            <div class="badges-count">
                                                 <div class="badge">
                                                     <mat-icon class="bronze" aria-hidden="false" aria-label="Bronze Badge Count">workspace_premium</mat-icon>
                                                     <span>5</span>
@@ -63,7 +87,6 @@
                                                 
                                             </div>
                                         </div>
-                                        
 
                                         <div>
                                             <span style="font-weight: 300">10/25 Badges obtained</span>
@@ -74,7 +97,29 @@
                                 </mat-expansion-panel-header>
 
                                 <div>
-                                    <p>Game content</p>
+                                    <mat-divider></mat-divider>
+
+                                    <h3 style="margin-bottom: 0">5 Obtained badges</h3>
+
+                                    <div class="badges-list">
+                                        <img src="https://via.placeholder.com/150" class="badge-icon small border gold" *ngFor="let number of [0,1,2,3,4]">
+                                    </div>
+                                    
+                                    <mat-divider style="margin-top: 5px;"></mat-divider>
+
+                                    <h3 style="margin-bottom: 0">5 Badges In progress</h3>
+
+                                    <div class="badges-list">
+                                        <img src="https://via.placeholder.com/150" class="badge-icon small border bronze" *ngFor="let number of [0,1,2,3,4]">
+                                    </div>
+
+                                    <mat-divider style="margin-top: 5px;"></mat-divider>
+
+                                    <h3 style="margin-bottom: 0">5 Unobtained badges</h3>
+
+                                    <div class="badges-list">
+                                        <img src="https://via.placeholder.com/150" class="badge-icon small border platinum" *ngFor="let number of [0,1,2,3,4]">
+                                    </div>
                                 </div>
                                 
                             </mat-expansion-panel>
