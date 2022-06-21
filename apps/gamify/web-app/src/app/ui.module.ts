@@ -18,6 +18,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
     declarations: [],
@@ -42,7 +44,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatCardModule,
         MatProgressSpinnerModule,
         MatDividerModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatProgressBarModule,
+        MatTooltipModule
     ]
   })
   export class UiModule {}

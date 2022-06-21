@@ -32,18 +32,54 @@
                     
                     <div style="margin-top: 10px; padding: 10px;">
                         <mat-accordion>
-                            <mat-expansion-panel >
-                                <mat-expansion-panel-header style="height: 80px;">
-                                    <mat-panel-title>
-                                        <img src="https://via.placeholder.com/150" style="width: 100px;">
-                                        Game 1
-                                    </mat-panel-title>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header style="height: 104px;">
+                                    <img src="https://via.placeholder.com/150" style="width: 80px;">
+
+                                    <div style="margin: 0 10px; width: 100%; display: flex; justify-content: space-between; flex-direction: column;">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <h2 style="margin-bottom: 0;">Code Heroes</h2>
+
+                                            <div class="application-badges-count">
+                                                <div class="badge">
+                                                    <mat-icon class="bronze" aria-hidden="false" aria-label="Bronze Badge Count">workspace_premium</mat-icon>
+                                                    <span>5</span>
+                                                </div>
+                                                
+                                                <div class="badge">
+                                                    <mat-icon class="silver" aria-hidden="false" aria-label="Silver Badge Count">workspace_premium</mat-icon>
+                                                    <span>10</span>
+                                                </div>
+
+                                                <div class="badge">
+                                                    <mat-icon class="gold" aria-hidden="false" aria-label="Gold Badge Count">workspace_premium</mat-icon>
+                                                    <span>15</span>
+                                                </div>
+
+                                                <div class="badge">
+                                                    <mat-icon class="platinum" aria-hidden="false" aria-label="Platinum Badge Count">workspace_premium</mat-icon>
+                                                    <span>20</span>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+
+                                        <div>
+                                            <span style="font-weight: 300">10/25 Badges obtained</span>
+                                            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                                        </div>
+                                    </div>
+                                    
                                 </mat-expansion-panel-header>
-                                <p>Game content</p>
+
+                                <div>
+                                    <p>Game content</p>
+                                </div>
+                                
                             </mat-expansion-panel>
                         </mat-accordion>
                     </div>
-                    
 
                 </mat-tab>
 
