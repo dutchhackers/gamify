@@ -16,6 +16,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
     declarations: [],
@@ -38,7 +40,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatCheckboxModule,
         MatSnackBarModule,
         MatCardModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDividerModule,
+        MatExpansionModule
     ]
   })
   export class UiModule {}

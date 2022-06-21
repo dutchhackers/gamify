@@ -1,0 +1,19 @@
+.profile-picture {
+    width: 100%;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+
+
+.badge-icon {
+    width: 80px;
+    border-radius: 6px;
+    margin: 0 5px;
+}
+
+.favorite-badges .badge-icon:first-child {
+    margin-left: 0;
+}
