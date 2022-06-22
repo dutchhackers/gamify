@@ -1,0 +1,13 @@
+<div matTooltip="Bla bla">
+    <img 
+        src="https://via.placeholder.com/150"
+        class="badge-icon border"
+        
+        [ngClass]="{
+            'large': large,
+            'bronze': tier === 'BRONZE',
+            'silver': tier === 'SILVER',
+            'gold': tier === 'GOLD',
+            'platinum': tier === 'PLATINUM'
+        }">
+</div>

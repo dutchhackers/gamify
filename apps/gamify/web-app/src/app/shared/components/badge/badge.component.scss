@@ -1,0 +1,34 @@
+.badge-icon {
+    
+    border-radius: 6px;
+    
+    width: 60px;
+    margin: 0 3px;
+
+    &.border {
+        border-width: 2px;
+        border-style: solid;
+    }
+
+    &.large {
+        width: 80px;
+        margin: 0 5px;
+    }
+
+    &.bronze {
+        border-color: #CD7F32;
+    }
+    &.silver {
+        border-color: #C0C0C0
+    }
+    &.gold {
+        border-color: #FFD700;
+    }
+    &.platinum {
+        border-color: #93ebff;
+    }
+}
+
+.badge-icon:first-child {
+    margin-left: 0;
+}

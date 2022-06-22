@@ -1,47 +1,9 @@
-$bronze-color: #CD7F32;
-
 .profile-picture {
     width: 100%;
     border-radius: 50%;
     margin: 0 auto;
     display: block;
     margin-bottom: 20px;
-}
-
-
-.badges-list {
-    .badge-icon {
-        width: 80px;
-        border-radius: 6px;
-        margin: 0 5px;
-
-        &.border {
-            border-width: 2px;
-            border-style: solid;
-        }
-    
-        &.small {
-            width: 60px;
-            margin: 0 3px;
-        }
-
-        &.bronze {
-            border-color: $bronze-color;
-        }
-        &.silver {
-            border-color: #C0C0C0
-        }
-        &.gold {
-            border-color: #FFD700;
-        }
-        &.platinum {
-            border-color: #93ebff;
-        }
-    }
-
-    .badge-icon:first-child {
-        margin-left: 0;
-    }
 }
 
 .badges-count {
@@ -59,7 +21,7 @@ $bronze-color: #CD7F32;
         }
 
         .bronze {
-            color: $bronze-color;
+            color: #CD7F32;
         }
         .silver {
             color: #C0C0C0

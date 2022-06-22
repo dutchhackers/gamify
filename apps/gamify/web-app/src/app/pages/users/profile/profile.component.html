@@ -15,14 +15,14 @@
         <div style="width: 80%; margin-left: 30px;">
             <div style="display: flex; justify-content: space-between;">
                 <div>
-                    <h2 style="margin-bottom: 8px;">Favorite badges</h2>
+                    <h2 style="margin-bottom: 8px;" >Favorite badges</h2>
                     
-                    <div class="badges-list">
-                        <img src="https://via.placeholder.com/150" class="badge-icon border bronze">
-                        <img src="https://via.placeholder.com/150" class="badge-icon border silver">
-                        <img src="https://via.placeholder.com/150" class="badge-icon border gold">
-                        <img src="https://via.placeholder.com/150" class="badge-icon border gold">
-                        <img src="https://via.placeholder.com/150" class="badge-icon border platinum">
+                    <div style="display: flex">
+                        <coders-badge [tier]="badgeTier.BRONZE" [large]="true"></coders-badge>
+                        <coders-badge [tier]="badgeTier.SILVER" [large]="true"> </coders-badge>
+                        <coders-badge [tier]="badgeTier.GOLD" [large]="true"> </coders-badge>
+                        <coders-badge [tier]="badgeTier.GOLD" [large]="true"> </coders-badge>
+                        <coders-badge [tier]="badgeTier.PLATINUM" [large]="true"> </coders-badge>
                     </div>
                 </div>
                 <div>
@@ -56,7 +56,7 @@
                     
                     <div style="margin-top: 10px; padding: 5px;">
                         <mat-accordion multi>
-                            <mat-expansion-panel *ngFor="let number of [0]" expanded="true">
+                            <mat-expansion-panel *ngFor="let number of [0, 1, 2]">
                                 <mat-expansion-panel-header style="height: 104px;">
                                     <img src="https://via.placeholder.com/150" style="width: 80px; border-radius: 6px;">
 
@@ -101,24 +101,24 @@
 
                                     <h3 style="margin-bottom: 0">5 Obtained badges</h3>
 
-                                    <div class="badges-list">
-                                        <img src="https://via.placeholder.com/150" class="badge-icon small border gold" *ngFor="let number of [0,1,2,3,4]">
+                                    <div style="display: flex;">
+                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.BRONZE"></coders-badge>
                                     </div>
                                     
                                     <mat-divider style="margin-top: 5px;"></mat-divider>
 
                                     <h3 style="margin-bottom: 0">5 Badges In progress</h3>
 
-                                    <div class="badges-list">
-                                        <img src="https://via.placeholder.com/150" class="badge-icon small border bronze" *ngFor="let number of [0,1,2,3,4]">
+                                    <div style="display: flex;">
+                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.GOLD"></coders-badge>
                                     </div>
 
                                     <mat-divider style="margin-top: 5px;"></mat-divider>
 
                                     <h3 style="margin-bottom: 0">5 Unobtained badges</h3>
 
-                                    <div class="badges-list">
-                                        <img src="https://via.placeholder.com/150" class="badge-icon small border platinum" *ngFor="let number of [0,1,2,3,4]">
+                                    <div style="display: flex;">
+                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.PLATINUM"></coders-badge>
                                     </div>
                                 </div>
                                 

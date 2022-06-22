@@ -21,10 +21,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
+import { BadgeComponent } from './shared/components/badge/badge.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-    declarations: [],
-    imports: [],
+    declarations: [
+        BadgeComponent
+    ],
+    imports: [
+        CommonModule,
+    ],
     providers: [],
     bootstrap: [],
     exports: [
@@ -48,7 +54,10 @@ import { MatBadgeModule } from '@angular/material/badge';
         MatExpansionModule,
         MatProgressBarModule,
         MatTooltipModule,
-        MatBadgeModule
+        MatBadgeModule,
+
+        // Components
+        BadgeComponent
     ]
   })
   export class UiModule {}
