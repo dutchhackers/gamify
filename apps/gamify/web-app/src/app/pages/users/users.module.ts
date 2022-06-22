@@ -8,7 +8,7 @@ import { UiModule } from '../../ui.module';
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

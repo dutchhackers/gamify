@@ -1,18 +1,44 @@
+.badge {
+    position: relative;
+
+    .badge-content {
+        position: absolute;
+        top: -3px;
+        right: 2px;
+        background: #001e4b;
+        color: white;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
+        text-align: center;
+        border-radius: 50%;
+        font-weight: 600;
+        font-size: 12px;
+
+        &.small {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            font-size: 10px;
+        }
+    }
+}
+
+
 .badge-icon {
     
     border-radius: 6px;
     
-    width: 60px;
-    margin: 0 3px;
+    width: 80px;
+    margin: 0 5px;
 
     &.border {
         border-width: 2px;
         border-style: solid;
     }
 
-    &.large {
-        width: 80px;
-        margin: 0 5px;
+    &.small {
+        width: 60px;
     }
 
     &.bronze {

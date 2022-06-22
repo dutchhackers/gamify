@@ -23,13 +23,39 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { BadgeComponent } from './shared/components/badge/badge.component';
 import { CommonModule } from '@angular/common';
+import { MessageBoxComponent } from './shared/components/message-box/message-box.component';
+import { UcfirstPipe } from './core/pipes/ucfirst.pipe';
 
 @NgModule({
     declarations: [
-        BadgeComponent
+        BadgeComponent,
+        MessageBoxComponent,
+        UcfirstPipe,
     ],
     imports: [
         CommonModule,
+
+        MatSliderModule, 
+        MatToolbarModule, 
+        MatSidenavModule, 
+        MatListModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+        MatTableModule,
+        MatTabsModule,
+        MatInputModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatSnackBarModule,
+        MatCardModule,
+        MatProgressSpinnerModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        MatBadgeModule,
     ],
     providers: [],
     bootstrap: [],
@@ -57,7 +83,11 @@ import { CommonModule } from '@angular/common';
         MatBadgeModule,
 
         // Components
-        BadgeComponent
+        BadgeComponent,
+        MessageBoxComponent,
+
+        // Pipes
+        UcfirstPipe,
     ]
   })
   export class UiModule {}

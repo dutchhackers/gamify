@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BadgeTier } from '@gamify/shared';
 
 @Component({
@@ -6,17 +6,11 @@ import { BadgeTier } from '@gamify/shared';
   templateUrl: './badge.component.html',
   styleUrls: ['./badge.component.scss']
 })
-export class BadgeComponent implements OnInit {
+export class BadgeComponent {
 
   @Input() name: string;
   @Input() tier: BadgeTier;
-  @Input() large?: boolean;
+  @Input() small?: boolean;
   @Input() imageUrl?: string;
   @Input() amount?: number;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

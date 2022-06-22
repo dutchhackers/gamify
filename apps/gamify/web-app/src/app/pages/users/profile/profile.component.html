@@ -15,35 +15,35 @@
         <div style="width: 80%; margin-left: 30px;">
             <div style="display: flex; justify-content: space-between;">
                 <div>
-                    <h2 style="margin-bottom: 8px;" >Favorite badges</h2>
+                    <h2 style="margin-bottom: 8px;">Favorite badges</h2>
                     
                     <div style="display: flex">
-                        <coders-badge [tier]="badgeTier.BRONZE" [large]="true"></coders-badge>
-                        <coders-badge [tier]="badgeTier.SILVER" [large]="true"> </coders-badge>
-                        <coders-badge [tier]="badgeTier.GOLD" [large]="true"> </coders-badge>
-                        <coders-badge [tier]="badgeTier.GOLD" [large]="true"> </coders-badge>
-                        <coders-badge [tier]="badgeTier.PLATINUM" [large]="true"> </coders-badge>
+                        <coders-badge name="Very cool badge" [tier]="badgeTier.BRONZE" [amount]="5"></coders-badge>
+                        <coders-badge [tier]="badgeTier.SILVER"> </coders-badge>
+                        <coders-badge [tier]="badgeTier.GOLD"> </coders-badge>
+                        <coders-badge [tier]="badgeTier.GOLD"> </coders-badge>
+                        <coders-badge [tier]="badgeTier.PLATINUM"> </coders-badge>
                     </div>
                 </div>
                 <div>
                     <h2 style="margin-bottom: 8px;">Total badges</h2>
                     <div class="badges-count">
-                        <div class="badge large">
+                        <div class="badge large" matTooltip="Total amount of bronze badges obtained">
                             <mat-icon class="bronze" aria-hidden="false" aria-label="Bronze Badge Count">workspace_premium</mat-icon>
                             <span>20</span>
                         </div>
                         
-                        <div class="badge large">
+                        <div class="badge large" matTooltip="Total amount of silver badges obtained">
                             <mat-icon class="silver" aria-hidden="false" aria-label="Silver Badge Count">workspace_premium</mat-icon>
                             <span>20</span>
                         </div>
                         
-                        <div class="badge large">
+                        <div class="badge large" matTooltip="Total amount of gold badges obtained">
                             <mat-icon class="gold" aria-hidden="false" aria-label="Gold Badge Count">workspace_premium</mat-icon>
                             <span>20</span>
                         </div>
                         
-                        <div class="badge large">
+                        <div class="badge large" matTooltip="Total amount of platinum badges obtained">
                             <mat-icon class="platinum" aria-hidden="false" aria-label="Platinum Badge Count">workspace_premium</mat-icon>
                             <span>20</span>
                         </div>
@@ -65,22 +65,22 @@
                                             <h2 style="margin-bottom: 0;">Code Heroes</h2>
 
                                             <div class="badges-count">
-                                                <div class="badge">
+                                                <div class="badge" matTooltip="Amount of bronze badges obtained within this game">
                                                     <mat-icon class="bronze" aria-hidden="false" aria-label="Bronze Badge Count">workspace_premium</mat-icon>
                                                     <span>5</span>
                                                 </div>
                                                 
-                                                <div class="badge">
+                                                <div class="badge" matTooltip="Amount of silver badges obtained within this game">
                                                     <mat-icon class="silver" aria-hidden="false" aria-label="Silver Badge Count">workspace_premium</mat-icon>
                                                     <span>10</span>
                                                 </div>
 
-                                                <div class="badge">
+                                                <div class="badge" matTooltip="Amount of gold badges obtained within this game">
                                                     <mat-icon class="gold" aria-hidden="false" aria-label="Gold Badge Count">workspace_premium</mat-icon>
                                                     <span>15</span>
                                                 </div>
 
-                                                <div class="badge">
+                                                <div class="badge" matTooltip="Amount of platinum badges obtained within this game">
                                                     <mat-icon class="platinum" aria-hidden="false" aria-label="Platinum Badge Count">workspace_premium</mat-icon>
                                                     <span>20</span>
                                                 </div>
@@ -102,7 +102,7 @@
                                     <h3 style="margin-bottom: 0">5 Obtained badges</h3>
 
                                     <div style="display: flex;">
-                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.BRONZE"></coders-badge>
+                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.BRONZE" [small]="true" [amount]="5"></coders-badge>
                                     </div>
                                     
                                     <mat-divider style="margin-top: 5px;"></mat-divider>
@@ -110,7 +110,7 @@
                                     <h3 style="margin-bottom: 0">5 Badges In progress</h3>
 
                                     <div style="display: flex;">
-                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.GOLD"></coders-badge>
+                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.GOLD" [small]="true"></coders-badge>
                                     </div>
 
                                     <mat-divider style="margin-top: 5px;"></mat-divider>
@@ -118,7 +118,7 @@
                                     <h3 style="margin-bottom: 0">5 Unobtained badges</h3>
 
                                     <div style="display: flex;">
-                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.PLATINUM"></coders-badge>
+                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.PLATINUM" [small]="true"></coders-badge>
                                     </div>
                                 </div>
                                 
