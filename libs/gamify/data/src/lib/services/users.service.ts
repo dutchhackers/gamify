@@ -1,3 +1,4 @@
+import { ApplicationUserConverter } from '@gamify/shared';
 import { Injectable } from '@nestjs/common';
 import { DataService } from '../data.service';
 
@@ -66,5 +67,24 @@ export class UsersService {
                 id: userBadgeId
             }
         });
+    }
+
+    async findUserApplications(userId: number) {
+        return (await this.data.applicationUser.findMany({
+            where: {
+                userId
+            },
+            select: {
+                userId: true,
+                applicationId: true,
+                joinedAt: true,
+                user: {
+                    select: {
+                        firstname: true,
+                        lastname: true,
+                    }
+                }
+            }
+        })).map(appUser => ApplicationUserConverter.fromPrismaApplicationUser(appUser));
     }
 }
