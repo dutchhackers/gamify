@@ -9,12 +9,11 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
     
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         return next.handle(req).pipe(
-            catchError(err => { 
-                console.log(err);
+            catchError(err => {
                 if (err.status === 401) {
                     this.router.navigate(['/login']);
                 }
-                return throwError(() => new Error(err.error.message));
+                return throwError(() => err);
             })
         )
     }
