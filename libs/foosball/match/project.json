@@ -1,5 +1,4 @@
 {
-  "root": "libs/foosball/match",
   "sourceRoot": "libs/foosball/match/src",
   "projectType": "library",
   "targets": {

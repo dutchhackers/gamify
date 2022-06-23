@@ -1,5 +1,4 @@
 {
-  "root": "libs/gamify/badges",
   "sourceRoot": "libs/gamify/badges/src",
   "targets": {
     "lint": {

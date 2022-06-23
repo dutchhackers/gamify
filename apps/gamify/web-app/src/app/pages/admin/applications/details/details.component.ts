@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Application } from '@gamify/shared';
+import { Application, Badge } from '@gamify/shared';
 import { Observable } from 'rxjs';
 import { ApplicationService } from '../../../../services/application.service';
 
@@ -14,6 +14,8 @@ export class DetailsComponent implements OnInit {
   application: Application | undefined;
   application$: Observable<Application> = new Observable<Application>();
   applicationId = 0;
+
+  badges: Badge[] = [];
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService) {}
 
@@ -29,5 +31,9 @@ export class DetailsComponent implements OnInit {
 
   updateApplication($event: Application) {
     this.application = $event;
+  }
+
+  updateBadges($event: Badge[]) {
+    this.badges = $event;
   }
 }

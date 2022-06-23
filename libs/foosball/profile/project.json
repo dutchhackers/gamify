@@ -1,5 +1,4 @@
 {
-  "root": "libs/foosball/profile",
   "sourceRoot": "libs/foosball/profile/src",
   "projectType": "library",
   "targets": {
