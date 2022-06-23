@@ -21,7 +21,7 @@ export class ApplicationsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const user = this.authService.getUser();
+    const user = this.authService.getUser$().getValue();
 
     this.applicationService.list$().subscribe(applications => {
       this.applications = applications;
