@@ -6,7 +6,7 @@
     <router-outlet *ngIf="!uiSettings.showAppWrapper"></router-outlet>
 
     <div class="app-wrapper" *ngIf="uiSettings.showAppWrapper">
-        <coders-toolbar [user]="user"></coders-toolbar>
+        <coders-toolbar></coders-toolbar>
         
         <!-- Creates a layout with a left-positioned sidenav and explicit content. -->
         <mat-sidenav-container>

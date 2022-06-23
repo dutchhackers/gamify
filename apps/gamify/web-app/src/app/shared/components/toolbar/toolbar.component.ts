@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '@gamify/shared';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class ToolbarComponent {
 
-  @Input() public user: User;
+  user$: BehaviorSubject<User> = this.authService.getUser$();
 
   constructor(private authService: AuthService) { }
 

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser, User } from '@gamify/shared';
-import { map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class AuthService {
 
   private authenticated = false;
 
-  private user: User;
+  private user$: BehaviorSubject<User> = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) { }
 
@@ -19,14 +19,15 @@ export class AuthService {
     return this.authenticated;
   }
 
-  getUser(): User {
-    return this.user;
+  getUser$(): BehaviorSubject<User> {
+    return this.user$;
   }
 
   canModerate(): boolean {
-    if (! this.user) return false;
+    const user = this.user$.getValue();
+    if (! user) return false;
 
-    switch (this.user.moderationRole) {
+    switch (user.moderationRole) {
       case 'ADMIN':
       case 'MODERATOR':
         return true;
@@ -57,7 +58,7 @@ export class AuthService {
     return this.http.get<IUser>(`${environment.apiUrl}/users/me`).pipe(
       map(res => res as User),
       tap(user => {
-        this.user = user;
+        this.user$.next(user);
         this.authenticated = true;
       }),
     )
