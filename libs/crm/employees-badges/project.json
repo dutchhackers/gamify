@@ -1,5 +1,4 @@
 {
-  "root": "libs/crm/employees-badges",
   "sourceRoot": "libs/crm/employees-badges/src",
   "projectType": "library",
   "targets": {

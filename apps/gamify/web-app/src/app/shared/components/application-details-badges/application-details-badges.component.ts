@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Badge, BadgeTier } from '@gamify/shared';
@@ -22,6 +22,8 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
   badgesDataSource: Badge[] = [];
   @ViewChild('badgesTable') badgesTable: any;
 
+  @Output() badgesUpdate: EventEmitter<Badge[]> = new EventEmitter<Badge[]>();
+
   constructor(
     public dialog: MatDialog, 
     private badgesService: BadgesService,
@@ -32,6 +34,7 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
     console.log('Application id: ' + this.applicationId);
     this.badgesService.list$(this.applicationId).subscribe(res => {
       this.badgesDataSource = res;
+      this.badgesUpdate.emit(this.badgesDataSource);
     });
   }
 
@@ -85,6 +88,7 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
         })
       ).subscribe(res => {
         this.badgesDataSource.push(res);
+        this.badgesUpdate.emit(this.badgesDataSource);
         this.badgesTable.renderRows();
         this.snackBar.open('Badge succesfully created!', 'Close', {
           horizontalPosition: 'center',	
@@ -151,6 +155,7 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
           }
           return badge;
         });
+        this.badgesUpdate.emit(this.badgesDataSource);
         this.badgesTable.renderRows();
         this.snackBar.open('Badge succesfully edited!', 'Close', {
           horizontalPosition: 'center',	
@@ -166,7 +171,7 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
       width: '400px',
       data: {
         title: 'Delete badge',
-        message: 'Are you sure you want to delete this badge?',
+        message: 'Are you sure you want to delete this badge? Every user who obtained this badge will lose it.',
       }
     });
 
@@ -175,6 +180,7 @@ export class ApplicationDetailsBadgesComponent implements OnInit {
 
       this.badgesService.delete$(badgeId).subscribe(() => {
         this.badgesDataSource = this.badgesDataSource.filter(item => item.id !== badgeId);
+        this.badgesUpdate.emit(this.badgesDataSource);
         this.badgesTable.renderRows();
         this.snackBar.open('Badge succesfully deleted!', 'Close', {
           horizontalPosition: 'center',	

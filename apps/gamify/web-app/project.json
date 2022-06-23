@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/gamify/web-app",
   "sourceRoot": "apps/gamify/web-app/src",
   "prefix": "coders",
   "targets": {

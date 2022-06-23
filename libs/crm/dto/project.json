@@ -1,5 +1,4 @@
 {
-  "root": "libs/crm/dto",
   "sourceRoot": "libs/crm/dto/src",
   "projectType": "library",
   "targets": {

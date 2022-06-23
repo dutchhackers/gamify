@@ -1,5 +1,4 @@
 {
-  "root": "libs/foosball/player",
   "sourceRoot": "libs/foosball/player/src",
   "projectType": "library",
   "targets": {
