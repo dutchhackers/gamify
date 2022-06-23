@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '@gamify/shared';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -7,15 +8,11 @@ import { AuthService } from '../../../services/auth.service';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent {
 
-  user: User;
+  user$: BehaviorSubject<User> = this.authService.getUser$();
 
   constructor(private authService: AuthService) { }
-
-  ngOnInit() {
-    this.authService.getUser$().subscribe(user => this.user = user);
-  }
 
   public canModerate(): boolean {
     return this.authService.canModerate();
