@@ -72,13 +72,13 @@
                     
                     <div style="margin-top: 10px; padding: 5px;">
                         <mat-accordion multi>
-                            <mat-expansion-panel *ngFor="let number of [0, 1, 2]">
+                            <mat-expansion-panel *ngFor="let userApp of userApplications">
                                 <mat-expansion-panel-header style="height: 104px;">
                                     <img src="https://via.placeholder.com/150" style="width: 80px; border-radius: 6px;">
 
                                     <div style="margin: 0 10px; width: 100%; display: flex; justify-content: space-between; flex-direction: column;">
                                         <div style="display: flex; justify-content: space-between;">
-                                            <h2 style="margin-bottom: 0;">Code Heroes</h2>
+                                            <h2 style="margin-bottom: 0;">{{ userApp.application.name }}</h2>
 
                                             <div class="badges-count">
                                                 <div class="badge" matTooltip="Amount of bronze badges obtained within this game">
@@ -121,13 +121,13 @@
                                         <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.BRONZE" [small]="true" [amount]="5"></coders-badge>
                                     </div>
                                     
-                                    <mat-divider style="margin-top: 5px;"></mat-divider>
+                                    <!-- <mat-divider style="margin-top: 5px;"></mat-divider>
 
                                     <h3 style="margin-bottom: 0">5 Badges In progress</h3>
 
                                     <div style="display: flex;">
                                         <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.GOLD" [small]="true"></coders-badge>
-                                    </div>
+                                    </div> -->
 
                                     <mat-divider style="margin-top: 5px;"></mat-divider>
 
