@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Application, ApplicationUser, Badge, BadgeTier, UserBadge } from '@gamify/shared';
+import { Application, ApplicationUser, Badge, BadgeTier, IFavoriteBadge, UserBadge } from '@gamify/shared';
 import { combineLatestWith } from 'rxjs';
 import { ApplicationService } from '../../../services/application.service';
 import { AuthService } from '../../../services/auth.service';
@@ -15,12 +15,7 @@ interface UserApplicationProfile {
     GOLD: number,
     PLATINUM: number
   },
-  obtainedBadges: { 
-    [key: number]: {
-      badge: Badge,
-      amount: number
-    }
-  },
+  obtainedBadges: ObtainedBadges,
   unobtainedBadges: Badge[],
 
   obtainedBadgesCount: number,
@@ -37,6 +32,22 @@ interface Stats {
   platinumBadges: number,
 }
 
+interface FavoriteBadge {
+  badge: {
+    name: string,
+    tier: BadgeTier,
+  },
+  amount: number,
+  priority: number
+}
+
+interface ObtainedBadges {
+  [key: number]: {
+    badge: Badge,
+    amount: number
+  }
+}
+
 @Component({
   selector: 'coders-profile',
   templateUrl: './profile.component.html',
@@ -51,10 +62,7 @@ export class ProfileComponent implements OnInit {
     "PLATINUM": BadgeTier.PLATINUM
   }
 
-  favoriteBadges: {
-    badge: Badge,
-    amount: number
-  }[] = [];
+  favoriteBadges: FavoriteBadge[] = [];
 
   stats: Stats = {
     totalBadges: 0,
@@ -83,18 +91,19 @@ export class ProfileComponent implements OnInit {
     const applications = this.applicationService.list$();
     const badges = this.badgesService.list$();
     const userBadges = this.usersService.listUserBadges$(user.id);
+    const favoriteBadges = this.usersService.listFavoriteBadges$(user.id);
     
     userApplications.pipe(
-      combineLatestWith(applications, badges, userBadges)
-    ).subscribe(([userApplications, applications, badges, userBadges]) => {
-      this.userApplications = this.aggregateUserApplications(userApplications, applications, badges, userBadges);
-      console.log(this.userApplications);
-      this.stats = this.calculateStats(userApplications, userBadges);
+      combineLatestWith(applications, badges, userBadges, favoriteBadges),
+    ).subscribe(([userApplications, applications, badges, userBadges, favoriteBadges]) => {
+      this.aggregateUserApplications(userApplications, applications, badges, userBadges);
+      this.calculateStats(userApplications, userBadges);
+      this.calculateFavoriteBadges(favoriteBadges, userBadges);
     });
   }
 
-  private aggregateUserApplications(userApplications: ApplicationUser[], applications: Application[], badges: Badge[], userBadges: UserBadge[]): UserApplicationProfile[] {
-    return userApplications.map(userApplication => {
+  private aggregateUserApplications(userApplications: ApplicationUser[], applications: Application[], badges: Badge[], userBadges: UserBadge[]) {
+    this.userApplications = userApplications.map(userApplication => {
       const application = applications.find(app => app.id === userApplication.applicationId);
       const applicationBadges = badges.filter(badge => badge.applicationId === application.id);
       const applicationUserBadges = userBadges.filter(userBadge => userBadge.badge.applicationId === application.id);
@@ -106,12 +115,7 @@ export class ProfileComponent implements OnInit {
         PLATINUM: 0
       }
 
-      const obtainedBadges: {
-        [key: number]: {
-          badge: Badge,
-          amount: number
-        }
-      } = {};
+      const obtainedBadges: ObtainedBadges = {};
       let obtainedBadgesCount = 0;
 
       applicationUserBadges.forEach(userBadge => {
@@ -155,7 +159,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  private calculateStats(userApplications: ApplicationUser[], userBadges: UserBadge[]): Stats {
+  private calculateStats(userApplications: ApplicationUser[], userBadges: UserBadge[]) {
     const stats = {
       totalBadges: 0,
       totalGames: 0,
@@ -185,7 +189,30 @@ export class ProfileComponent implements OnInit {
       }
     });
 
-    return stats;
+    this.stats = stats;
   }
 
+  private calculateFavoriteBadges(favoriteBadges: IFavoriteBadge[], userBadges: UserBadge[]) {
+    this.favoriteBadges = favoriteBadges.map(favoriteBadge => { 
+      let amount = 0;
+      userBadges.forEach(userBadge => {
+        if (userBadge.badgeId === favoriteBadge.badgeId) {
+          amount++;
+        }
+      })
+
+      return {
+        badge: {
+          name: favoriteBadge.badge.name,
+          tier: favoriteBadge.badge.tier
+        },
+        amount,
+        priority: favoriteBadge.priority
+      }
+    })
+    // Sort the badges by priority, the badge with the highest priority is shown first (left)
+    .sort((a, b) => {
+      return b.priority - a.priority;
+    }).splice(0, 5);
+  }
 }
