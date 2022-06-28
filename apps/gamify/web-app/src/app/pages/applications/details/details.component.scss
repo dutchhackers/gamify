@@ -1,0 +1,8 @@
+.player-avatar {
+    margin: 0 3px;
+    border-radius: 6px;
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
