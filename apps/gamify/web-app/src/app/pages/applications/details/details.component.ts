@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Application, ApplicationUser } from '@gamify/shared';
+import { Application, ApplicationUser, Badge, UserBadge } from '@gamify/shared';
 import { catchError, throwError } from 'rxjs';
 import { ApplicationService } from '../../../services/application.service';
 import { AuthService } from '../../../services/auth.service';
+import { BadgesService } from '../../../services/badges.service';
 import { UsersService } from '../../../services/users.service';
 
 @Component({
@@ -18,6 +19,12 @@ export class DetailsComponent implements OnInit {
   applicationUsers: ApplicationUser[] = [];
   application: Application;
 
+  availableBadges: Badge[] = [];
+
+  hasJoinedApplication = false;
+
+  userBadges: UserBadge[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
@@ -25,6 +32,7 @@ export class DetailsComponent implements OnInit {
     private readonly usersService: UsersService,
     private readonly authService: AuthService,
     private readonly applicationService: ApplicationService,
+    private readonly badgesService: BadgesService
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +58,20 @@ export class DetailsComponent implements OnInit {
 
       this.usersService.listUserApplications$(user.id).subscribe(applicationUsers => {
         this.applicationUsers = applicationUsers;
+        this.hasJoinedApplication = applicationUsers.some(applicationUser => applicationUser.applicationId === this.applicationId);
+
+        if (this.hasJoinedApplication) {
+          this.usersService.listUserBadges$(user.id).subscribe(badges => {
+            this.userBadges = badges;
+          });
+        }
       });
+
+      this.badgesService.list$(this.applicationId).subscribe(badges => {
+        this.availableBadges = badges;
+      });
+
+      // const userBadges = this.usersService.listUserBadges$(user.id);
     })
   }
 

@@ -3,8 +3,8 @@
         <div style="width: 60%; padding: 0 10px">
             <div style="display: flex; justify-content: space-between;">
                 <div>
-                    <h1 style="margin-bottom: 8px;">Code Heroes</h1>
-                    <p style="margin-bottom: 0;">5 Other player people are playing this game</p>
+                    <h1 style="margin-bottom: 8px;">{{ application?.name }}</h1>
+                    <p style="margin-bottom: 4px; font-weight: 300;" >5 Other player people are playing this game</p>
                     <div>
                         <img src="https://via.placeholder.com/80" class="player-avatar" *ngFor="let item of [0, 1, 2, 3, 4]">
                     </div>
@@ -15,20 +15,26 @@
             </div>
 
             <div>
-                <h3 style="margin-bottom: 4px">Description</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni nemo quam, quas molestias reiciendis velit. Explicabo aliquid esse cum incidunt! Ipsam rem quis tenetur harum ut eaque maiores autem fugiat.</p>
+                <h3 style="margin: 4px 0;">Description</h3>
+                <p>{{ application?.description }}</p>
 
-                <h3 style="margin-bottom: 0;">Obtained badges 4/10 (40%)</h3>
-                <mat-progress-bar mode="determinate" value="40" style="margin-bottom: 8px;"></mat-progress-bar>
-                <div>
-                    <!-- Replace this image with the coders-badge component in the profile page branch -->
-                    <img src="https://via.placeholder.com/80" class="player-avatar" *ngFor="let item of [0, 1, 2, 3, 4]"> 
+                <div *ngIf="hasJoinedApplication">
+                    <mat-divider style="margin: 8px 0"></mat-divider>
+
+                    <h3 style="margin-bottom: 0;">Your obtained badges 4/10 (40%)</h3>
+                    <mat-progress-bar mode="determinate" value="40" style="margin-bottom: 8px;"></mat-progress-bar>
+                    <div>
+                        <!-- Replace this image with the coders-badge component in the profile page branch -->
+                        <img src="https://via.placeholder.com/80" class="badge" *ngFor="let item of [0, 1, 2, 3, 4]"> 
+                    </div>
                 </div>
 
-                <h3 style="margin-bottom: 4px;">Available badges</h3>
+                <mat-divider style="margin: 8px 0"></mat-divider>
+
+                <h3 style="margin-bottom: 4px;">All available badges</h3>
                 <div>
                     <!-- Replace this image with the coders-badge component in the profile page branch -->
-                    <img src="https://via.placeholder.com/80" class="player-avatar" *ngFor="let item of [0, 1, 2, 3, 4]"> 
+                    <img src="https://via.placeholder.com/80" class="badge" *ngFor="let badge of availableBadges"> 
                 </div>
             </div>
         </div>
