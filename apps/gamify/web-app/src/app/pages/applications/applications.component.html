@@ -7,9 +7,8 @@
                 <h1 style="text-align: center">{{ application.name }}</h1>
 
                 <div style="display: flex; justify-content: space-between; margin-top: 40px;">
-                    <a mat-raised-button color="primary" [routerLink]="'/games/' + application.id">Info</a>
-                    <button mat-raised-button color="accent" *ngIf="! hasJoinedApplication(application.id)" (click)="joinApplication(application.id)">Join game</button>
-                    <button mat-raised-button disabled *ngIf="hasJoinedApplication(application.id)">Joined</button>
+                    <a mat-raised-button color="primary" [routerLink]="'/applications/' + application.id">Info</a>
+                    <coders-join-application-button [applicationId]="application.id" [applicationUsers]="applicationUsers"></coders-join-application-button>
                 </div>
             </mat-card>
         </div>

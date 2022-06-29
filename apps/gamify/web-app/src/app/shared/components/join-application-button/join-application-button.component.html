@@ -1,1 +1,2 @@
-<p>join-application-button works!</p>
+<button mat-raised-button color="accent" *ngIf="! hasJoinedApplication(applicationId)" (click)="joinApplication(applicationId)">Join game</button>
+<button mat-raised-button disabled *ngIf="hasJoinedApplication(applicationId)">Joined</button>

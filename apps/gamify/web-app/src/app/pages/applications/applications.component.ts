@@ -30,14 +30,4 @@ export class ApplicationsComponent implements OnInit {
       this.applicationUsers = applicationUsers;
     });
   }
-
-  hasJoinedApplication(applicationId: number) {
-    return this.applicationUsers.some(applicationUser => applicationUser.applicationId === applicationId);
-  }
-
-  joinApplication(applicationId: number) {
-    this.userService.joinApplication$(applicationId).subscribe(applicationUser => {
-      this.applicationUsers.push(applicationUser);
-    });
-  }
 }
