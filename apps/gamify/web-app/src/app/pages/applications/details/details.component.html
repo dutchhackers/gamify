@@ -36,6 +36,7 @@
                     <!-- Replace this image with the coders-badge component in the profile page branch -->
                     <img src="https://via.placeholder.com/80" class="badge" *ngFor="let badge of availableBadges"> 
                 </div>
+                <p *ngIf="availableBadges.length === 0" style="font-weight: 300; font-style: italic;">There are no badges in this application :-(</p>
             </div>
         </div>
         <div style="width: 40%">
