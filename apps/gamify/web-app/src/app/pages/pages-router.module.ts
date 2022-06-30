@@ -18,6 +18,10 @@ const routes: Routes = [
         component: ApplicationsComponent
     },
     {
+        path: "users",
+        loadChildren: () => import("./users/users.module").then(m => m.UsersModule)
+    },
+    {
         path: "admin",
         loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
     },

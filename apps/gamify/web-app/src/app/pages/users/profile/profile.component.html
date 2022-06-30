@@ -1,0 +1,164 @@
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+    <div style="width: 1280px; display: flex;">
+
+        <div style="width: 20%;">
+            <img src="/assets/profile_avatar_placeholder.png" class="profile-picture">
+
+            <h1 style="margin-bottom: 0;">{{ (user$ | async)?.firstname }} {{ (user$ | async)?.lastname }}</h1>
+            <h4 style="margin-bottom: 0; font-weight: 300;">Developer</h4>
+
+            <mat-divider style="margin: 8px 0;"></mat-divider>
+
+            <h3 style="margin-bottom: 0; font-weight: 500;">Stats</h3>
+            <div class="stat">
+                <mat-icon class="material-icons-outlined">videogame_asset</mat-icon>
+                <span class="stat-text">{{ stats.totalGames}} Games</span>
+            </div>
+            <div class="stat">
+                <mat-icon>workspace_premium</mat-icon> 
+                <span class="stat-text">{{ stats.totalBadges }} Badges</span>
+            </div>
+
+            <mat-divider style="margin: 8px 0;"></mat-divider>
+
+            <h3 style="margin-bottom: 0; font-weight: 500;">Socials</h3>
+            <div class="stat">
+                <mat-icon class="material-icons-outlined">email</mat-icon>
+                <span class="stat-text">{{ (user$ | async)?.email }}</span>
+            </div>
+        </div>
+
+        <div style="width: 80%; margin-left: 30px;">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <h2 style="margin-bottom: 8px;">Favorite badges</h2>
+                    
+                    <div style="display: flex">
+                        <coders-badge *ngFor="let badge of favoriteBadges"
+                            [name]="badge.badge.name" 
+                            [tier]="badge.badge.tier" 
+                            [amount]="badge.amount"
+                        ></coders-badge>
+                    </div>
+                </div>
+                <div>
+                    <h2 style="margin-bottom: 8px;">Total badges per tier</h2>
+                    <div class="badges-count">
+                        <div class="badge large" matTooltip="Total amount of bronze badges obtained">
+                            <mat-icon class="bronze" aria-hidden="false" aria-label="Bronze Badge Count">workspace_premium</mat-icon>
+                            <span>{{ stats.bronzeBadges }}</span>
+                        </div>
+                        
+                        <div class="badge large" matTooltip="Total amount of silver badges obtained">
+                            <mat-icon class="silver" aria-hidden="false" aria-label="Silver Badge Count">workspace_premium</mat-icon>
+                            <span>{{ stats.silverBadges }}</span>
+                        </div>
+                        
+                        <div class="badge large" matTooltip="Total amount of gold badges obtained">
+                            <mat-icon class="gold" aria-hidden="false" aria-label="Gold Badge Count">workspace_premium</mat-icon>
+                            <span>{{ stats.goldBadges }}</span>
+                        </div>
+                        
+                        <div class="badge large" matTooltip="Total amount of platinum badges obtained">
+                            <mat-icon class="platinum" aria-hidden="false" aria-label="Platinum Badge Count">workspace_premium</mat-icon>
+                            <span>{{ stats.platinumBadges }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <mat-tab-group>
+                <mat-tab label="Games">
+                    
+                    <div style="margin-top: 10px; padding: 5px;">
+                        <mat-accordion multi>
+                            <mat-expansion-panel *ngFor="let userApp of userApplications">
+                                <mat-expansion-panel-header style="height: 104px;">
+                                    <img src="https://via.placeholder.com/150" style="width: 80px; border-radius: 6px;">
+
+                                    <div style="margin: 0 10px; width: 100%; display: flex; justify-content: space-between; flex-direction: column;">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <h2 style="margin-bottom: 0;">{{ userApp.application.name }}</h2>
+
+                                            <div class="badges-count">
+                                                <div class="badge" matTooltip="Amount of bronze badges obtained within this game">
+                                                    <mat-icon class="bronze" aria-hidden="false" aria-label="Bronze Badge Count">workspace_premium</mat-icon>
+                                                    <span>{{ userApp.badgesCount.BRONZE }}</span>
+                                                </div>
+                                                
+                                                <div class="badge" matTooltip="Amount of silver badges obtained within this game">
+                                                    <mat-icon class="silver" aria-hidden="false" aria-label="Silver Badge Count">workspace_premium</mat-icon>
+                                                    <span>{{ userApp.badgesCount.SILVER }}</span>
+                                                </div>
+
+                                                <div class="badge" matTooltip="Amount of gold badges obtained within this game">
+                                                    <mat-icon class="gold" aria-hidden="false" aria-label="Gold Badge Count">workspace_premium</mat-icon>
+                                                    <span>{{ userApp.badgesCount.GOLD }}</span>
+                                                </div>
+
+                                                <div class="badge" matTooltip="Amount of platinum badges obtained within this game">
+                                                    <mat-icon class="platinum" aria-hidden="false" aria-label="Platinum Badge Count">workspace_premium</mat-icon>
+                                                    <span>{{ userApp.badgesCount.PLATINUM }}</span>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <span style="font-weight: 300">{{ userApp.obtainedBadgesCount }}/{{ userApp.totalBadgesCount }} Badges obtained</span>
+                                            <mat-progress-bar mode="determinate" [value]="userApp.obtainedPercentage"></mat-progress-bar>
+                                        </div>
+                                    </div>
+                                    
+                                </mat-expansion-panel-header>
+
+                                <div>
+                                    <mat-divider></mat-divider>
+
+                                    <h3 style="margin-bottom: 0">{{ userApp.obtainedBadgesCount }} Obtained badges</h3>
+
+                                    <div style="display: flex;">
+                                        <coders-badge *ngFor="let item of userApp.obtainedBadges | keyvalue" 
+                                            [tier]="item.value.badge.tier" 
+                                            [small]="true" 
+                                            [amount]="item.value.amount"
+                                            [name]="item.value.badge.name">
+                                        </coders-badge>
+                                    </div>
+                                    
+                                    <!-- <mat-divider style="margin-top: 5px;"></mat-divider>
+
+                                    <h3 style="margin-bottom: 0">5 Badges In progress</h3>
+
+                                    <div style="display: flex;">
+                                        <coders-badge *ngFor="let number of [0,1,2,3,4]" [tier]="badgeTier.GOLD" [small]="true"></coders-badge>
+                                    </div> -->
+
+                                    <mat-divider style="margin-top: 5px;"></mat-divider>
+
+                                    <h3 style="margin-bottom: 0">{{ userApp.unobtainedBadges.length }} Unobtained badges</h3>
+
+                                    <div style="display: flex;">
+                                        <coders-badge *ngFor="let badge of userApp.unobtainedBadges" 
+                                            [tier]="badge.tier" 
+                                            [small]="true"
+                                            [name]="badge.name">
+                                        </coders-badge>
+                                        <span *ngIf="userApp.unobtainedBadges.length === 0 && userApp.totalBadgesCount !== 0">Congratulations, you obtained all badges!</span>
+                                    </div>
+                                </div>
+                                
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+
+                </mat-tab>
+
+                <mat-tab label="Recent Activity">
+                    Recent activity
+                </mat-tab>
+            </mat-tab-group>
+
+        </div>
+    </div>
+</div>

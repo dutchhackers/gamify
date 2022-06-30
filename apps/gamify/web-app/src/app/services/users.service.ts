@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApplicationUser, UserBadge } from '@gamify/shared';
+import { ApplicationUser, IFavoriteBadge, UserBadge } from '@gamify/shared';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -33,5 +33,9 @@ export class UsersService {
 
   joinApplication$(applicationId: number) {
     return this.http.post<ApplicationUser>(`${environment.apiUrl}/applications/${applicationId}/join`, {});
+  }
+
+  listFavoriteBadges$(userId: number): Observable<IFavoriteBadge[]> {
+    return this.http.get<IFavoriteBadge[]>(`${environment.apiUrl}/users/${userId}/favorite-badges`);
   }
 }

@@ -1,0 +1,14 @@
+<div class="badge">
+    <img 
+        src="https://via.placeholder.com/150"
+        class="badge-icon border"
+        [matTooltip]="name"
+        [ngClass]="{
+            'small': small,
+            'bronze': tier === 'BRONZE',
+            'silver': tier === 'SILVER',
+            'gold': tier === 'GOLD',
+            'platinum': tier === 'PLATINUM'
+        }">
+    <span class="badge-content" *ngIf="amount" [ngClass]="{ 'small': small }">{{ amount }}</span>
+</div>

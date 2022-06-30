@@ -16,10 +16,47 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
+import { BadgeComponent } from './shared/components/badge/badge.component';
+import { CommonModule } from '@angular/common';
+import { MessageBoxComponent } from './shared/components/message-box/message-box.component';
+import { UcfirstPipe } from './core/pipes/ucfirst.pipe';
 
 @NgModule({
-    declarations: [],
-    imports: [],
+    declarations: [
+        BadgeComponent,
+        MessageBoxComponent,
+        UcfirstPipe,
+    ],
+    imports: [
+        CommonModule,
+
+        MatSliderModule, 
+        MatToolbarModule, 
+        MatSidenavModule, 
+        MatListModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+        MatTableModule,
+        MatTabsModule,
+        MatInputModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatSnackBarModule,
+        MatCardModule,
+        MatProgressSpinnerModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        MatBadgeModule,
+    ],
     providers: [],
     bootstrap: [],
     exports: [
@@ -38,7 +75,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatCheckboxModule,
         MatSnackBarModule,
         MatCardModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        MatBadgeModule,
+
+        // Components
+        BadgeComponent,
+        MessageBoxComponent,
+
+        // Pipes
+        UcfirstPipe,
     ]
   })
   export class UiModule {}
