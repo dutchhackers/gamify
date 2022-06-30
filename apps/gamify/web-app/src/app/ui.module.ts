@@ -19,6 +19,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { JoinApplicationButtonComponent } from './shared/components/join-application-button/join-application-button.component';
 import { CommonModule } from '@angular/common';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
+import { BadgeComponent } from './shared/components/badge/badge.component';
+import { MessageBoxComponent } from './shared/components/message-box/message-box.component';
+import { UcfirstPipe } from './core/pipes/ucfirst.pipe';
+
 
 const materialModules = [
     MatSliderModule, 
@@ -38,13 +46,22 @@ const materialModules = [
     MatCardModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatTooltipModule,
+    MatBadgeModule,
+    MatDividerModule,
+    MatExpansionModule
 ];
 
 @NgModule({
-    declarations: [JoinApplicationButtonComponent],
+    declarations: [
+        BadgeComponent,
+        MessageBoxComponent,
+        UcfirstPipe,
+        JoinApplicationButtonComponent
+    ],
     imports: [
         CommonModule,
-
+        
         ...materialModules,
     ],
     providers: [],
@@ -54,6 +71,11 @@ const materialModules = [
 
         // Components
         JoinApplicationButtonComponent,
+        BadgeComponent,
+        MessageBoxComponent,
+
+        // Pipes
+        UcfirstPipe,
     ]
   })
   export class UiModule {}
