@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApplicationUser, UserBadge } from '@gamify/shared';
+import { ApplicationUser, User, UserBadge } from '@gamify/shared';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -10,6 +10,10 @@ import { environment } from '../../environments/environment';
 export class UsersService {
 
   constructor(private http: HttpClient) { }
+
+  listUsers$(): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiUrl}/users`);
+  }
 
   listUserBadges$(userId: number, applicationId?: number): Observable<UserBadge[]> {
     let params = '';
