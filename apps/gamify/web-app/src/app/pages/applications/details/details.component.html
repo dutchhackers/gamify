@@ -32,9 +32,10 @@
                 <mat-divider style="margin: 8px 0"></mat-divider>
 
                 <h3 style="margin-bottom: 4px;">All available badges</h3>
-                <div>
+                <div style="display: flex;">
                     <!-- Replace this image with the coders-badge component in the profile page branch -->
-                    <img src="https://via.placeholder.com/80" class="badge" *ngFor="let badge of availableBadges"> 
+                    <!-- <img src="https://via.placeholder.com/80" class="badge" *ngFor="let badge of availableBadges">  -->
+                    <coders-badge *ngFor="let badge of availableBadges" [tier]="badge.tier" [small]="true" [name]="badge.name"></coders-badge>
                 </div>
                 <p *ngIf="availableBadges.length === 0" style="font-weight: 300; font-style: italic;">There are no badges in this application :-(</p>
             </div>
