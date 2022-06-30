@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { JoinApplicationButtonComponent } from './join-application-button.component';
@@ -8,6 +9,10 @@ describe('JoinApplicationButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule
+      ],
+      providers: [HttpClient],
       declarations: [ JoinApplicationButtonComponent ]
     })
     .compileComponents();
