@@ -91,4 +91,23 @@ export class UsersService {
             }
         })).map(appUser => ApplicationUserConverter.fromPrismaApplicationUser(appUser));
     }
+
+    findFavoriteBadges(userId: number) {
+        return this.data.favoriteBadge.findMany({
+            where: {
+                userId
+            },
+            select: {
+                userId: true,
+                badgeId: true,
+                priority: true,
+                badge: {
+                    select: {
+                        name: true,
+                        tier: true,
+                    }
+                }
+            }
+        });
+    }
 }

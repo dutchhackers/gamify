@@ -1,8 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { ApplicationsComponent } from "./applications/applications.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { UsersComponent } from "./users/users.component";
 
 const routes: Routes = [
     {
@@ -15,12 +13,12 @@ const routes: Routes = [
         component: DashboardComponent
     },
     {
-        path: "games",
-        component: ApplicationsComponent
+        path: "applications",
+        loadChildren: () => import('./applications/applications.module').then(m => m.ApplicationsModule)
     },
     {
         path: "users",
-        component: UsersComponent
+        loadChildren: () => import("./users/users.module").then(m => m.UsersModule)
     },
     {
         path: "admin",

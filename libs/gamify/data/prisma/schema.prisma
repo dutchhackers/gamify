@@ -19,6 +19,7 @@ model User {
     moderationRole     String            @default("user")
     joinedApplications ApplicationUser[]
     badges             UserBadge[]
+    favoriteBadge      FavoriteBadge[]
 }
 
 model Application {
@@ -35,16 +36,17 @@ model Application {
 }
 
 model Badge {
-    id                   Int         @id @default(autoincrement())
-    createdAt            DateTime    @default(now())
+    id                   Int             @id @default(autoincrement())
+    createdAt            DateTime        @default(now())
     name                 String
-    application          Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+    application          Application     @relation(fields: [applicationId], references: [id], onDelete: Cascade)
     applicationId        Int
     iconPath             String?
     tier                 String
     repeatedlyObtainable Boolean
     totalScore           Int?
     users                UserBadge[]
+    favoriteBadge        FavoriteBadge[]
 }
 
 model ApplicationUser {
@@ -64,4 +66,14 @@ model UserBadge {
     badge    Badge    @relation(fields: [badgeId], references: [id], onDelete: Cascade)
     badgeId  Int
     earnedAt DateTime @default(now())
+}
+
+model FavoriteBadge {
+    user     User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId   Int
+    badge    Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+    badgeId  Int
+    priority Int
+
+    @@id([userId, badgeId])
 }

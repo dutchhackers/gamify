@@ -3,7 +3,7 @@
 
     <a mat-raised-button color="accent" routerLink="/dashboard" class="toolbar-button">Dashboard</a>
     <a mat-raised-button color="accent" routerLink="/activity-feed" class="toolbar-button">Activity feed</a>
-    <a mat-raised-button color="accent" routerLink="/games" class="toolbar-button">Games</a>
+    <a mat-raised-button color="accent" routerLink="/applications" class="toolbar-button">Applications</a>
     <a mat-raised-button color="accent" routerLink="/users" class="toolbar-button">People</a>
 
     <span class="spacer"></span>
@@ -13,7 +13,7 @@
         <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <a mat-menu-item routerLink="/profile">Profile</a>
+        <a mat-menu-item routerLink="/users/{{ (user$ |async)?.id }}">Profile</a>
         <a mat-menu-item routerLink="/settings">Settings</a>
         <a mat-menu-item routerLink="/admin/dashboard" *ngIf="canModerate()">Admin Dashboard</a>
         <a mat-menu-item routerLink="/logout">Logout</a>
