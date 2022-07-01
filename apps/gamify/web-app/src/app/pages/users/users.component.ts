@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@gamify/shared';
+import { BadgeTier, User } from '@gamify/shared';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -11,6 +11,13 @@ export class UsersComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'stats', 'favorite-badges', 'actions'];
   dataSource: User[] = [];
+
+  badgeTier = {
+    "BRONZE": BadgeTier.BRONZE,
+    "SILVER": BadgeTier.SILVER,
+    "GOLD": BadgeTier.GOLD,
+    "PLATINUM": BadgeTier.PLATINUM
+  }
 
   constructor(
     private readonly userService: UsersService
