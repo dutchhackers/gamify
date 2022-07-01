@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Application, ApplicationUser, Badge, BadgeTier, IFavoriteBadge, UserBadge } from '@gamify/shared';
 import { combineLatestWith } from 'rxjs';
+import { BadgesPerTier, ObtainedBadges } from '../../../core/interfaces';
 import { ApplicationService } from '../../../services/application.service';
 import { AuthService } from '../../../services/auth.service';
 import { BadgesService } from '../../../services/badges.service';
@@ -9,17 +10,12 @@ import { UsersService } from '../../../services/users.service';
 interface UserApplicationProfile {
   application: Application,
   userApplication: ApplicationUser,
-  badgesCount: {
-    BRONZE: number,
-    SILVER: number,
-    GOLD: number,
-    PLATINUM: number
-  },
+  badgesCount: BadgesPerTier,
   obtainedBadges: ObtainedBadges,
   unobtainedBadges: Badge[],
 
   obtainedBadgesCount: number,
-  totalBadgesCount: number,
+  applicationBadgesCount: number,
   obtainedPercentage: number,
 }
 
@@ -39,13 +35,6 @@ interface FavoriteBadge {
   },
   amount: number,
   priority: number
-}
-
-interface ObtainedBadges {
-  [key: number]: {
-    badge: Badge,
-    amount: number
-  }
 }
 
 @Component({
@@ -108,41 +97,10 @@ export class ProfileComponent implements OnInit {
       const applicationBadges = badges.filter(badge => badge.applicationId === application.id);
       const applicationUserBadges = userBadges.filter(userBadge => userBadge.badge.applicationId === application.id);
       
-      const badgesCount = {
-        BRONZE: 0,
-        SILVER: 0,
-        GOLD: 0,
-        PLATINUM: 0
-      }
-
-      const obtainedBadges: ObtainedBadges = {};
-      let obtainedBadgesCount = 0;
-
-      applicationUserBadges.forEach(userBadge => {
-        badgesCount[userBadge.badge.tier] += 1;
-
-        const badge = applicationBadges.find(badge => badge.id === userBadge.badgeId);
-
-        if (! badge) {
-          return;
-        }
-
-        if (obtainedBadges[badge.id]) {
-          obtainedBadges[badge.id].amount += 1;
-        } else {
-          obtainedBadgesCount++;
-          obtainedBadges[badge.id] = {
-            badge,
-            amount: 1
-          }
-        }
-      });
-
-
-      let obtainedPercentage = 0;
-      if (applicationBadges.length > 0) {
-        obtainedPercentage = Math.round((obtainedBadgesCount / applicationBadges.length) * 100);
-      }
+      const badgesCount = this.badgesService.calculateBadgesPerTier(applicationUserBadges);
+      const obtainedBadges: ObtainedBadges = this.badgesService.calculateObtainedBadges(applicationUserBadges, badges);
+      const obtainedBadgesCount = Object.keys(obtainedBadges).length;
+      const obtainedPercentage = this.badgesService.calculateObtainedPercentage(obtainedBadges, applicationBadges.length);
 
       const unobtainedBadges = applicationBadges.filter(badge => ! applicationUserBadges.find(userBadge => userBadge.badgeId === badge.id));
 
@@ -153,8 +111,8 @@ export class ProfileComponent implements OnInit {
         obtainedBadges,
         unobtainedBadges,
         obtainedBadgesCount,
-        totalBadgesCount: applicationBadges.length,
-        obtainedPercentage: obtainedPercentage
+        applicationBadgesCount: applicationBadges.length,
+        obtainedPercentage
       }
     });
   }

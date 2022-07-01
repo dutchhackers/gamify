@@ -1,0 +1,52 @@
+<div style="display: flex; justify-content: center; margin-top: 20px">
+    <div style="width: 1280px; display: flex;">
+        <div style="width: 60%; padding: 0 10px">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <h1 style="margin-bottom: 8px;">{{ application?.name }}</h1>
+                    <p style="margin-bottom: 4px; font-weight: 300;" >{{ applicationUsers.length }} Other player people are playing this game</p>
+                    <div>
+                        <img *ngFor="let applicationUser of applicationUsers" 
+                            src="https://via.placeholder.com/80" 
+                            class="player-avatar" 
+                            [matTooltip]="applicationUser.user.firstname + ' ' + applicationUser.user.lastname + ' joined at ' + (applicationUser.joinedAt | date)">
+                    </div>
+                </div>
+                <div>
+                    <coders-join-application-button [applicationId]="applicationId" [userApplications]="userApplications"></coders-join-application-button>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin: 4px 0;">Description</h3>
+                <p>{{ application?.description }}</p>
+
+                <div *ngIf="hasJoinedApplication">
+                    <mat-divider style="margin: 8px 0"></mat-divider>
+
+                    <h3 style="margin-bottom: 0;">Your obtained badges {{ badgesStats.obtainedBadges }}/{{ badgesStats.totalBadges }} ({{badgesStats.obtainedPercentage}}%)</h3>
+                    <mat-progress-bar mode="determinate" [value]="badgesStats.obtainedPercentage" style="margin-bottom: 8px;"></mat-progress-bar>
+                    <div style="display: flex;">
+                        <coders-badge *ngFor="let item of obtainedBadges | keyvalue" 
+                            [tier]="item.value.badge.tier" 
+                            [small]="true" 
+                            [amount]="item.value.amount"
+                            [name]="item.value.badge.name">
+                        </coders-badge>
+                    </div>
+                </div>
+
+                <mat-divider style="margin: 8px 0"></mat-divider>
+
+                <h3 style="margin-bottom: 4px;">All available badges</h3>
+                <div style="display: flex;">
+                    <coders-badge *ngFor="let badge of availableBadges" [tier]="badge.tier" [small]="true" [name]="badge.name"></coders-badge>
+                </div>
+                <p *ngIf="availableBadges.length === 0" style="font-weight: 300; font-style: italic;">There are no badges in this application :-(</p>
+            </div>
+        </div>
+        <div style="width: 40%">
+            <img src="https://via.placeholder.com/500" />
+        </div>
+    </div>
+</div>

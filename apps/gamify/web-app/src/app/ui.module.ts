@@ -16,73 +16,61 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { JoinApplicationButtonComponent } from './shared/components/join-application-button/join-application-button.component';
+import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { BadgeComponent } from './shared/components/badge/badge.component';
-import { CommonModule } from '@angular/common';
 import { MessageBoxComponent } from './shared/components/message-box/message-box.component';
 import { UcfirstPipe } from './core/pipes/ucfirst.pipe';
+
+
+const materialModules = [
+    MatSliderModule, 
+    MatToolbarModule, 
+    MatSidenavModule, 
+    MatListModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTableModule,
+    MatTabsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    MatBadgeModule,
+    MatDividerModule,
+    MatExpansionModule
+];
 
 @NgModule({
     declarations: [
         BadgeComponent,
         MessageBoxComponent,
         UcfirstPipe,
+        JoinApplicationButtonComponent
     ],
     imports: [
         CommonModule,
-
-        MatSliderModule, 
-        MatToolbarModule, 
-        MatSidenavModule, 
-        MatListModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatIconModule,
-        MatTableModule,
-        MatTabsModule,
-        MatInputModule,
-        MatDialogModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatSnackBarModule,
-        MatCardModule,
-        MatProgressSpinnerModule,
-        MatDividerModule,
-        MatExpansionModule,
-        MatProgressBarModule,
-        MatTooltipModule,
-        MatBadgeModule,
+        
+        ...materialModules,
     ],
     providers: [],
     bootstrap: [],
     exports: [
-        MatSliderModule, 
-        MatToolbarModule, 
-        MatSidenavModule, 
-        MatListModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatIconModule,
-        MatTableModule,
-        MatTabsModule,
-        MatInputModule,
-        MatDialogModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatSnackBarModule,
-        MatCardModule,
-        MatProgressSpinnerModule,
-        MatDividerModule,
-        MatExpansionModule,
-        MatProgressBarModule,
-        MatTooltipModule,
-        MatBadgeModule,
+        ...materialModules,
 
         // Components
+        JoinApplicationButtonComponent,
         BadgeComponent,
         MessageBoxComponent,
 

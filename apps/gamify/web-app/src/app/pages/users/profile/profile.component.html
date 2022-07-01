@@ -105,7 +105,7 @@
                                         </div>
 
                                         <div>
-                                            <span style="font-weight: 300">{{ userApp.obtainedBadgesCount }}/{{ userApp.totalBadgesCount }} Badges obtained</span>
+                                            <span style="font-weight: 300">{{ userApp.obtainedBadgesCount }}/{{ userApp.applicationBadgesCount }} Badges obtained</span>
                                             <mat-progress-bar mode="determinate" [value]="userApp.obtainedPercentage"></mat-progress-bar>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
                                             [small]="true"
                                             [name]="badge.name">
                                         </coders-badge>
-                                        <span *ngIf="userApp.unobtainedBadges.length === 0 && userApp.totalBadgesCount !== 0">Congratulations, you obtained all badges!</span>
+                                        <span *ngIf="userApp.unobtainedBadges.length === 0 && userApp.applicationBadgesCount !== 0">Congratulations, you obtained all badges!</span>
                                     </div>
                                 </div>
                                 

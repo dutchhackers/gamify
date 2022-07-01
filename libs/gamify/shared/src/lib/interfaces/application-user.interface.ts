@@ -1,7 +1,7 @@
 export interface IApplicationUser {
     applicationId: number;
     userId: number;
-    earnedAt: Date;
+    joinedAt: Date;
 
     user?: {
         firstname?: string;
