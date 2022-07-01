@@ -25,7 +25,7 @@
                     <mat-divider style="margin: 8px 0"></mat-divider>
 
                     <h3 style="margin-bottom: 0;">Your obtained badges {{ badgesStats.obtainedBadges }}/{{ badgesStats.totalBadges }} ({{badgesStats.obtainedPercentage}}%)</h3>
-                    <mat-progress-bar mode="determinate" value="40" style="margin-bottom: 8px;"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" [value]="badgesStats.obtainedPercentage" style="margin-bottom: 8px;"></mat-progress-bar>
                     <div style="display: flex;">
                         <coders-badge *ngFor="let item of obtainedBadges | keyvalue" 
                             [tier]="item.value.badge.tier" 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Application, ApplicationUser, Badge, UserBadge } from '@gamify/shared';
+import { Application, ApplicationUser, Badge, User, UserBadge } from '@gamify/shared';
 import { catchError, throwError, combineLatestWith } from 'rxjs';
 import { ObtainedBadges } from '../../../core/interfaces';
 import { ApplicationService } from '../../../services/application.service';
@@ -17,6 +17,8 @@ import { UsersService } from '../../../services/users.service';
 export class DetailsComponent implements OnInit {
 
   applicationId: number;
+
+  user: User;
 
   // Note that the following properties serve both a different purpose.
   userApplications: ApplicationUser[] = []; // The applications that the current user has joined
@@ -52,57 +54,66 @@ export class DetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const user = this.authService.getUser$().getValue();
+    this.user = this.authService.getUser$().getValue();
 
     this.route.params.subscribe(params => {
       this.applicationId = parseInt(params['id']);
       if (isNaN(this.applicationId)) this.applicationId = 0;
 
-      this.applicationService.get$(this.applicationId).pipe(
-        catchError(error => {
-          this.snackBar.open('Error retrieving application, going back to overview', 'Close', {
-            horizontalPosition: 'center',	
-            verticalPosition: 'top',
-            duration: 3000
-          });
-          this.router.navigate(['/applications']);
-          return throwError(() => new Error(error));
-        })
-      ).subscribe(application => {
-        this.application = application;
-      });
+      this.retrieveApplication();
+      this.retrieveUserApplications();
+      this.retrieveBadges();
+      this.retrieveApplicationUsers();
+    });
+  }
 
-      this.usersService.listUserApplications$(user.id).subscribe(userApplications => {
-        this.userApplications = userApplications;
-        this.hasJoinedApplication = userApplications.some(applicationUser => applicationUser.applicationId === this.applicationId);
+  private retrieveApplication() {
+    this.applicationService.get$(this.applicationId).pipe(
+      catchError(error => {
+        this.snackBar.open('Error retrieving application, going back to overview', 'Close', {
+          horizontalPosition: 'center',	
+          verticalPosition: 'top',
+          duration: 3000
+        });
+        this.router.navigate(['/applications']);
+        return throwError(() => new Error(error));
+      })
+    ).subscribe(application => {
+      this.application = application;
+    });
+  }
 
-        if (this.hasJoinedApplication) {
-          this.usersService.listUserBadges$(user.id).subscribe(badges => {
-            this.userBadges = badges;
-          });
-        }
-      });
+  private retrieveBadges() {
+    const userBadges = this.usersService.listUserBadges$(this.user.id, this.applicationId);
+    const badges = this.badgesService.list$(this.applicationId);
 
-      this.badgesService.list$(this.applicationId).subscribe(badges => {
-        this.availableBadges = badges;
-      });
+    userBadges.pipe(
+      combineLatestWith(badges)
+    ).subscribe(([userBadges, badges]) => {
+      this.availableBadges = badges;
+      this.obtainedBadges = this.badgesService.calculateObtainedBadges(userBadges, badges);
+      this.badgesStats.obtainedBadges = Object.keys(this.obtainedBadges).length;
+      this.badgesStats.obtainedPercentage = this.badgesService.calculateObtainedPercentage(this.obtainedBadges, badges.length);
+      this.badgesStats.totalBadges = badges.length;
+    });
+  }
 
-      const userBadges = this.usersService.listUserBadges$(user.id, this.applicationId);
-      const badges = this.badgesService.list$(this.applicationId);
+  private retrieveUserApplications() {
+    this.usersService.listUserApplications$(this.user.id).subscribe(userApplications => {
+      this.userApplications = userApplications;
+      this.hasJoinedApplication = userApplications.some(applicationUser => applicationUser.applicationId === this.applicationId);
 
-      userBadges.pipe(
-        combineLatestWith(badges)
-      ).subscribe(([userBadges, badges]) => {
-        this.obtainedBadges = this.badgesService.calculateObtainedBadges(userBadges, badges);
-        this.badgesStats.obtainedBadges = Object.keys(this.obtainedBadges).length;
-        this.badgesStats.obtainedPercentage = this.badgesService.calculateObtainedPercentage(this.obtainedBadges, badges.length);
-        this.badgesStats.totalBadges = badges.length;
-      });
+      if (this.hasJoinedApplication) {
+        this.usersService.listUserBadges$(this.user.id).subscribe(badges => {
+          this.userBadges = badges;
+        });
+      }
+    });
+  }
 
-      this.applicationService.listUsers$(this.applicationId).subscribe(applicationUsers => {
-        this.applicationUsers = applicationUsers;
-      });
-
+  private retrieveApplicationUsers() {
+    this.applicationService.listUsers$(this.applicationId).subscribe(applicationUsers => {
+      this.applicationUsers = applicationUsers;
     });
   }
 
