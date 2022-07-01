@@ -4,13 +4,16 @@
             <div style="display: flex; justify-content: space-between;">
                 <div>
                     <h1 style="margin-bottom: 8px;">{{ application?.name }}</h1>
-                    <p style="margin-bottom: 4px; font-weight: 300;" >5 Other player people are playing this game</p>
+                    <p style="margin-bottom: 4px; font-weight: 300;" >{{ applicationUsers.length }} Other player people are playing this game</p>
                     <div>
-                        <img src="https://via.placeholder.com/80" class="player-avatar" *ngFor="let item of [0, 1, 2, 3, 4]">
+                        <img *ngFor="let applicationUser of applicationUsers" 
+                            src="https://via.placeholder.com/80" 
+                            class="player-avatar" 
+                            [matTooltip]="applicationUser.user.firstname + ' ' + applicationUser.user.lastname + ' joined at ' + (applicationUser.joinedAt | date)">
                     </div>
                 </div>
                 <div>
-                    <coders-join-application-button [applicationId]="applicationId" [applicationUsers]="applicationUsers"></coders-join-application-button>
+                    <coders-join-application-button [applicationId]="applicationId" [userApplications]="userApplications"></coders-join-application-button>
                 </div>
             </div>
 

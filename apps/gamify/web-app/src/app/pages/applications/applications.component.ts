@@ -12,7 +12,7 @@ import { UsersService } from '../../services/users.service';
 export class ApplicationsComponent implements OnInit {
 
   applications: Application[] = [];
-  applicationUsers: ApplicationUser[] = [];
+  userApplications: ApplicationUser[] = [];
 
   constructor(
     private authService: AuthService,
@@ -26,8 +26,8 @@ export class ApplicationsComponent implements OnInit {
     this.applicationService.list$().subscribe(applications => {
       this.applications = applications;
     });
-    this.userService.listUserApplications$(user.id).subscribe(applicationUsers => {
-      this.applicationUsers = applicationUsers;
+    this.userService.listUserApplications$(user.id).subscribe(userApplications => {
+      this.userApplications = userApplications;
     });
   }
 }

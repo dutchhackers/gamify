@@ -17,7 +17,11 @@ import { UsersService } from '../../../services/users.service';
 export class DetailsComponent implements OnInit {
 
   applicationId: number;
-  applicationUsers: ApplicationUser[] = [];
+
+  // Note that the following properties serve both a different purpose.
+  userApplications: ApplicationUser[] = []; // The applications that the current user has joined
+  applicationUsers: ApplicationUser[] = []; // The users that joined the current application
+
   application: Application;
 
   availableBadges: Badge[] = [];
@@ -68,9 +72,9 @@ export class DetailsComponent implements OnInit {
         this.application = application;
       });
 
-      this.usersService.listUserApplications$(user.id).subscribe(applicationUsers => {
-        this.applicationUsers = applicationUsers;
-        this.hasJoinedApplication = applicationUsers.some(applicationUser => applicationUser.applicationId === this.applicationId);
+      this.usersService.listUserApplications$(user.id).subscribe(userApplications => {
+        this.userApplications = userApplications;
+        this.hasJoinedApplication = userApplications.some(applicationUser => applicationUser.applicationId === this.applicationId);
 
         if (this.hasJoinedApplication) {
           this.usersService.listUserBadges$(user.id).subscribe(badges => {
@@ -93,6 +97,10 @@ export class DetailsComponent implements OnInit {
         this.badgesStats.obtainedBadges = Object.keys(this.obtainedBadges).length;
         this.badgesStats.obtainedPercentage = this.badgesService.calculateObtainedPercentage(this.obtainedBadges, badges.length);
         this.badgesStats.totalBadges = badges.length;
+      });
+
+      this.applicationService.listUsers$(this.applicationId).subscribe(applicationUsers => {
+        this.applicationUsers = applicationUsers;
       });
 
     });

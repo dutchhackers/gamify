@@ -10,17 +10,17 @@ import { UsersService } from '../../../services/users.service';
 export class JoinApplicationButtonComponent {
 
   @Input() applicationId: number;
-  @Input() applicationUsers: ApplicationUser[] = [];
+  @Input() userApplications: ApplicationUser[] = [];
 
   constructor(private readonly userService: UsersService) { }
 
   hasJoinedApplication(applicationId: number) {
-    return this.applicationUsers.some(applicationUser => applicationUser.applicationId === applicationId);
+    return this.userApplications.some(applicationUser => applicationUser.applicationId === applicationId);
   }
 
   joinApplication(applicationId: number) {
     this.userService.joinApplication$(applicationId).subscribe(applicationUser => {
-      this.applicationUsers.push(applicationUser);
+      this.userApplications.push(applicationUser);
     });
   }
 }
