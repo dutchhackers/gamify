@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Application, ApplicationUser, Badge, UserBadge } from '@gamify/shared';
-import { catchError, throwError } from 'rxjs';
+import { catchError, throwError, combineLatestWith } from 'rxjs';
+import { ObtainedBadges } from '../../../core/interfaces';
 import { ApplicationService } from '../../../services/application.service';
 import { AuthService } from '../../../services/auth.service';
 import { BadgesService } from '../../../services/badges.service';
@@ -24,6 +25,17 @@ export class DetailsComponent implements OnInit {
   hasJoinedApplication = false;
 
   userBadges: UserBadge[] = [];
+
+  obtainedBadges: ObtainedBadges = {};
+  badgesStats: {
+    totalBadges: number,
+    obtainedBadges: number,
+    obtainedPercentage: number,
+  } = {
+    totalBadges: 0,
+    obtainedBadges: 0,
+    obtainedPercentage: 0,
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -71,8 +83,19 @@ export class DetailsComponent implements OnInit {
         this.availableBadges = badges;
       });
 
-      // const userBadges = this.usersService.listUserBadges$(user.id);
-    })
+      const userBadges = this.usersService.listUserBadges$(user.id, this.applicationId);
+      const badges = this.badgesService.list$(this.applicationId);
+
+      userBadges.pipe(
+        combineLatestWith(badges)
+      ).subscribe(([userBadges, badges]) => {
+        this.obtainedBadges = this.badgesService.calculateObtainedBadges(userBadges, badges);
+        this.badgesStats.obtainedBadges = Object.keys(this.obtainedBadges).length;
+        this.badgesStats.obtainedPercentage = this.badgesService.calculateObtainedPercentage(this.obtainedBadges, badges.length);
+        this.badgesStats.totalBadges = badges.length;
+      });
+
+    });
   }
 
 }

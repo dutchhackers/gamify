@@ -21,11 +21,15 @@
                 <div *ngIf="hasJoinedApplication">
                     <mat-divider style="margin: 8px 0"></mat-divider>
 
-                    <h3 style="margin-bottom: 0;">Your obtained badges 4/10 (40%)</h3>
+                    <h3 style="margin-bottom: 0;">Your obtained badges {{ badgesStats.obtainedBadges }}/{{ badgesStats.totalBadges }} ({{badgesStats.obtainedPercentage}}%)</h3>
                     <mat-progress-bar mode="determinate" value="40" style="margin-bottom: 8px;"></mat-progress-bar>
-                    <div>
-                        <!-- Replace this image with the coders-badge component in the profile page branch -->
-                        <img src="https://via.placeholder.com/80" class="badge" *ngFor="let item of [0, 1, 2, 3, 4]"> 
+                    <div style="display: flex;">
+                        <coders-badge *ngFor="let item of obtainedBadges | keyvalue" 
+                            [tier]="item.value.badge.tier" 
+                            [small]="true" 
+                            [amount]="item.value.amount"
+                            [name]="item.value.badge.name">
+                        </coders-badge>
                     </div>
                 </div>
 
@@ -33,8 +37,6 @@
 
                 <h3 style="margin-bottom: 4px;">All available badges</h3>
                 <div style="display: flex;">
-                    <!-- Replace this image with the coders-badge component in the profile page branch -->
-                    <!-- <img src="https://via.placeholder.com/80" class="badge" *ngFor="let badge of availableBadges">  -->
                     <coders-badge *ngFor="let badge of availableBadges" [tier]="badge.tier" [small]="true" [name]="badge.name"></coders-badge>
                 </div>
                 <p *ngIf="availableBadges.length === 0" style="font-weight: 300; font-style: italic;">There are no badges in this application :-(</p>
