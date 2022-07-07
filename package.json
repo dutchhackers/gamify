@@ -73,7 +73,7 @@
     "@nrwl/tao": "14.1.9",
     "@nrwl/workspace": "14.1.9",
     "@types/cache-manager": "^4.0.0",
-    "@types/google-spreadsheet": "^3.2.3",
+    "@types/google-spreadsheet": "^3.3.0",
     "@types/jest": "27.4.1",
     "@types/luxon": "^2.0.9",
     "@types/node": "18.0.1",
