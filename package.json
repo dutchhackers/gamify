@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "13.3.4",
     "@angular/router": "13.3.4",
     "@nestjs/common": "^8.0.0",
-    "@nestjs/config": "^2.1.0",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/graphql": "^9.1.2",
     "@nestjs/jwt": "^8.0.0",
