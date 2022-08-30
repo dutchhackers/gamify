@@ -42,7 +42,7 @@
     "graphql": "^15.8.0",
     "graphql-tools": "^8.3.3",
     "joi": "^17.6.0",
-    "luxon": "^3.0.1",
+    "luxon": "^3.0.3",
     "passport": "^0.6.0",
     "passport-firebase-jwt": "^1.2.1",
     "passport-jwt": "^4.0.0",
