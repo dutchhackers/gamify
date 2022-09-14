@@ -1,5 +1,4 @@
 {
-  "root": "apps/foosball-slackbot",
   "sourceRoot": "apps/foosball/slackbot/src",
   "projectType": "application",
   "targets": {

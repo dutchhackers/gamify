@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'gamify-shared',
   preset: '../../../jest.preset.js',

@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/gamify/badges/src",
   "targets": {
     "lint": {
@@ -12,7 +13,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/gamify/badges"],
       "options": {
-        "jestConfig": "libs/gamify/badges/jest.config.js",
+        "jestConfig": "libs/gamify/badges/jest.config.ts",
         "passWithNoTests": true
       }
     }
