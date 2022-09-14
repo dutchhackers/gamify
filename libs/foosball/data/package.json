@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "studio": "prisma studio --schema prisma/schema.prisma",
-    "generate": "prisma generate --schema prisma/schema.prisma"
-  },
-  "prisma": {
-    "seed": "ts-node --project prisma/tsconfig.tools.json prisma/seed.ts"
-  }
-}
