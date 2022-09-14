@@ -1,6 +1,7 @@
-module.exports = {
-  displayName: 'gamify-badges',
-  preset: '../../../jest.preset.js',
+/* eslint-disable */
+export default {
+  displayName: 'foosball-slackbot',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +12,6 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/libs/gamify/badges',
+  coverageDirectory: '../../../coverage/apps/foosball/slackbot',
+  preset: '../../../jest.preset.js',
 };
