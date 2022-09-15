@@ -10,5 +10,6 @@
     "gamify-shared": "libs/gamify/shared",
     "gamify-users": "libs/gamify/users",
     "gamify-web-app": "apps/gamify/web-app"
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

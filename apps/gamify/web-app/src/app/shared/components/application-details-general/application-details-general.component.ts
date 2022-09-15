@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Application } from '@gamify/shared';
 import { catchError, Observable, Subject, throwError } from 'rxjs';
@@ -18,10 +18,10 @@ export class ApplicationDetailsGeneralComponent implements OnInit {
 
   @Output() applicationUpdated: EventEmitter<Application> = new EventEmitter<Application>(); 
 
-  form = new FormGroup({
-    "name": new FormControl("", Validators.required),
-    "description": new FormControl(""),
-    "externalApplicationUrl": new FormControl(""),
+  form = new UntypedFormGroup({
+    "name": new UntypedFormControl("", Validators.required),
+    "description": new UntypedFormControl(""),
+    "externalApplicationUrl": new UntypedFormControl(""),
   })
   
   errorMessage$: Subject<string|string[]> = new Subject<string|string[]>();

@@ -1,0 +1,77 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/codeheroes/api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/codeheroes-api",
+        "main": "apps/codeheroes/api/src/main.ts",
+        "tsConfig": "apps/codeheroes/api/tsconfig.app.json",
+        "assets": ["apps/codeheroes/api/src/assets"],
+        "generatePackageJson": false
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/codeheroes/api/src/environments/environment.ts",
+              "with": "apps/codeheroes/api/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "codeheroes-api:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/codeheroes/api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/codeheroes-api"],
+      "options": {
+        "jestConfig": "apps/codeheroes/api/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "dockerize": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker build -f ./apps/codeheroes/api/server/Dockerfile . -t codeheroes-api"
+      },
+      "parallel": false
+    },
+    "docker-push": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "if [ {args.projectId} = \"undefined\" ]; then echo \"provide project arg\"; else docker tag codeheroes-api gcr.io/{args.projectId}/codeheroes-api; fi ",
+          "if [ {args.projectId} = \"undefined\" ]; then echo \"provide project arg\"; else docker push gcr.io/{args.projectId}/codeheroes-api; fi "
+        ]
+      },
+      "parallel": false
+    },
+    "docker": {
+      "executor": "@nx-tools/nx-docker:build",
+      "options": {
+        "push": false,
+        "tags": ["your-org/api:latest", "your-org/api:v1"]
+      }
+    }
+  },
+  "tags": ["type:app", "scope:codeheroes"]
+}

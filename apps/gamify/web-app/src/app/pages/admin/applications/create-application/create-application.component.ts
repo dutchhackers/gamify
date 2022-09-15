@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApplicationType } from '@gamify/shared';
 import { catchError, Subject, tap, throwError } from 'rxjs';
@@ -24,11 +24,11 @@ export class CreateApplicationComponent {
     { value: ApplicationType.EXTERNAL_APP, viewValue: 'External Application' },
   ]
 
-  form = new FormGroup({
-    "name": new FormControl("", Validators.required),
-    "applicationType": new FormControl("", Validators.required),
-    "description": new FormControl(""),
-    "externalApplicationUrl": new FormControl(""),
+  form = new UntypedFormGroup({
+    "name": new UntypedFormControl("", Validators.required),
+    "applicationType": new UntypedFormControl("", Validators.required),
+    "description": new UntypedFormControl(""),
+    "externalApplicationUrl": new UntypedFormControl(""),
   })
 
   errorMessage$: Subject<string|string[]> = new Subject<string|string[]>();
