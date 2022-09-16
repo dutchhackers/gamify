@@ -88,7 +88,7 @@
     "jest-preset-angular": "12.2.2",
     "nx": "14.7.5",
     "prettier": "2.7.1",
-    "prisma": "^3.15.2",
+    "prisma": "^4.3.1",
     "ts-jest": "28.0.8",
     "typescript": "4.7.4"
   },
