@@ -39,8 +39,11 @@ jobs:
         env:
           CI: true
 
-      # - name: Build affected apps
-      #   uses: mansagroup/nrwl-nx-action@v2.0.3
-      #   with:
-      #     targets: lint,test,build
-      #     affected: 'true'
+      - name: Generate Prisma schema
+        run: nx run gamify-data:generate
+
+      - name: Build affected apps
+        uses: mansagroup/nrwl-nx-action@v2.0.3
+        with:
+          targets: lint,test,build
+          affected: 'true'
