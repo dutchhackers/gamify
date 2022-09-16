@@ -40,7 +40,7 @@ jobs:
           CI: true
 
       - name: Generate Prisma schema
-        run: nx run gamify-data:generate
+        run: npm run nx run gamify-data:generate
 
       - name: Build affected apps
         uses: mansagroup/nrwl-nx-action@v2.0.3
