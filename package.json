@@ -41,7 +41,7 @@
     "google-spreadsheet": "^3.3.0",
     "graphql": "^16.6.0",
     "graphql-tools": "^8.3.6",
-    "joi": "^17.6.0",
+    "joi": "^17.8.1",
     "luxon": "^3.0.3",
     "passport": "^0.6.0",
     "passport-firebase-jwt": "^1.2.1",
